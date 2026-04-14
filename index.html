@@ -11,41 +11,26 @@
       background: #fafaf7;
       color: #111;
       margin: 0;
-      padding: 3rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
       line-height: 1.55;
     }
-    main { max-width: 720px; margin: 0 auto; }
-    h1 { font-size: 2rem; margin: 0 0 0.25rem; letter-spacing: -0.02em; }
-    .sub { color: #555; margin: 0 0 2rem; }
-    .tool {
-      display: block;
-      background: white;
-      border: 1px solid #e5e5e0;
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 0.75rem;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.15s;
-    }
-    .tool:hover { border-color: #111; transform: translateY(-1px); }
-    .tool h2 { margin: 0 0 0.25rem; font-size: 1.1rem; }
-    .tool p { margin: 0; color: #555; font-size: 0.95em; }
-    .tool .client { display: inline-block; font-size: 0.75em; font-weight: 600; padding: 0.15rem 0.5rem; background: #f0f0ec; border-radius: 4px; margin-bottom: 0.5rem; letter-spacing: 0.02em; text-transform: uppercase; color: #555; }
-    footer { max-width: 720px; margin: 3rem auto 0; text-align: center; color: #999; font-size: 0.85em; }
+    main { max-width: 520px; text-align: center; }
+    h1 { font-size: 2.25rem; margin: 0 0 0.5rem; letter-spacing: -0.02em; }
+    p { color: #555; margin: 0 0 0.75rem; }
+    .lead { font-size: 1.05em; }
+    .meta { color: #888; font-size: 0.9em; }
+    a { color: #111; }
   </style>
 </head>
 <body>
   <main>
     <h1>Narrative Tools</h1>
-    <p class="sub">Self-service tools for Narrative clients.</p>
-
-    <a class="tool" href="./rentman-converter/">
-      <span class="client">Brownys Event Productions</span>
-      <h2>Rentman → Ronnie Materiaallijst Converter</h2>
-      <p>Converts a Rentman Excel export into the markdown file Rentman Ronnie (Custom GPT) uses as knowledge base.</p>
-    </a>
+    <p class="lead">Custom tools we ship for our clients. Each tool lives at its own private link — if you're looking for one, it should be in your inbox.</p>
+    <p class="meta">Narrative is an AI consultancy for event professionals. Visit us at <a href="https://partofthenarrative.com">partofthenarrative.com</a>.</p>
   </main>
-  <footer>Narrative — AI consultancy for event professionals</footer>
 </body>
 </html>
