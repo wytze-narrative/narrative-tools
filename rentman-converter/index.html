@@ -125,6 +125,49 @@
       color: #999;
       font-size: 0.8em;
     }
+
+    .screenshot-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      padding: 0.4rem 0.75rem;
+      background: #f0f0ec;
+      border: 1px solid #e0e0d8;
+      border-radius: 6px;
+      font-size: 0.9em;
+      color: #111;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .screenshot-link:hover { background: #e8e8e2; }
+
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+      padding: 2rem;
+      cursor: zoom-out;
+    }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 6px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      width: 2.25rem; height: 2.25rem;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+    }
   </style>
 </head>
 <body>
@@ -147,6 +190,7 @@
         <li>ID</li>
       </ul>
       <p class="field-note">💡 <strong>Locatie</strong> staat niet standaard aan. In de kolomkiezer zoek je een veld dat begint met "Locatie" — bijvoorbeeld <code>Locatie in standaard voorraadlocatie</code> (onder VOORRAAD) of <code>Locatie in magazijn per voorraadlocatie</code>. De tool accepteert beide. Voeg het veld éénmalig toe aan je export template — daarna blijft 'ie aan.</p>
+      <a class="screenshot-link" id="open-screenshot">📷 Bekijk screenshot van het Rentman export scherm</a>
     </section>
 
     <section class="step">
@@ -160,11 +204,11 @@
     </section>
 
     <section class="step" id="output-section" hidden>
-      <h2><span class="step-num">3</span> Kopieer de output</h2>
-      <textarea id="output" readonly rows="14" spellcheck="false"></textarea>
+      <h2><span class="step-num">3</span> Download het bestand</h2>
+      <textarea id="output" readonly rows="10" spellcheck="false"></textarea>
       <div class="actions">
-        <button id="copy-btn" class="primary">Kopieer naar klembord</button>
-        <button id="download-btn">Download als .md</button>
+        <button id="download-btn" class="primary">⬇ Download als .md</button>
+        <button id="copy-btn">Kopieer naar klembord</button>
       </div>
     </section>
 
@@ -175,13 +219,18 @@
         <li>Klik ⚙ <em>(rechtsboven)</em> → <strong>Edit GPT</strong> → <strong>Configure</strong> tab</li>
         <li>Scroll naar <strong>Knowledge</strong></li>
         <li>Verwijder het oude <code>brownys-materiaallijst-with-id-…</code> bestand</li>
-        <li>Sleep het nieuwe bestand erin (datum staat in de bestandsnaam, bv. <code>brownys-materiaallijst-with-id-2026-04-14.md</code>)</li>
+        <li>Sleep het zojuist gedownloade bestand erin (bv. <code>brownys-materiaallijst-with-id-2026-04-14.md</code>)</li>
         <li>Klik <strong>Update</strong> rechtsboven</li>
       </ol>
     </section>
   </main>
 
   <footer>Vragen? Mail Wytze — wytze@partofthenarrative.com</footer>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <button class="lightbox-close" aria-label="Sluiten">×</button>
+    <img src="assets/rentman-export-view.png" alt="Rentman export scherm met de juiste kolommen geselecteerd">
+  </div>
 
   <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
   <script>
@@ -406,6 +455,17 @@ This is the complete equipment database for Brownys Event Productions.
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     });
+
+    // Lightbox for the Rentman export screenshot
+    const lightbox = document.getElementById('lightbox');
+    const openScreenshot = document.getElementById('open-screenshot');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const open = () => { lightbox.hidden = false; document.body.style.overflow = 'hidden'; };
+    const close = () => { lightbox.hidden = true; document.body.style.overflow = ''; };
+    openScreenshot.addEventListener('click', open);
+    closeBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+    lightbox.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !lightbox.hidden) close(); });
   </script>
 </body>
 </html>
