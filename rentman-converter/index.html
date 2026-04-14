@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rentman → Ronnie Materiaallijst Converter</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: #fafaf7;
+      color: #111;
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      line-height: 1.55;
+    }
+    main { max-width: 720px; margin: 0 auto; }
+    header { margin-bottom: 2rem; }
+    header h1 { font-size: 1.75rem; margin: 0 0 0.25rem; letter-spacing: -0.015em; }
+    header .sub { color: #555; margin: 0; }
+    header .by { margin: 0.5rem 0 0; font-size: 0.85em; color: #888; }
+
+    .step {
+      background: white;
+      border: 1px solid #e5e5e0;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .step h2 {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .step-num {
+      display: inline-flex;
+      width: 1.75rem; height: 1.75rem;
+      background: #111; color: white;
+      border-radius: 50%;
+      align-items: center; justify-content: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .step p:first-of-type { margin-top: 0; }
+    .step p:last-child { margin-bottom: 0; }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem 1.5rem;
+    }
+    .checklist li { font-size: 0.95em; }
+    .checklist li::before {
+      content: "☑";
+      margin-right: 0.5rem;
+      color: #555;
+    }
+    .checklist li.highlight { color: #b45309; }
+    .checklist li.highlight::before { color: #b45309; }
+    .field-note { font-size: 0.85em; color: #777; margin-top: 0.75rem; }
+
+    .dropzone {
+      border: 2px dashed #c0c0b8;
+      border-radius: 10px;
+      padding: 2.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: #fcfcfa;
+    }
+    .dropzone:hover { border-color: #888; background: #f6f6f2; }
+    .dropzone.dragging { border-color: #111; background: #f0f0ec; }
+    .dropzone p { margin: 0.25rem 0; }
+    .dropzone .muted { color: #777; font-size: 0.9em; }
+    .link { color: #111; text-decoration: underline; cursor: pointer; }
+
+    #status { margin-top: 1rem; }
+    .status-ok, .status-err {
+      padding: 0.85rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95em;
+    }
+    .status-ok { background: #f0fdf4; border: 1px solid #86efac; color: #14532d; }
+    .status-err { background: #fef2f2; border: 1px solid #fca5a5; color: #7f1d1d; white-space: pre-wrap; }
+    .warn { margin: 0.5rem 0 0; color: #92400e; font-size: 0.9em; }
+
+    textarea {
+      width: 100%;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.82em;
+      padding: 0.75rem;
+      border: 1px solid #e5e5e0;
+      border-radius: 8px;
+      resize: vertical;
+      background: #fafaf7;
+      color: #222;
+    }
+
+    .actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
+    button {
+      padding: 0.55rem 1.1rem;
+      font: inherit;
+      font-size: 0.95em;
+      border: 1px solid #d8d8d2;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover { background: #f5f5f0; }
+    button.primary { background: #111; color: white; border-color: #111; }
+    button.primary:hover { background: #333; }
+
+    ol { padding-left: 1.25rem; margin: 0.25rem 0 0; }
+    ol li { margin-bottom: 0.25rem; }
+
+    footer {
+      max-width: 720px;
+      margin: 2rem auto 0;
+      text-align: center;
+      color: #999;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Rentman → Ronnie Materiaallijst Converter</h1>
+      <p class="sub">Zet een Rentman Excel export om in het bestand dat Rentman Ronnie (Custom GPT) nodig heeft.</p>
+      <p class="by">Gemaakt door Narrative voor Brownys Event Productions</p>
+    </header>
+
+    <section class="step">
+      <h2><span class="step-num">1</span> Exporteer uit Rentman</h2>
+      <p>Zorg dat deze zes velden aangevinkt zijn in je Rentman export template:</p>
+      <ul class="checklist">
+        <li>Naam (in database)</li>
+        <li>Verhuur/verkoop</li>
+        <li>Code</li>
+        <li class="highlight">Locatie in magazijn</li>
+        <li>Huidig aantal</li>
+        <li>ID</li>
+      </ul>
+      <p class="field-note">💡 <strong>Locatie in magazijn</strong> staat niet standaard aan in Rentman. Voeg dit veld éénmalig toe aan je export template — daarna blijft 'ie aan.</p>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-num">2</span> Upload je Excel-bestand</h2>
+      <div id="dropzone" class="dropzone">
+        <p><strong>Sleep je .xlsx bestand hier</strong></p>
+        <p class="muted">of <span class="link">klik om te kiezen</span></p>
+        <input type="file" id="file-input" accept=".xlsx,.xls" hidden>
+      </div>
+      <div id="status"></div>
+    </section>
+
+    <section class="step" id="output-section" hidden>
+      <h2><span class="step-num">3</span> Kopieer de output</h2>
+      <textarea id="output" readonly rows="14" spellcheck="false"></textarea>
+      <div class="actions">
+        <button id="copy-btn" class="primary">Kopieer naar klembord</button>
+        <button id="download-btn">Download als .md</button>
+      </div>
+    </section>
+
+    <section class="step" id="upload-step" hidden>
+      <h2><span class="step-num">4</span> Upload naar Rentman Ronnie</h2>
+      <ol>
+        <li>Open Rentman Ronnie (je Custom GPT)</li>
+        <li>Klik ⚙ <em>(rechtsboven)</em> → <strong>Edit GPT</strong> → <strong>Configure</strong> tab</li>
+        <li>Scroll naar <strong>Knowledge</strong></li>
+        <li>Verwijder het oude <code>brownys-materiaallijst-with-id.md</code></li>
+        <li>Sleep het nieuwe bestand erin (of plak de gekopieerde tekst in een nieuw bestand)</li>
+        <li>Klik <strong>Update</strong> rechtsboven</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>Vragen? Mail Wytze — wytze@partofthenarrative.com</footer>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+  <script>
+    'use strict';
+
+    const REQUIRED_FIELDS = {
+      id:       ['ID'],
+      code:     ['Code'],
+      name:     ['Naam (in database)'],
+      stock:    ['Huidig aantal'],
+      type:     ['Verhuur/verkoop'],
+      location: ['Locatie in magazijn', 'Locatie', 'Magazijn locatie', 'Location in warehouse'],
+    };
+
+    const MARKDOWN_HEADER =
+`# Brownys Materiaallijst (met ID)
+
+> **Last updated**: {date}
+> **Source**: Eva de Kemp (Rentman Export)
+> **Total items**: {total}
+> **ID Coverage**: 100% (all items have API IDs)
+
+---
+
+## About This List
+
+This is the complete equipment database for Brownys Event Productions.
+
+**Key columns:**
+- **ID**: The Rentman API identifier (required for API calls)
+- **Code**: The visible item code in Rentman UI
+- **Naam**: Item name
+- **Huidig aantal**: Current stock quantity
+- **Verhuur/Verkoop**: Rental (Verhuur) or Sale (Verkoop) item
+- **Locatie**: Warehouse location
+
+**Note**: ID != Code. The API requires the ID, not the Code.
+
+---
+
+## Equipment List
+
+| ID | Code | Naam | Huidig aantal | Verhuur/Verkoop | Locatie |
+|----|------|------|---------------|-----------------|---------|
+`;
+
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const formatDate = (d) => `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+    const norm = (s) => (s == null ? '' : String(s).trim().toLowerCase());
+
+    function findColumnIndexes(headers) {
+      const normalized = headers.map(norm);
+      const indexes = {};
+      const missing = [];
+      for (const [key, accepted] of Object.entries(REQUIRED_FIELDS)) {
+        const acceptedNorm = accepted.map(a => a.trim().toLowerCase());
+        const idx = normalized.findIndex(h => acceptedNorm.includes(h));
+        if (idx === -1) missing.push(accepted[0]);
+        else indexes[key] = idx;
+      }
+      if (missing.length) {
+        const plural = missing.length > 1;
+        const list = missing.map(m => `"${m}"`).join(', ');
+        throw new Error(
+          `Veld${plural ? 'en' : ''} ontbre${plural ? 'ken' : 'ekt'} in je Excel: ${list}.\n\n` +
+          `Ga terug naar Rentman, voeg ${plural ? 'deze kolommen' : 'deze kolom'} toe aan je export template, en exporteer opnieuw.`
+        );
+      }
+      return indexes;
+    }
+
+    function cleanCell(value) {
+      if (value == null) return '';
+      let s = String(value);
+      s = s.replace(/[\r\n\t]+/g, ' ');
+      s = s.replace(/ {2,}/g, ' ');
+      s = s.replace(/\|/g, '\\|');
+      return s.trim();
+    }
+
+    function rowsToMarkdown(rows, indexes, dateStr) {
+      const body = [];
+      let locatieFilled = 0;
+      for (const row of rows) {
+        if (!row || row.every(c => c == null || String(c).trim() === '')) continue;
+        const id = cleanCell(row[indexes.id]);
+        const code = cleanCell(row[indexes.code]);
+        const name = cleanCell(row[indexes.name]);
+        const stock = cleanCell(row[indexes.stock]);
+        const type = cleanCell(row[indexes.type]);
+        const loc = cleanCell(row[indexes.location]);
+        if (loc) locatieFilled++;
+        body.push(`| ${id} | ${code} | ${name} | ${stock} | ${type} | ${loc} |`);
+      }
+      const markdown = MARKDOWN_HEADER
+        .replace('{date}', dateStr)
+        .replace('{total}', body.length) + body.join('\n') + '\n';
+      return { markdown, count: body.length, locatieFilled };
+    }
+
+    // ── UI wiring ─────────────────────────────────────────────────────────
+
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('file-input');
+    const statusEl = document.getElementById('status');
+    const outputSection = document.getElementById('output-section');
+    const outputEl = document.getElementById('output');
+    const uploadStep = document.getElementById('upload-step');
+    const copyBtn = document.getElementById('copy-btn');
+    const downloadBtn = document.getElementById('download-btn');
+
+    function showSuccess(count, locatieFilled) {
+      const missing = count - locatieFilled;
+      const warn = missing > 0
+        ? `<p class="warn">⚠ ${missing} item${missing === 1 ? '' : 's'} zonder Locatie — deze blijven leeg in de output.</p>`
+        : '';
+      statusEl.innerHTML = `
+        <div class="status-ok">
+          <strong>✓ ${count} items verwerkt</strong><br>
+          Alle verplichte velden aanwezig. Scroll naar stap 3 voor de output.
+          ${warn}
+        </div>`;
+    }
+
+    function showError(msg) {
+      statusEl.innerHTML = `<div class="status-err"><strong>✗ Er ging iets mis</strong>\n\n${msg}</div>`;
+      outputSection.hidden = true;
+      uploadStep.hidden = true;
+    }
+
+    function handleFile(file) {
+      statusEl.innerHTML = '';
+      outputSection.hidden = true;
+      uploadStep.hidden = true;
+
+      if (!/\.xlsx?$/i.test(file.name)) {
+        showError('Dit lijkt geen Excel-bestand. Upload de export direct uit Rentman (.xlsx).');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const wb = XLSX.read(data, { type: 'array' });
+          if (!wb.SheetNames.length) throw new Error('Geen werkblad gevonden in dit Excel-bestand.');
+          const ws = wb.Sheets[wb.SheetNames[0]];
+          const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null, raw: true });
+          if (rows.length < 2) throw new Error('Het bestand is leeg of bevat geen data rijen.');
+          const indexes = findColumnIndexes(rows[0]);
+          const { markdown, count, locatieFilled } = rowsToMarkdown(rows.slice(1), indexes, formatDate(new Date()));
+          if (count === 0) throw new Error('Geen geldige rijen gevonden in het bestand.');
+          outputEl.value = markdown;
+          outputSection.hidden = false;
+          uploadStep.hidden = false;
+          showSuccess(count, locatieFilled);
+        } catch (err) {
+          showError(err.message);
+        }
+      };
+      reader.onerror = () => showError('Kon het bestand niet lezen.');
+      reader.readAsArrayBuffer(file);
+    }
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length) handleFile(e.target.files[0]);
+      e.target.value = '';
+    });
+    dropzone.addEventListener('click', () => fileInput.click());
+    dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragging'); });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragging'));
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('dragging');
+      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(outputEl.value);
+        const original = copyBtn.textContent;
+        copyBtn.textContent = '✓ Gekopieerd';
+        setTimeout(() => { copyBtn.textContent = original; }, 2000);
+      } catch {
+        outputEl.select();
+        document.execCommand('copy');
+      }
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      const blob = new Blob([outputEl.value], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'brownys-materiaallijst-with-id.md';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
