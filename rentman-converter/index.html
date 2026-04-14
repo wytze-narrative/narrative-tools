@@ -142,11 +142,11 @@
         <li>Naam (in database)</li>
         <li>Verhuur/verkoop</li>
         <li>Code</li>
-        <li class="highlight">Locatie in magazijn</li>
+        <li class="highlight">Locatie (zie tip)</li>
         <li>Huidig aantal</li>
         <li>ID</li>
       </ul>
-      <p class="field-note">💡 <strong>Locatie in magazijn</strong> staat niet standaard aan in Rentman. Voeg dit veld éénmalig toe aan je export template — daarna blijft 'ie aan.</p>
+      <p class="field-note">💡 <strong>Locatie</strong> staat niet standaard aan. In de kolomkiezer zoek je een veld dat begint met "Locatie" — bijvoorbeeld <code>Locatie in standaard voorraadlocatie</code> (onder VOORRAAD) of <code>Locatie in magazijn per voorraadlocatie</code>. De tool accepteert beide. Voeg het veld éénmalig toe aan je export template — daarna blijft 'ie aan.</p>
     </section>
 
     <section class="step">
@@ -187,14 +187,17 @@
   <script>
     'use strict';
 
+    // Each field lists matchers: a string (exact, case-insensitive) or
+    // {startsWith: prefix} for prefix matching. First match wins.
     const REQUIRED_FIELDS = {
       id:       ['ID'],
       code:     ['Code'],
       name:     ['Naam (in database)'],
       stock:    ['Huidig aantal'],
       type:     ['Verhuur/verkoop'],
-      location: ['Locatie in magazijn', 'Locatie', 'Magazijn locatie', 'Location in warehouse'],
+      location: [{ startsWith: 'Locatie' }, 'Location in warehouse'],
     };
+    const LOCATION_DISPLAY_NAME = 'Locatie in magazijn';
 
     const MARKDOWN_HEADER =
 `# Brownys Materiaallijst (met ID)
@@ -232,15 +235,29 @@ This is the complete equipment database for Brownys Event Productions.
     const formatDate = (d) => `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
     const norm = (s) => (s == null ? '' : String(s).trim().toLowerCase());
 
+    function matches(headerNorm, matcher) {
+      if (typeof matcher === 'string') return headerNorm === matcher.trim().toLowerCase();
+      if (matcher && matcher.startsWith) return headerNorm.startsWith(matcher.startsWith.trim().toLowerCase());
+      return false;
+    }
+
+    function displayName(matcher) {
+      if (typeof matcher === 'string') return matcher;
+      if (matcher && matcher.startsWith) return matcher.startsWith;
+      return String(matcher);
+    }
+
     function findColumnIndexes(headers) {
       const normalized = headers.map(norm);
       const indexes = {};
       const missing = [];
-      for (const [key, accepted] of Object.entries(REQUIRED_FIELDS)) {
-        const acceptedNorm = accepted.map(a => a.trim().toLowerCase());
-        const idx = normalized.findIndex(h => acceptedNorm.includes(h));
-        if (idx === -1) missing.push(accepted[0]);
-        else indexes[key] = idx;
+      for (const [key, matchers] of Object.entries(REQUIRED_FIELDS)) {
+        const idx = normalized.findIndex(h => matchers.some(m => matches(h, m)));
+        if (idx === -1) {
+          missing.push(key === 'location' ? LOCATION_DISPLAY_NAME : displayName(matchers[0]));
+        } else {
+          indexes[key] = idx;
+        }
       }
       if (missing.length) {
         const plural = missing.length > 1;
