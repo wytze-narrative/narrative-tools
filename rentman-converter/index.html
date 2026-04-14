@@ -174,8 +174,8 @@
         <li>Open Rentman Ronnie (je Custom GPT)</li>
         <li>Klik ⚙ <em>(rechtsboven)</em> → <strong>Edit GPT</strong> → <strong>Configure</strong> tab</li>
         <li>Scroll naar <strong>Knowledge</strong></li>
-        <li>Verwijder het oude <code>brownys-materiaallijst-with-id.md</code></li>
-        <li>Sleep het nieuwe bestand erin (of plak de gekopieerde tekst in een nieuw bestand)</li>
+        <li>Verwijder het oude <code>brownys-materiaallijst-with-id-…</code> bestand</li>
+        <li>Sleep het nieuwe bestand erin (datum staat in de bestandsnaam, bv. <code>brownys-materiaallijst-with-id-2026-04-14.md</code>)</li>
         <li>Klik <strong>Update</strong> rechtsboven</li>
       </ol>
     </section>
@@ -388,12 +388,19 @@ This is the complete equipment database for Brownys Event Productions.
       }
     });
 
+    function isoDate(d) {
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
     downloadBtn.addEventListener('click', () => {
       const blob = new Blob([outputEl.value], { type: 'text/markdown;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'brownys-materiaallijst-with-id.md';
+      a.download = `brownys-materiaallijst-with-id-${isoDate(new Date())}.md`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
