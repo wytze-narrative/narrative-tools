@@ -102,7 +102,7 @@ Vandaag (mei 2026) bestaat alleen de VOF "Part of the Narrative"; beide BV's zij
 
 ### Wat doet Narrative? Wat doet Protocol?
 
-Korte definitie (uit Wytze's eigen woorden, mail aan RJ 9 feb 2026):
+Korte definitie:
 
 > *Waar Narrative zich richt op AI-training in de eventbranche, richt Protocol zich op AI-automatisering in die branche.*
 
@@ -121,7 +121,7 @@ Binnen Protocol bestaan vervolgens twee lijnen — Client Automations en Owned P
 
 ### Waarom alleen één MSA — en alleen voor Client Automations
 
-Wytze's pushback (24 apr 2026): MSA is alleen nodig waar het juridisch een MSA *vereist*. Dat is Client Automation-werk. Training valt buiten omdat AV v1.3 al volstaat. Owned Products vallen buiten omdat een klant-MSA op een SaaS-product een commercieel anti-pattern is (zie tabel "Drie commerciële trajecten" hierboven).
+MSA is alleen nodig waar het juridisch een MSA *vereist*. Dat is Client Automation-werk. Training valt buiten omdat AV v1.3 al volstaat. Owned Products vallen buiten omdat een klant-MSA op een SaaS-product een commercieel anti-pattern is (zie tabel "Drie commerciële trajecten" hierboven).
 
 | MSA-functie | Nodig voor Client Automations? | Nodig voor Narrative-training? | Nodig voor Owned Products? |
 |---|---|---|---|
@@ -185,17 +185,12 @@ Zie Achtergrond-sectie hierboven voor volledige onderbouwing en de tabel met de 
 ### Sectie 1 — Contracting entities
 
 **Narrative-zijde (signing party)**:
-- **MSA wordt getekend door**: `Part of the Protocol B.V.` (in oprichting; afronding vóór 1 juli 2026)
-- **Reden**: Protocol-BV doet de automation/builds — wat onder MSA valt. Narrative-BV blijft buiten MSA-scope.
-- **Aandeelhouders Protocol B.V.**: Wytze de Haan (1/3), Xander Kranenburg (1/3) en Bjorn Veldmeijer (1/3)
-- **Voor de tussenfase (tussen nu en oprichting Protocol BV)**:
-  - **Voorkeur**: wachten tot Protocol BV bestaat en die direct laten tekenen. Geen assignment-clausule nodig, geen administratieve rompslomp later. Praktisch betekent dit ondertekening in juli/augustus 2026.
-  - **Fallback** (als LN per se nu wil tekenen): VOF "Part of the Narrative" tekent voorlopig met expliciete assignment-clausule naar Part of the Protocol BV zodra die bestaat. Side-letter / assignment notice in juli/augustus 2026.
-  - Wytze checkt met Xander welke route het cleanste is — zie Open vragen.
 
-**Assignment-clausule (concept-formulering — alleen nodig als VOF moet tekenen als interim, NL → ICTRecht naar EN)**:
-
-> *"Service Provider may, upon written notice to Live Nation, assign or transfer this Agreement and all rights and obligations hereunder to any affiliate or successor entity within Service Provider's corporate group (including without limitation Part of the Protocol B.V., established as part of the corporate restructuring of Service Provider's group). Such assignment shall not require Live Nation's prior consent. Any assignment outside Service Provider's corporate group requires Live Nation's prior written consent, not to be unreasonably withheld."*
+- **MSA wordt getekend door**: `Part of the Narrative VOF` (KvK-nummer in te vullen) — de Nederlandse vennootschap onder firma waaronder Wytze en Xander vandaag opereren. Tekenen wachten op de BV-oprichting zou de MSA-route maanden vertragen, en dat staat het Live Nation-werk in de weg.
+- **Pre-agreed novation naar Part of the Protocol B.V.**: in de MSA zelf wordt vastgelegd dat de overeenkomst (inclusief alle dan geldende SoW's en DPA-annexen) automatisch overgaat (novatie, BW 6:155 e.v.) op `Part of the Protocol B.V.` zodra die BV is opgericht (verwacht juli/augustus 2026). Live Nation's voorafgaande toestemming voor de novatie wordt verleend door ondertekening van deze MSA — er is geen aanvullende handtekening op Novation Date vereist. Volledige clausule + waarborgen (12 mnd jointly-and-severally liable, DPA migreert automatisch mee) staan in **Sectie 16a**.
+- **Reden voor deze constructie**: Part of the Protocol B.V. is de uiteindelijke leverende entiteit voor Client Automation-werk, maar bestaat nu nog niet. VOF tekent als interim om de MSA-route niet te vertragen; de pre-agreed novation geeft Live Nation comfort dat de juiste eindentiteit straks de obligaties draagt zonder dat er een nieuwe handtekeningenronde of vendor-risk-assessment nodig is.
+- **Aandeelhouders Part of the Protocol B.V.**: Wytze de Haan (1/3), Xander Kranenburg (1/3) en Bjorn Veldmeijer (1/3) — allen volledig op de hoogte van de Live Nation-engagement en mede-betrokken bij review van de MSA-concept vóór ondertekening.
+- **Operationele actie richting Live Nation**: KvK-nummer van Part of the Protocol B.V. wordt aan Live Nation gecommuniceerd zodra de BV in oprichting is bij notaris Rosalie Wesseling (verwacht vóór 1 juli 2026), zodat LN-IT desgewenst alvast een dual-track vendor-risk-assessment kan starten op de toekomstige counterparty.
 
 **LN-zijde (counterparty)**:
 - **Primary signing party**: `Live Nation Entertainment Netherlands B.V.` (groepsmoeder NL). Jennifer mag definitieve entity-naam bevestigen of corrigeren tijdens review.
@@ -2570,14 +2565,14 @@ Voorbeeld-clausule:
 
 > *"Service Provider may assign this Agreement and any Statement of Work, without the consent of Customer, to (i) any Affiliate of Service Provider, (ii) any successor entity arising from a merger, consolidation, or restructuring of Service Provider's group, or (iii) any acquirer of all or substantially all of Service Provider's assets relating to the services hereunder, provided that Service Provider notifies Customer within thirty (30) days. Any other assignment requires Customer's prior written consent, not to be unreasonably withheld."*
 
-**(ii) Pre-agreed novation naar Part of the Protocol B.V.** (specifiek voor lopende VOF→BV→Operating-Subsidiary-transitie)
+**(ii) Pre-agreed novation naar Part of the Protocol B.V.** (specifiek voor de lopende VOF→BV-transitie binnen Narrative-groep)
 
 Voorbeeld-clausule:
 
-> *"At the Effective Date of this Agreement, the Service Provider is Part of the Narrative B.V. (KvK [number]). The Parties acknowledge that Service Provider is in the process of establishing a wholly-owned operating subsidiary, Part of the Protocol B.V. (the "Operating Subsidiary"), which is intended to become the principal contracting entity providing services under this Agreement. Upon written notification by Service Provider to Customer that the Operating Subsidiary has been duly incorporated and is operational, this Agreement, together with all Statements of Work then in effect and all associated Annexes (including the Data Processing Annex), shall automatically be novated to the Operating Subsidiary as Service Provider, with effect from the date specified in such notification (the "Novation Date"). Following novation: (a) Part of the Narrative B.V. shall remain jointly and severally liable for the performance of obligations accrued prior to the Novation Date for a period of twelve (12) months; (b) the Operating Subsidiary shall be solely responsible for performance of obligations arising from and after the Novation Date; (c) the Customer's consent to such novation is given by execution of this Agreement and no further consent, signature, or action by Customer is required."*
+> *"At the Effective Date of this Agreement, the Service Provider is Part of the Narrative VOF (KvK [number]), a Dutch general partnership ("vennootschap onder firma"). The Parties acknowledge that Service Provider's principals are in the process of incorporating Part of the Protocol B.V. (the "Operating Entity"), a Dutch private limited company intended to become the principal contracting entity providing services under this Agreement. Upon written notification by Service Provider to Customer that the Operating Entity has been duly incorporated and is operational, this Agreement, together with all Statements of Work then in effect and all associated Annexes (including the Data Processing Annex), shall automatically be novated to the Operating Entity as Service Provider, with effect from the date specified in such notification (the "Novation Date"). Following novation: (a) Part of the Narrative VOF (or its successor entity arising from the planned corporate restructuring) shall remain jointly and severally liable for the performance of obligations accrued prior to the Novation Date for a period of twelve (12) months; (b) the Operating Entity shall be solely responsible for performance of obligations arising from and after the Novation Date; (c) the Customer's consent to such novation is given by execution of this Agreement and no further consent, signature, or action by Customer is required."*
 
 **Drie sterke punten in deze formulering**:
-1. **"jointly and severally liable for 12 maanden"** — LN behoudt verhaal-recht op POTN BV voor pre-novation verplichtingen, geeft hen comfort
+1. **"jointly and severally liable for 12 maanden"** — LN behoudt verhaal-recht op de oorspronkelijke signing party (VOF, of haar opvolger Part of the Narrative B.V. na doorzak) voor pre-novation verplichtingen
 2. **"no further consent required"** — geen herhandtekening, vooraf-akkoord zonder vertraging
 3. **"all associated Annexes including DPA"** — DPA + subprocessor-listing migreren automatisch mee (geen herhandeling Jennifer's DPA onder POTP)
 
@@ -2646,9 +2641,9 @@ Voorbeeld-clausule:
 
 | Keuze | Motivatie |
 |---|---|
-| **Hybride: blanket assignment + pre-agreed novation** | Blanket dekt toekomstige restructuring; pre-agreed novation dekt de huidige VOF→POTN→POTP-transitie zonder LN-vertraging |
+| **Hybride: blanket assignment + pre-agreed novation** | Blanket dekt toekomstige restructuring; pre-agreed novation dekt de huidige VOF→POTP-transitie zonder LN-vertraging |
 | **Specifiek POTP bij naam genoemd** | LN-IT/vendor-risk-management kan POTP vooraf-beoordelen (dual-track) i.p.v. herbeoordeling bij overdracht |
-| **12 mnd jointly liable post-novation** | LN behoudt verhaal-recht op POTN BV voor pre-novation verplichtingen |
+| **12 mnd jointly liable post-novation** | LN behoudt verhaal-recht op de oorspronkelijke VOF (of haar BV-opvolger) voor pre-novation verplichtingen |
 | **DPA migreert automatisch mee in novation** | Geen herhandeling Jennifer's DPA-template onder POTP |
 | **Material Competitor-lijst als Annex** | Beide partijen weten precies welke CoC een exit triggert; jaarlijks aanpasbaar |
 | **Subcontracting €10k-drempel** | Voorkomt notice-overhead voor ad-hoc freelancers; LN behoudt grip op structurele leveranciers |
@@ -2660,7 +2655,7 @@ Voorbeeld-clausule:
 **Operationele actiepunten** (buiten MSA-tekst):
 
 1. **Brief Paul/LN-IT** dat POTP de uiteindelijke counterparty wordt (timing: oprichting POTP vóór 30-6-2026 per Dennis-tijdlijn)
-2. **Vraag of leveranciersbeoordeling dual-track kan**: POTN BV nu, POTP vooraf-geaccepteerd
+2. **Vraag of leveranciersbeoordeling dual-track kan**: VOF (signing party nu), POTP vooraf-geaccepteerd
 3. **Stuur KvK-nummer POTP** zodra Rosalie het in oprichting heeft, maar nog vóór passering — LN-IT kan de POTP-line al openzetten in vendor system
 4. **Material Competitor-lijst** opstellen vóór ICTRecht-briefing: 5-10 entities per kant
 
