@@ -98,7 +98,7 @@ Per 1 juli 2026 bestaat de Narrative-groep uit twee werk-BV's:
 - **Part of the Narrative B.V.** — Wytze de Haan en Xander Kranenburg, 50/50.
 - **Part of the Protocol B.V.** — Wytze de Haan, Xander Kranenburg en Bjorn Veldmeijer, ieder 1/3.
 
-Part of the Protocol B.V. is opgericht en wordt onder deze MSA de leverende entiteit voor Client Automations. Part of the Narrative B.V. is nog in oprichting bij notaris Rosalie Wesseling (passering vóór 1 juli 2026); die entiteit verzorgt training- en advisory-werk onder AV v1.3 en valt buiten de MSA-scope.
+Beide BV's zijn op dit moment in oprichting bij notaris Rosalie Wesseling en worden naar verwachting gepasseerd voordat deze MSA wordt ondertekend. Part of the Protocol B.V. wordt onder de MSA de leverende entiteit voor Client Automations; Part of the Narrative B.V. verzorgt training- en advisory-werk onder AV v1.3 en valt buiten de MSA-scope.
 
 ### Wat doet Narrative? Wat doet Protocol?
 
