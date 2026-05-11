@@ -64,7 +64,7 @@ Het werk dat Narrative/Protocol levert valt uiteen in drie distincte commerciël
 | **Contract-stack** | Algemene Voorwaarden v1.3 + offerte + mutual NDA | **MSA + SoW + DPA-annex (deze template)** | Subscription Order Form + Protocol's Product Terms + Protocol's eigen DPA |
 | **DPA-spoor** | n.v.t. (geen persoonsgegevens in scope) | Klant's DPA-template met de 5 redlines (zie `reference_ln_dpa_template.md` + Besluit 2) | **Protocol's eigen multi-tenant DPA** — niet onderhandelbaar per klant (zoals Microsoft/AWS dat doen) |
 | **IP-positie** | Methodology blijft bij Narrative onder AV v1.3 Art 9 | Dual perpetual license: beide partijen eeuwigdurend gebruiksrecht op opgeleverde code; Protocol behoudt template/methodology | Protocol blijft 100% eigenaar; klant krijgt time-bounded license voor de duur van de subscription |
-| **Hosting** | n.v.t. | Variabel — per SoW: óf in klant's tenant (bv. Brand Shield in MOJO MS365), óf in Protocol's tenant (bv. WhatsApp HR Agent voor AFAS) | Altijd Protocol's tenant (multi-tenant SaaS, één instantie meerdere klanten) |
+| **Hosting** | n.v.t. | Variabel — per SoW: óf in klant's tenant (bv. Brand Shield in MOJO's eigen n8n-tenant), óf in Protocol's tenant (bv. WhatsApp HR Agent voor AFAS) | Altijd Protocol's tenant (multi-tenant SaaS, één instantie meerdere klanten) |
 | **Pricing-model** | Per offerte (workshop-fee, advisory day-rate, retainer) | Fixed-fee build per offerte + optionele managed support (retainer of on-demand uurtarief) | All-in subscription (bv. Venue Vera €7.500 onboarding + €6.500/jaar inclusief hosting + API-kosten + standaard support) |
 | **Liability cap** | Standaard AV v1.3 | Onder MSA — zie Sectie 7 | Onder Protocol's eigen Subscription Terms (12 maanden subscription fee + verzekering, conform Besluit 1) |
 | **Continuïteit na contract-einde** | Klant houdt training-output (slides, frameworks) onder license | Klant houdt eeuwig gebruiksrecht (dual perpetual) | Klant verliest toegang bij niet-verlengen — product blijft draaien voor andere klanten |
@@ -83,7 +83,7 @@ Het werk dat Narrative/Protocol levert valt uiteen in drie distincte commerciël
 
 Een Client Automation kán in Protocol's tenant draaien zonder dat het daarmee een Owned Product wordt. Het canonieke voorbeeld is de **WhatsApp HR Agent voor AFAS Live**: Protocol bouwt en host (AFAS heeft geen geschikte eigen infra, en de Twilio-WhatsApp-integratie is operationeel makkelijker centraal te beheren), maar het is een custom build voor één klant met klant-specifieke prompts en HR-flows — geen multi-tenant SaaS, geen herverkoop aan andere klanten. **Conclusie**: hosting-locatie is een operationele as, ownership is een commerciële as. Een SoW onder deze MSA kan beide hosting-modellen omvatten zolang de IP-positie en het commerciële model conform Client Automation zijn.
 
-Voor de DPA-annex onder de MSA betekent dit wel iets praktisch: Protocol-tenant-hosting (zoals HR Agent) vraagt om een uitgebreidere security-baseline-uitwerking in de annex — Protocol is dan technisch processor + hosting-infrastructure-provider in één rol. Klant-tenant-hosting (zoals Brand Shield in MOJO's MS365) verlegt het zwaartepunt naar change-control en configuration-responsibility (zie ook Besluit 1's change-control clausule voor Brand Shield).
+Voor de DPA-annex onder de MSA betekent dit wel iets praktisch: Protocol-tenant-hosting (zoals HR Agent) vraagt om een uitgebreidere security-baseline-uitwerking in de annex — Protocol is dan technisch processor + hosting-infrastructure-provider in één rol. Klant-tenant-hosting (zoals Brand Shield in MOJO's eigen n8n-tenant met MS365-credentials) verlegt het zwaartepunt naar change-control en configuration-responsibility (zie ook Besluit 1's change-control clausule voor Brand Shield).
 
 **Toekomstige enterprise-pattern**:
 
@@ -113,7 +113,7 @@ Binnen Protocol bestaan vervolgens twee lijnen — Client Automations en Owned P
 | Workshops / trainingen | Part of the Narrative BV | Traject 1 (training/advisory) | AI Fundamentals workshops, MT-sessies, awareness-trainingen | Nee — AV v1.3 + offerte |
 | AI-strategie / advisory | Part of the Narrative BV | Traject 1 | AI Manifesto/Beleid, jaarplannen-advisory, discovery sessies | Nee — AV v1.3 + offerte |
 | AI Year Plan retainers (coaching/advisory-kant) | Part of the Narrative BV | Traject 1 | Coaching, governance, prioritering | Nee — AV v1.3 + retainer |
-| Custom builds in klant-tenant | Part of the Protocol BV | Traject 2 (Client Automation) | Brand Shield (MOJO MS365), Mailbox Ticket Counting | **Ja** — onder deze MSA |
+| Custom builds in klant-tenant | Part of the Protocol BV | Traject 2 (Client Automation) | Brand Shield (MOJO's eigen n8n-tenant), Mailbox Ticket Counting | **Ja** — onder deze MSA |
 | Custom builds in Protocol-tenant (single-client) | Part of the Protocol BV | Traject 2 (Client Automation) | WhatsApp HR Agent (AFAS Live) — Protocol host, maar custom voor één klant | **Ja** — onder deze MSA |
 | n8n workflow automation per klant | Part of the Protocol BV | Traject 2 | Custom workflow-builds in klant-tenant of Protocol-tenant | **Ja** — onder deze MSA |
 | Managed support op Client Automations | Part of the Protocol BV | Traject 2 | Beheer, monitoring, finetuning, error handling | **Ja** — onder deze MSA (retainer of on-demand) |
@@ -155,7 +155,7 @@ Uitsluitend Traject 2 — Protocol Client Automations:
 - Managed support op die Client Automations (retainer of on-demand uurtarief)
 - Alle DPA-relevante custom-werk (klant's DPA-template met de 5 redlines; geen Protocol-template)
 
-Hosting-locatie maakt voor MSA-scope niet uit — een Client Automation kan in klant-tenant draaien (Brand Shield in MOJO MS365) of in Protocol-tenant (HR Agent voor AFAS) zolang het een custom build voor één klant blijft.
+Hosting-locatie maakt voor MSA-scope niet uit — een Client Automation kan in klant-tenant draaien (Brand Shield in MOJO's eigen n8n-tenant) of in Protocol-tenant (HR Agent voor AFAS) zolang het een custom build voor één klant blijft.
 
 ---
 
@@ -413,7 +413,7 @@ Specifieke automation-builds en agents die Protocol bouwt voor één klant. Voor
 |---|---|
 | Discovery / scoping | **Vooraf en onbetaald.** Resulteert in offerte. Wordt expliciet niet gefactureerd, ook niet retroactief. |
 | Build/oplevering | **Fixed-fee per SoW** dekt het hele build-traject. Géén T&M voor builds. |
-| Indicatieve build-prijzen (richtbedragen, finaal in SoW) | n8n workflow simpel: ~€3.750 / WhatsApp HR Agent V1: ~€5.000 / AI Agent Platform incl. agent #1: ~€5.000 / extra agent met 75% hergebruik: ~€2.500 / Custom GPT: ~€300 |
+| Indicatieve build-prijzen (richtbedragen, finaal in SoW) | n8n workflow simpel: ~€3.750 / WhatsApp HR Agent V1: ~€5.000 / Custom GPT: ~€4.000 |
 | Mijlpalen-betaling | Standaard 3 fasen: bv. 25% bij start, 50% bij oplevering technisch, 25% bij final acceptance |
 | Wijzigingen op scope tijdens build | Via change-control-procedure (Sectie 6) → resultant in addendum-SoW met eigen fixed-fee. Niet als T&M-bijschrijving. |
 | IP-positie | Dual perpetual license (AV v1.3 Art 9): beide partijen eeuwigdurend gebruiksrecht; Protocol behoudt template/methodology-recht |
@@ -424,7 +424,7 @@ Een Client Automation kan op twee manieren gehost worden — dat raakt de DPA-an
 
 | Hosting-model | Voorbeeld | Wat verandert er commercieel/contractueel |
 |---|---|---|
-| **Klant-tenant-hosting** | Brand Shield draait in MOJO's MS365-tenant; Mailbox Ticket Counting in MOJO-systemen | Protocol levert configuratie + code, MOJO is operator. Change-control-clausule essentieel: Protocol's aansprakelijkheid alleen voor configuratie die expliciet door Protocol als productie-ready bevestigd is. |
+| **Klant-tenant-hosting** | Brand Shield draait in MOJO's eigen n8n-tenant (via MOJO's MS365-credentials voor SharePoint/Outlook-toegang); Mailbox Ticket Counting in MOJO-systemen | Protocol levert configuratie + code, MOJO is operator. Change-control-clausule essentieel: Protocol's aansprakelijkheid alleen voor configuratie die expliciet door Protocol als productie-ready bevestigd is. |
 | **Protocol-tenant-hosting (custom build)** | WhatsApp HR Agent voor AFAS Live: Protocol host, beheert Twilio-integratie, draait op Protocol-stack — maar **blijft een custom build voor één klant**, geen multi-tenant SaaS, geen herverkoop | Protocol is hier processor + hosting-infrastructure-provider. Vraagt uitgebreidere security-baseline in DPA-annex. Optionele hosting-fee als component in maandelijkse retainer. |
 
 **Belangrijk voor scope-bewaking**: Protocol-tenant-hosting maakt een Client Automation niet automatisch tot Owned Product. De definiërende as is **eigendom + multi-tenancy + herverkoop**, niet hosting-locatie. WhatsApp HR Agent voor AFAS = custom build (Categorie A), ondanks Protocol-hosting; Venue Vera voor diezelfde AFAS = Owned Product (buiten MSA), omdat het multi-tenant is en aan andere venues wordt verkocht.
@@ -728,7 +728,7 @@ Na final acceptance start een gedefinieerde warranty-periode waarin Protocol kos
 
 **6c. Change-control bij operationele wijzigingen (shared-infra-bescherming)**
 
-Change-control-clausule regelt wat er gebeurt als wijzigingen aan een operationeel systeem worden doorgevoerd buiten Protocol om. Dit is **verplicht** voor shared-infra-systemen waar klant operationele controle heeft over de tenant of het systeem (Brand Shield in MOJO MS365, Mailbox Ticket Counting in MOJO-systemen, toekomstige builds op klant-tenants). Maar de clausule heeft ook betekenis voor Protocol-gehoste builds — als Protocol zelf de operator is, gelden andere procedures voor backend-wijzigingen.
+Change-control-clausule regelt wat er gebeurt als wijzigingen aan een operationeel systeem worden doorgevoerd buiten Protocol om. Dit is **verplicht** voor shared-infra-systemen waar klant operationele controle heeft over de tenant of het systeem (Brand Shield in MOJO's eigen n8n-tenant, Mailbox Ticket Counting in MOJO-systemen, toekomstige builds op klant-tenants). Maar de clausule heeft ook betekenis voor Protocol-gehoste builds — als Protocol zelf de operator is, gelden andere procedures voor backend-wijzigingen.
 
 **Kern-clausule (gebaseerd op `narrative-non-negotiables-briefing.md` Sectie 5)**:
 
@@ -738,7 +738,7 @@ Change-control-clausule regelt wat er gebeurt als wijzigingen aan een operatione
 
 | Hosting-model | Procedure |
 |---|---|
-| **Klant-tenant-hosting** (Brand Shield in MOJO MS365, Mailbox Ticket Counting in MOJO-systemen) | Klant notifieert Protocol **vooraf** bij geplande wijzigingen. Bij ongeplande wijzigingen: Protocol mag suspension-recht uitoefenen + re-baseline-fee in rekening brengen via change-order (6e). |
+| **Klant-tenant-hosting** (Brand Shield in MOJO's eigen n8n-tenant, Mailbox Ticket Counting in MOJO-systemen) | Klant notifieert Protocol **vooraf** bij geplande wijzigingen. Bij ongeplande wijzigingen: Protocol mag suspension-recht uitoefenen + re-baseline-fee in rekening brengen via change-order (6e). |
 | **Protocol-tenant-hosting** (HR Agent voor AFAS Live, Venue Vera-architectuur) | Protocol is feitelijk operator. Klant heeft beperkte directe wijzigingstoegang; risico is lager. Clausule blijft nuttig voor klant-doorgevoerde wijzigingen via API-toegang of admin-portal. |
 
 **Backend-wijzigingen door Protocol zelf (Protocol-tenant-hosting)**
@@ -900,7 +900,7 @@ Specifiek scenario: production-blocking issues, security-issues, of compliance-i
 | Niet bedoeld voor | Reguliere defect-fixes binnen warranty (die gaan via 6b) of reguliere scope-wijzigingen (die gaan via 6e) |
 
 **Reden voor emergency-mechanisme**:
-- Production-systemen (vooral Brand Shield in MOJO MS365 en HR Agent op Protocol-tenant) kunnen incidenten hebben die niet onder warranty vallen maar wel onmiddellijke actie vereisen
+- Production-systemen (vooral Brand Shield in MOJO's eigen n8n-tenant en HR Agent op Protocol-tenant) kunnen incidenten hebben die niet onder warranty vallen maar wel onmiddellijke actie vereisen
 - Zonder dit mechanisme moet Protocol kiezen tussen onveilig werken (zonder commerciële dekking) of klant 5 dagen laten wachten op formaliteit (relatieschade)
 - Cap op 20 uur voorkomt scope-creep onder emergency-vlag — als het werk groter wordt, moet alsnog formaliteit volgen
 
