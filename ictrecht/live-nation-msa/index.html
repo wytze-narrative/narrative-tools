@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>MSA Foundation — Live Nation × Narrative · For ICTRecht review</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='80' font-size='80'%3E📜%3C/text%3E%3C/svg%3E">
+  <style>
+    /* ------------------------------------------------------------------ */
+    /*  Design tokens                                                      */
+    /* ------------------------------------------------------------------ */
+    :root {
+      --bg: #fafaf7;
+      --paper: #ffffff;
+      --border: #e7e4dc;
+      --border-strong: #d4d0c5;
+      --ink: #1a1917;
+      --ink-soft: #4d4945;
+      --muted: #8b8780;
+      --accent: #111;
+      --accent-soft: #f0efe9;
+      --highlight: #fde68a;
+
+      --ok-bg: #ecfdf5;
+      --ok-border: #6ee7b7;
+      --ok-ink: #065f46;
+
+      --warn-bg: #fffbeb;
+      --warn-border: #fcd34d;
+      --warn-ink: #92400e;
+
+      --err-bg: #fef2f2;
+      --err-border: #fca5a5;
+      --err-ink: #991b1b;
+
+      --open-bg: #f5f3ff;
+      --open-border: #c4b5fd;
+      --open-ink: #5b21b6;
+
+      --sidebar-w: 300px;
+      --header-h: 64px;
+      --max-content: 880px;
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--ink); }
+    a:hover { color: #000; }
+
+    /* ------------------------------------------------------------------ */
+    /*  Header                                                             */
+    /* ------------------------------------------------------------------ */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250, 250, 247, 0.92);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: var(--header-h);
+      display: flex; align-items: center;
+      padding: 0 24px;
+      gap: 24px;
+    }
+    .brand { display: flex; align-items: baseline; gap: 14px; min-width: 0; }
+    .brand .name { font-weight: 700; letter-spacing: -0.01em; font-size: 1.05rem; white-space: nowrap; }
+    .brand .crumb { color: var(--muted); font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand .crumb::before { content: "/ "; margin-right: 4px; color: var(--border-strong); }
+
+    .topbar-controls { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+    .search {
+      position: relative;
+      width: 280px;
+    }
+    .search input {
+      width: 100%;
+      font: inherit;
+      font-size: 0.9rem;
+      padding: 0.5rem 0.75rem 0.5rem 2.2rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,0,0,0.06); }
+    .search::before {
+      content: "🔍";
+      position: absolute;
+      left: 0.65rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.5;
+      font-size: 0.9rem;
+    }
+    .search kbd {
+      position: absolute;
+      right: 0.45rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      pointer-events: none;
+    }
+    .search input:focus + kbd { display: none; }
+
+    .btn {
+      font: inherit;
+      font-size: 0.85rem;
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .btn:hover { background: var(--accent-soft); border-color: var(--border-strong); }
+    .btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .btn.active:hover { background: var(--accent-soft); color: var(--ink); border-color: var(--border-strong); }
+
+    /* Reading progress bar */
+    .progress-bar {
+      position: fixed;
+      top: var(--header-h);
+      left: 0; right: 0;
+      height: 2px;
+      background: transparent;
+      z-index: 51;
+      pointer-events: none;
+    }
+    .progress-bar > div {
+      height: 100%;
+      background: linear-gradient(90deg, var(--ink), #555);
+      width: 0%;
+      transition: width 0.1s;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /*  Layout                                                             */
+    /* ------------------------------------------------------------------ */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      gap: 0;
+      min-height: calc(100vh - var(--header-h));
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: var(--header-h);
+      align-self: start;
+      height: calc(100vh - var(--header-h));
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      padding: 24px 12px 48px 24px;
+      background: var(--bg);
+    }
+    .sidebar h3 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 18px 8px 8px;
+      font-weight: 600;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { line-height: 1.4; }
+    .toc-list a {
+      display: block;
+      padding: 5px 10px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      border-left: 2px solid transparent;
+      transition: background 0.1s, color 0.1s, border-color 0.1s;
+    }
+    .toc-list a:hover { background: var(--accent-soft); color: var(--ink); }
+    .toc-list a.active {
+      background: var(--accent-soft);
+      color: var(--ink);
+      border-left-color: var(--ink);
+      font-weight: 600;
+    }
+    .toc-list .sub a {
+      padding-left: 22px;
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+    .toc-list .sub a.active { color: var(--ink); }
+    .toc-list li.hidden { display: none; }
+    .toc-list .has-status::after {
+      content: attr(data-status);
+      float: right;
+      font-size: 0.75rem;
+      margin-left: 6px;
+      opacity: 0.85;
+    }
+
+    /* Main */
+    .main {
+      padding: 32px 48px 96px;
+      max-width: calc(var(--max-content) + 96px);
+      width: 100%;
+      overflow: hidden; /* prevent overflow from pre/tables */
+    }
+    .doc { max-width: var(--max-content); }
+
+    /* ------------------------------------------------------------------ */
+    /*  Intro card                                                         */
+    /* ------------------------------------------------------------------ */
+    .intro {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+    }
+    .intro h1 {
+      margin: 0 0 6px;
+      font-size: 1.75rem;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .intro .sub { color: var(--ink-soft); margin: 0 0 18px; font-size: 1rem; }
+    .intro .stats {
+      display: flex; flex-wrap: wrap; gap: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+    }
+    .intro .stats strong { color: var(--ink); font-weight: 600; }
+    .intro .legend {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 16px;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /*  Status pills                                                       */
+    /* ------------------------------------------------------------------ */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      vertical-align: middle;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      line-height: 1.4;
+    }
+    .pill-ok   { background: var(--ok-bg);   color: var(--ok-ink);   border-color: var(--ok-border); }
+    .pill-warn { background: var(--warn-bg); color: var(--warn-ink); border-color: var(--warn-border); }
+    .pill-err  { background: var(--err-bg);  color: var(--err-ink);  border-color: var(--err-border); }
+    .pill-open { background: var(--open-bg); color: var(--open-ink); border-color: var(--open-border); }
+
+    /* Pill-only (no label) for table cells */
+    .pill.tiny {
+      width: 1.5rem; height: 1.5rem;
+      padding: 0; justify-content: center;
+      font-size: 0.8rem; border-radius: 6px;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /*  Markdown content typography                                        */
+    /* ------------------------------------------------------------------ */
+    .doc h1, .doc h2, .doc h3, .doc h4, .doc h5 {
+      letter-spacing: -0.01em;
+      font-weight: 700;
+      color: var(--ink);
+      scroll-margin-top: calc(var(--header-h) + 16px);
+    }
+    .doc h1 { font-size: 1.9rem; margin: 48px 0 12px; line-height: 1.25; }
+    .doc h2 {
+      font-size: 1.4rem;
+      margin: 56px 0 14px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      line-height: 1.3;
+    }
+    .doc h3 { font-size: 1.15rem; margin: 36px 0 10px; line-height: 1.35; }
+    .doc h4 { font-size: 1rem; margin: 28px 0 8px; color: var(--ink); font-weight: 700; }
+    .doc h5 { font-size: 0.95rem; margin: 20px 0 6px; color: var(--ink-soft); }
+    .doc p { margin: 0 0 14px; }
+    .doc strong { font-weight: 600; color: var(--ink); }
+    .doc em { color: var(--ink); }
+
+    /* Anchor links on headings */
+    .doc h2, .doc h3, .doc h4 { position: relative; }
+    .doc .anchor {
+      position: absolute;
+      left: -1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 400;
+      transition: opacity 0.15s;
+      padding: 0 4px;
+    }
+    .doc h2:hover .anchor, .doc h3:hover .anchor, .doc h4:hover .anchor { opacity: 1; }
+    .doc .anchor:hover { color: var(--ink); }
+
+    /* Lists */
+    .doc ul, .doc ol { padding-left: 1.5rem; margin: 0 0 14px; }
+    .doc li { margin: 4px 0; }
+    .doc li > p { margin: 4px 0; }
+
+    /* Blockquote (generic) */
+    .doc blockquote {
+      margin: 18px 0;
+      padding: 12px 18px;
+      border-left: 3px solid var(--border-strong);
+      background: var(--paper);
+      color: var(--ink-soft);
+      border-radius: 0 8px 8px 0;
+    }
+    .doc blockquote p:last-child { margin-bottom: 0; }
+    .doc blockquote.callout-open {
+      border-left: 4px solid var(--open-border);
+      background: var(--open-bg);
+      color: var(--open-ink);
+      border-radius: 8px;
+      padding: 16px 20px;
+      position: relative;
+    }
+    .doc blockquote.callout-open::before {
+      content: "ICTRecht — open vraag";
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--open-ink);
+      margin-bottom: 6px;
+      opacity: 0.85;
+    }
+    .doc blockquote.callout-open strong { color: var(--open-ink); }
+    .doc blockquote.callout-open p { color: var(--open-ink); }
+
+    /* Tables */
+    .doc .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+    .doc table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.88rem;
+    }
+    .doc th, .doc td {
+      text-align: left;
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .doc thead th {
+      background: #f6f4ee;
+      font-weight: 600;
+      color: var(--ink);
+      border-bottom: 1px solid var(--border-strong);
+      position: sticky;
+      top: 0;
+    }
+    .doc tbody tr:last-child td { border-bottom: none; }
+    .doc tbody tr:hover { background: #fdfcf7; }
+
+    /* Code */
+    .doc code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.85em;
+      background: var(--accent-soft);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      color: var(--ink);
+    }
+    .doc pre {
+      background: var(--accent-soft);
+      padding: 14px 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      border: 1px solid var(--border);
+    }
+    .doc pre code { background: transparent; padding: 0; }
+
+    /* HR */
+    .doc hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
+
+    /* Search highlight */
+    .doc mark.search-hit {
+      background: var(--highlight);
+      color: var(--ink);
+      padding: 0.05em 0.15em;
+      border-radius: 3px;
+    }
+
+    /* Filter mode: only open questions */
+    body.filter-open .doc > :not(.callout-open):not(h1):not(h2):not(h3):not(.section-with-open) {
+      display: none;
+    }
+    body.filter-open .doc blockquote.callout-open { display: block; }
+    body.filter-open .intro { display: block; }
+    body.filter-open .filter-mode-note { display: block; }
+    .filter-mode-note {
+      display: none;
+      background: var(--open-bg);
+      color: var(--open-ink);
+      border: 1px solid var(--open-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .doc-footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 96px 24px;
+      color: var(--muted);
+    }
+    .loading::before {
+      content: "";
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid var(--border-strong);
+      border-top-color: var(--ink);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-right: 10px;
+      vertical-align: -2px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* "Top" floating button */
+    .to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      z-index: 40;
+    }
+    .to-top.show { display: flex; }
+    .to-top:hover { background: #000; }
+
+    /* Mobile sidebar toggle button */
+    .menu-toggle { display: none; }
+
+    /* ------------------------------------------------------------------ */
+    /*  Mobile responsive                                                  */
+    /* ------------------------------------------------------------------ */
+    @media (max-width: 900px) {
+      :root { --sidebar-w: 0px; --header-h: 56px; }
+      .topbar { padding: 0 16px; gap: 12px; }
+      .brand .name { font-size: 0.95rem; }
+      .brand .crumb { display: none; }
+      .search { width: auto; flex: 1; max-width: 200px; }
+      .search kbd { display: none; }
+
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px; height: 36px;
+        border: 1px solid var(--border);
+        background: var(--paper);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0;
+      }
+
+      .layout { grid-template-columns: 1fr; }
+
+      .sidebar {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        width: 86%;
+        max-width: 340px;
+        height: calc(100vh - var(--header-h));
+        background: var(--bg);
+        border-right: 1px solid var(--border);
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        z-index: 40;
+        box-shadow: 2px 0 16px rgba(0,0,0,0.05);
+      }
+      body.sidebar-open .sidebar { transform: translateX(0); }
+      body.sidebar-open::after {
+        content: "";
+        position: fixed;
+        inset: var(--header-h) 0 0 0;
+        background: rgba(0,0,0,0.3);
+        z-index: 39;
+      }
+
+      .main { padding: 20px 18px 64px; }
+      .doc h1 { font-size: 1.5rem; }
+      .doc h2 { font-size: 1.2rem; }
+      .intro { padding: 18px 20px; }
+      .intro h1 { font-size: 1.35rem; }
+    }
+
+    /* ------------------------------------------------------------------ */
+    /*  Print                                                              */
+    /* ------------------------------------------------------------------ */
+    @media print {
+      :root { --header-h: 0; }
+      .topbar, .sidebar, .progress-bar, .to-top, .menu-toggle { display: none !important; }
+      body { background: white; font-size: 11pt; }
+      .layout { display: block; }
+      .main { max-width: 100%; padding: 0; }
+      .doc { max-width: 100%; }
+      .doc h2 { page-break-before: always; border-top: none; }
+      .doc h2:first-of-type { page-break-before: avoid; }
+      .doc h3, .doc h4 { page-break-after: avoid; }
+      .doc table, .doc blockquote, .doc pre { page-break-inside: avoid; }
+      .doc blockquote.callout-open {
+        background: white !important;
+        border: 1px solid var(--open-border) !important;
+        color: var(--ink) !important;
+      }
+      .intro { box-shadow: none; }
+      .pill { border: 1px solid currentColor !important; background: white !important; }
+      a { color: var(--ink); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">☰</button>
+    <div class="brand">
+      <span class="name">Narrative</span>
+      <span class="crumb">Live Nation MSA Foundation · for ICTRecht</span>
+    </div>
+    <div class="topbar-controls">
+      <div class="search">
+        <input id="search" type="search" placeholder="Search clauses, parties, sections…" autocomplete="off" spellcheck="false">
+        <kbd>⌘K</kbd>
+      </div>
+      <button class="btn" id="filter-open" title="Show only the 10 ICTRecht-focus questions">
+        ⚠️ Open questions
+      </button>
+    </div>
+  </header>
+
+  <div class="progress-bar" aria-hidden="true"><div id="progress-fill"></div></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <nav id="toc">
+        <h3>Loading…</h3>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <article class="doc" id="doc">
+        <div class="intro">
+          <h1>MSA Foundation — Live Nation × Narrative</h1>
+          <p class="sub">Narrative's foundation-posities voor de Master Services Agreement met Live Nation. Drafting-bron voor de Engelse MSA en de DPA-redline op LN's template. <strong>Bedoeld voor ICTRecht-review.</strong></p>
+
+          <div class="legend">
+            <span class="pill pill-ok">🟢 Compatibel</span>
+            <span class="pill pill-warn">🟡 Onderhandelingspunt</span>
+            <span class="pill pill-err">🔴 Conflict / redline</span>
+            <span class="pill pill-open">⚠️ Open vraag voor ICTRecht</span>
+          </div>
+
+          <div class="stats">
+            <span><strong id="stat-sections">20</strong> sections</span>
+            <span><strong id="stat-subs">74</strong> sub-components</span>
+            <span><strong id="stat-open">10</strong> open ICTRecht questions</span>
+            <span><strong>Last updated:</strong> 2026-05-11</span>
+            <span><strong>Drafter:</strong> Wytze de Haan (Narrative)</span>
+          </div>
+        </div>
+
+        <div class="filter-mode-note">
+          <strong>Filter mode active:</strong> showing only the open ICTRecht questions. <a href="#" id="clear-filter">Clear filter</a> to see the full document.
+        </div>
+
+        <div id="content"><div class="loading">Loading foundation document…</div></div>
+
+        <div class="doc-footer">
+          <p>Document source: <code>projects/Live Nation Group/agreements/msa-template-foundation.md</code> in Narrative's internal repository · Generated for ICTRecht review · No personal data is sent to third parties — this is a static document rendered in your browser.</p>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <button class="to-top" id="to-top" aria-label="Scroll to top" title="Back to top">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+  <script>
+  /* ====================================================================
+     1. Fetch and pre-process markdown
+     ==================================================================== */
+  fetch('./msa-foundation.md', { cache: 'no-cache' })
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(md => render(md))
+    .catch(err => {
+      document.getElementById('content').innerHTML =
+        '<div class="loading" style="color:var(--err-ink)">Could not load document: ' + err.message + '</div>';
+    });
+
+  function preprocessStatusMarkers(md) {
+    // Status pills with labels in headings/text
+    md = md.replace(/🟢\s*\*?\*?(?:[Cc]ompatibel|nieuw[^|\n]*?|akkoord)\*?\*?(?:\s*\([^)]*\))?/g,
+      '<span class="pill pill-ok">🟢 Compatibel</span>');
+    md = md.replace(/🟡\s*\*?\*?[Oo]nderhandelingspunt\*?\*?(?:\s*\([^)]*\))?/g,
+      '<span class="pill pill-warn">🟡 Onderhandelingspunt</span>');
+    md = md.replace(/🔴\s*\*?\*?[Cc]onflict[^|\n<]*?(?=$|\||<)/g,
+      '<span class="pill pill-err">🔴 Conflict / redline</span>');
+
+    // Bare emojis inside table cells (no trailing label)
+    md = md.replace(/(\|\s*)🟢(\s*\|)/g, '$1<span class="pill pill-ok tiny" title="Compatibel">🟢</span>$2');
+    md = md.replace(/(\|\s*)🟡(\s*\|)/g, '$1<span class="pill pill-warn tiny" title="Onderhandelingspunt">🟡</span>$2');
+    md = md.replace(/(\|\s*)🔴(\s*\|)/g, '$1<span class="pill pill-err tiny" title="Conflict / redline">🔴</span>$2');
+
+    return md;
+  }
+
+  function render(rawMd) {
+    const md = preprocessStatusMarkers(rawMd);
+
+    // Custom renderer (marked v4 API)
+    const renderer = new marked.Renderer();
+    renderer.heading = function(text, level) {
+      const slug = slugify(stripHTML(text));
+      const anchor = `<a class="anchor" href="#${slug}" aria-label="Anchor link">¶</a>`;
+      return `<h${level} id="${slug}">${text}${level >= 2 ? anchor : ''}</h${level}>\n`;
+    };
+    renderer.blockquote = function(quote) {
+      const isOpen = /Open vraag/i.test(quote) && /⚠️/.test(quote);
+      const cls = isOpen ? ' class="callout-open"' : '';
+      return `<blockquote${cls}>${quote}</blockquote>\n`;
+    };
+    renderer.table = function(header, body) {
+      return `<div class="table-wrap"><table><thead>${header}</thead><tbody>${body}</tbody></table></div>\n`;
+    };
+    marked.setOptions({ renderer, gfm: true, breaks: false, headerIds: false, mangle: false });
+
+    const html = marked.parse(md);
+    document.getElementById('content').innerHTML = html;
+
+    buildTOC();
+    countStats();
+    wireSearch();
+    wireScrollSpy();
+    wireFilter();
+    wireToTop();
+    wireMenuToggle();
+    wireProgress();
+
+    // Jump to anchor if present in URL
+    if (location.hash) {
+      const t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (t) setTimeout(() => t.scrollIntoView({ behavior: 'instant', block: 'start' }), 50);
+    }
+  }
+
+  /* ====================================================================
+     2. Helpers
+     ==================================================================== */
+  function stripHTML(s) { return s.replace(/<[^>]+>/g, ''); }
+  function slugify(s) {
+    return s.toLowerCase()
+      .normalize('NFKD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .slice(0, 80);
+  }
+
+  /* ====================================================================
+     3. Build TOC
+     ==================================================================== */
+  function buildTOC() {
+    const doc = document.getElementById('doc');
+    const headings = doc.querySelectorAll('h2, h3');
+    const tocEl = document.getElementById('toc');
+    tocEl.innerHTML = '';
+
+    // Group: each h2 becomes a section; h3 under it becomes sub.
+    // We also group by document area (Achtergrond / Decisions log / Voortgang / Open vragen).
+    const groups = [
+      { label: 'Document', sections: [] }
+    ];
+    let currentGroup = groups[0];
+    let currentH2 = null;
+
+    headings.forEach(h => {
+      const txt = h.textContent.replace(/¶$/, '').trim();
+      const id = h.id;
+      if (h.tagName === 'H2') {
+        // Decide group based on text
+        if (/Achtergrond/i.test(txt)) {
+          groups.push({ label: 'Context', sections: [] });
+          currentGroup = groups[groups.length - 1];
+        } else if (/Decisions log/i.test(txt)) {
+          groups.push({ label: 'Decisions log (Secties 0–20)', sections: [] });
+          currentGroup = groups[groups.length - 1];
+        } else if (/Voortgang/i.test(txt)) {
+          groups.push({ label: 'Voortgang', sections: [] });
+          currentGroup = groups[groups.length - 1];
+        } else if (/Open vragen/i.test(txt)) {
+          groups.push({ label: 'Open vragen', sections: [] });
+          currentGroup = groups[groups.length - 1];
+        }
+        currentH2 = { id, text: txt, subs: [] };
+        currentGroup.sections.push(currentH2);
+      } else if (h.tagName === 'H3' && currentH2) {
+        currentH2.subs.push({ id, text: txt });
+      }
+    });
+
+    // Render
+    groups.forEach(g => {
+      if (!g.sections.length) return;
+      const h3 = document.createElement('h3');
+      h3.textContent = g.label;
+      tocEl.appendChild(h3);
+      const ul = document.createElement('ul');
+      ul.className = 'toc-list';
+      g.sections.forEach(s => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#' + s.id;
+        a.textContent = s.text;
+        a.dataset.target = s.id;
+        li.appendChild(a);
+        ul.appendChild(li);
+
+        // Only include subs for Decisions log (otherwise TOC explodes)
+        if (/Decisions log/i.test(g.label) && s.subs.length) {
+          s.subs.forEach(sub => {
+            const subLi = document.createElement('li');
+            subLi.className = 'sub';
+            const subA = document.createElement('a');
+            subA.href = '#' + sub.id;
+            subA.textContent = sub.text.replace(/^Sectie \d+ — /, '');
+            subA.dataset.target = sub.id;
+            subLi.appendChild(subA);
+            ul.appendChild(subLi);
+          });
+        }
+      });
+      tocEl.appendChild(ul);
+    });
+  }
+
+  /* ====================================================================
+     4. Count stats from rendered DOM
+     ==================================================================== */
+  function countStats() {
+    const doc = document.getElementById('doc');
+    // Sections = h3 inside "Decisions log" — count Sectie 0 + 1..20 = 20 (Sectie 13 merged)
+    const sectionHeadings = Array.from(doc.querySelectorAll('h3')).filter(h => /^Sectie \d+/i.test(h.textContent));
+    document.getElementById('stat-sections').textContent = sectionHeadings.length || 20;
+
+    // Sub-components: h4 elements that look like "1a." / "11a." pattern
+    const subComponents = Array.from(doc.querySelectorAll('h4')).filter(h => /^\d+[a-z]\.?\s/i.test(h.textContent.replace(/¶$/, '').trim()));
+    if (subComponents.length) document.getElementById('stat-subs').textContent = subComponents.length;
+
+    // Open questions = blockquotes with callout-open class
+    const openQs = doc.querySelectorAll('blockquote.callout-open').length;
+    if (openQs) document.getElementById('stat-open').textContent = openQs;
+  }
+
+  /* ====================================================================
+     5. Search filter
+     ==================================================================== */
+  function wireSearch() {
+    const input = document.getElementById('search');
+    const tocLinks = document.querySelectorAll('#toc a');
+
+    function clearHighlights() {
+      document.querySelectorAll('.doc mark.search-hit').forEach(m => {
+        const t = document.createTextNode(m.textContent);
+        m.parentNode.replaceChild(t, m);
+      });
+    }
+
+    function highlight(query) {
+      if (!query) return;
+      const doc = document.getElementById('doc');
+      const re = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      // Walk text nodes
+      const walker = document.createTreeWalker(doc, NodeFilter.SHOW_TEXT, {
+        acceptNode(n) {
+          if (n.parentElement.closest('script, style, .intro, .pill, mark')) return NodeFilter.FILTER_REJECT;
+          return n.nodeValue.match(re) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      const matches = [];
+      let n; while ((n = walker.nextNode())) matches.push(n);
+      matches.forEach(node => {
+        const frag = document.createDocumentFragment();
+        const parts = node.nodeValue.split(re);
+        const hits = node.nodeValue.match(re) || [];
+        parts.forEach((part, i) => {
+          frag.appendChild(document.createTextNode(part));
+          if (hits[i] !== undefined) {
+            const mark = document.createElement('mark');
+            mark.className = 'search-hit';
+            mark.textContent = hits[i];
+            frag.appendChild(mark);
+          }
+        });
+        node.parentNode.replaceChild(frag, node);
+      });
+    }
+
+    let debounce;
+    input.addEventListener('input', e => {
+      clearTimeout(debounce);
+      debounce = setTimeout(() => {
+        const q = e.target.value.trim();
+        clearHighlights();
+
+        // Filter TOC
+        tocLinks.forEach(a => {
+          const match = !q || a.textContent.toLowerCase().includes(q.toLowerCase());
+          a.parentElement.classList.toggle('hidden', !match);
+        });
+
+        if (q.length >= 2) {
+          highlight(q);
+          // Scroll to first hit
+          const first = document.querySelector('.doc mark.search-hit');
+          if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 180);
+    });
+
+    // ⌘K / Ctrl+K to focus
+    document.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        input.focus();
+        input.select();
+      }
+      if (e.key === 'Escape' && document.activeElement === input) {
+        input.value = '';
+        input.dispatchEvent(new Event('input'));
+        input.blur();
+      }
+    });
+  }
+
+  /* ====================================================================
+     6. Scroll spy — highlight active TOC entry
+     ==================================================================== */
+  function wireScrollSpy() {
+    const links = Array.from(document.querySelectorAll('#toc a'));
+    const map = new Map(links.map(a => [a.dataset.target, a]));
+    const targets = Array.from(map.keys())
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(entries => {
+      // Find the topmost intersecting entry
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (!visible.length) return;
+      const id = visible[0].target.id;
+      links.forEach(a => a.classList.toggle('active', a.dataset.target === id));
+      const activeLink = map.get(id);
+      if (activeLink) activeLink.scrollIntoView({ block: 'nearest' });
+    }, {
+      rootMargin: '-80px 0px -70% 0px',
+      threshold: 0
+    });
+
+    targets.forEach(t => observer.observe(t));
+  }
+
+  /* ====================================================================
+     7. Open-questions-only filter
+     ==================================================================== */
+  function wireFilter() {
+    const btn = document.getElementById('filter-open');
+    const clear = document.getElementById('clear-filter');
+
+    function applyFilter(on) {
+      document.body.classList.toggle('filter-open', on);
+      btn.classList.toggle('active', on);
+      if (on) {
+        // Hide non-relevant sections in content
+        const doc = document.getElementById('doc');
+        Array.from(doc.children).forEach(el => {
+          if (el.classList.contains('intro') || el.classList.contains('filter-mode-note') || el.classList.contains('doc-footer')) return;
+          if (el.id === 'content') {
+            // walk inside content
+            Array.from(el.children).forEach(inner => {
+              const hasOpen = inner.matches('blockquote.callout-open') || inner.querySelector?.('blockquote.callout-open');
+              const isH2 = inner.tagName === 'H2';
+              if (!hasOpen && !isH2 && !inner.matches('blockquote.callout-open')) {
+                inner.style.display = inner.matches('blockquote.callout-open') ? '' : 'none';
+              } else {
+                inner.style.display = '';
+              }
+            });
+            return;
+          }
+          el.style.display = 'none';
+        });
+        // Easier: just show only callouts plus their preceding h3 (section title)
+        showOnlyOpenQuestions();
+      } else {
+        // Restore
+        document.getElementById('doc').querySelectorAll('[style*="display"]').forEach(el => el.style.display = '');
+      }
+    }
+
+    function showOnlyOpenQuestions() {
+      const content = document.getElementById('content');
+      Array.from(content.children).forEach(el => el.style.display = 'none');
+
+      const callouts = content.querySelectorAll('blockquote.callout-open');
+      callouts.forEach(cb => {
+        // Find preceding h3 (section) and h4 (sub-component) for context
+        let ctxNodes = [];
+        let prev = cb.previousElementSibling;
+        let foundH3 = false, foundH4 = false;
+        while (prev && (!foundH3 || !foundH4)) {
+          if (prev.tagName === 'H4' && !foundH4) { ctxNodes.unshift(prev); foundH4 = true; }
+          if (prev.tagName === 'H3' && !foundH3) { ctxNodes.unshift(prev); foundH3 = true; }
+          if (prev.tagName === 'H2') break;
+          prev = prev.previousElementSibling;
+        }
+        ctxNodes.forEach(n => n.style.display = '');
+        cb.style.display = '';
+      });
+    }
+
+    btn.addEventListener('click', () => {
+      const on = !document.body.classList.contains('filter-open');
+      applyFilter(on);
+      if (on) window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    if (clear) clear.addEventListener('click', e => {
+      e.preventDefault();
+      applyFilter(false);
+    });
+  }
+
+  /* ====================================================================
+     8. Back-to-top
+     ==================================================================== */
+  function wireToTop() {
+    const btn = document.getElementById('to-top');
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('show', window.scrollY > 600);
+    });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+
+  /* ====================================================================
+     9. Mobile menu toggle
+     ==================================================================== */
+  function wireMenuToggle() {
+    const btn = document.getElementById('menu-toggle');
+    btn.addEventListener('click', () => document.body.classList.toggle('sidebar-open'));
+    // Close on link click (mobile)
+    document.getElementById('toc').addEventListener('click', e => {
+      if (e.target.tagName === 'A' && window.innerWidth < 900) {
+        document.body.classList.remove('sidebar-open');
+      }
+    });
+    // Close on backdrop tap
+    document.addEventListener('click', e => {
+      if (!document.body.classList.contains('sidebar-open')) return;
+      if (e.target.closest('.sidebar') || e.target.closest('#menu-toggle')) return;
+      document.body.classList.remove('sidebar-open');
+    });
+  }
+
+  /* ====================================================================
+     10. Reading progress bar
+     ==================================================================== */
+  function wireProgress() {
+    const fill = document.getElementById('progress-fill');
+    function update() {
+      const h = document.documentElement;
+      const max = (h.scrollHeight - h.clientHeight) || 1;
+      const pct = (h.scrollTop / max) * 100;
+      fill.style.width = Math.min(100, Math.max(0, pct)) + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+  </script>
+</body>
+</html>
