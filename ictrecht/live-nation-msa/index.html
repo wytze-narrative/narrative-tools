@@ -237,7 +237,7 @@
     .toc-list a {
       display: flex;
       align-items: baseline;
-      gap: 8px;
+      gap: 10px;
       padding: 5px 10px;
       color: var(--ink-soft);
       text-decoration: none;
@@ -246,7 +246,7 @@
       border-left: 2px solid transparent;
       transition: background 0.1s, color 0.1s, border-color 0.1s;
     }
-    .toc-list a:hover { background: var(--accent-soft); color: var(--ink); }
+    .toc-list a:hover { background: var(--accent-soft); color: var(--ink); text-decoration: none; }
     .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
     .toc-list a.active {
       background: var(--accent-tint);
@@ -262,16 +262,17 @@
       color: var(--muted);
       font-weight: 500;
       letter-spacing: 0;
+      margin-right: 2px;
     }
     .toc-list a.active .num { color: var(--accent); }
-    .toc-list a .label { flex: 1; }
+    .toc-list a .label { flex: 1; min-width: 0; }
     .toc-list .sub a {
-      padding-left: 18px;
+      padding-left: 16px;
       font-size: 0.83rem;
       color: var(--muted);
     }
     .toc-list .sub a.active { color: var(--accent); }
-    .toc-list .sub a .num { font-size: 0.7rem; flex-basis: 28px; }
+    .toc-list .sub a .num { font-size: 0.7rem; flex-basis: 30px; }
     .toc-list li.hidden { display: none; }
 
     /* Main */
@@ -976,13 +977,13 @@
       let inner = text;
 
       // Section number badge for "### Sectie X — Title"
+      // text already contains marked-processed (HTML-escaped) content; we just regex-split
       if (level === 3) {
-        const m = stripped.match(/^Sectie (\d+) — (.+)$/);
+        const m = text.match(/^Sectie (\d+) — (.+)$/);
         if (m) {
-          inner = `<span class="section-num">${m[1]}</span><span class="section-title">${escapeAttr(m[2])}</span>`;
+          inner = `<span class="section-num">${m[1]}</span><span class="section-title">${m[2]}</span>`;
         }
       }
-      // Sub-component prefix highlight: "#### 7c. Title"
       if (level === 4) {
         const m = text.match(/^(\d+[a-z])\.\s+(.+)$/);
         if (m) {
