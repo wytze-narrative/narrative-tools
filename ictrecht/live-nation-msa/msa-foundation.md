@@ -98,7 +98,7 @@ Per 1 juli 2026 bestaat de Narrative-groep uit twee werk-BV's:
 - **Part of the Narrative B.V.** — Wytze de Haan en Xander Kranenburg, 50/50.
 - **Part of the Protocol B.V.** — Wytze de Haan, Xander Kranenburg en Bjorn Veldmeijer, ieder 1/3.
 
-Vandaag (mei 2026) bestaat alleen de VOF "Part of the Narrative"; beide BV's zijn in oprichting bij notaris Rosalie Wesseling. Alle aktes worden gepasseerd vóór 1 juli 2026.
+Part of the Protocol B.V. is opgericht en wordt onder deze MSA de leverende entiteit voor Client Automations. Part of the Narrative B.V. is nog in oprichting bij notaris Rosalie Wesseling (passering vóór 1 juli 2026); die entiteit verzorgt training- en advisory-werk onder AV v1.3 en valt buiten de MSA-scope.
 
 ### Wat doet Narrative? Wat doet Protocol?
 
@@ -186,11 +186,9 @@ Zie Achtergrond-sectie hierboven voor volledige onderbouwing en de tabel met de 
 
 **Narrative-zijde (signing party)**:
 
-- **MSA wordt getekend door**: `Part of the Narrative VOF` (KvK-nummer in te vullen) — de Nederlandse vennootschap onder firma waaronder Wytze en Xander vandaag opereren. Tekenen wachten op de BV-oprichting zou de MSA-route maanden vertragen, en dat staat het Live Nation-werk in de weg.
-- **Pre-agreed novation naar Part of the Protocol B.V.**: in de MSA zelf wordt vastgelegd dat de overeenkomst (inclusief alle dan geldende SoW's en DPA-annexen) automatisch overgaat (novatie, BW 6:155 e.v.) op `Part of the Protocol B.V.` zodra die BV is opgericht (verwacht juli/augustus 2026). Live Nation's voorafgaande toestemming voor de novatie wordt verleend door ondertekening van deze MSA — er is geen aanvullende handtekening op Novation Date vereist. Volledige clausule + waarborgen (12 mnd jointly-and-severally liable, DPA migreert automatisch mee) staan in **Sectie 16a**.
-- **Reden voor deze constructie**: Part of the Protocol B.V. is de uiteindelijke leverende entiteit voor Client Automation-werk, maar bestaat nu nog niet. VOF tekent als interim om de MSA-route niet te vertragen; de pre-agreed novation geeft Live Nation comfort dat de juiste eindentiteit straks de obligaties draagt zonder dat er een nieuwe handtekeningenronde of vendor-risk-assessment nodig is.
+- **MSA wordt getekend door**: `Part of the Protocol B.V.` (KvK-nummer in te vullen). Dit is de Nederlandse besloten vennootschap die alle Client Automation-opdrachten onder de MSA gaat leveren.
 - **Aandeelhouders Part of the Protocol B.V.**: Wytze de Haan (1/3), Xander Kranenburg (1/3) en Bjorn Veldmeijer (1/3) — allen volledig op de hoogte van de Live Nation-engagement en mede-betrokken bij review van de MSA-concept vóór ondertekening.
-- **Operationele actie richting Live Nation**: KvK-nummer van Part of the Protocol B.V. wordt aan Live Nation gecommuniceerd zodra de BV in oprichting is bij notaris Rosalie Wesseling (verwacht vóór 1 juli 2026), zodat LN-IT desgewenst alvast een dual-track vendor-risk-assessment kan starten op de toekomstige counterparty.
+- **Operationele actie richting Live Nation**: KvK-nummer van Part of the Protocol B.V. wordt aan Live Nation gecommuniceerd voor het LN-IT-vendor-risk-assessment-traject.
 
 **LN-zijde (counterparty)**:
 - **Primary signing party**: `Live Nation Entertainment Netherlands B.V.` (groepsmoeder NL). Jennifer mag definitieve entity-naam bevestigen of corrigeren tijdens review.
@@ -198,8 +196,6 @@ Zie Achtergrond-sectie hierboven voor volledige onderbouwing en de tabel met de 
 - **Concept-formulering Authorized Affiliates** (laat ICTRecht juridisch aanscherpen):
 
 > *"Live Nation may designate one or more affiliates within the Live Nation Entertainment Netherlands group ('Authorized Affiliates') to enter into Statements of Work under this Agreement. Each Authorized Affiliate executing a SoW shall become a party to that SoW and shall be bound by the terms of this Agreement with respect to that SoW. Live Nation Entertainment Netherlands B.V. and the Authorized Affiliate shall be jointly responsible for the performance of obligations arising under that SoW."*
-
-> ⚠️ **Open vraag 1a (VOF-als-signing-party + pre-agreed novation — advisability)**: Werkt deze constructie — Part of the Narrative VOF tekent vandaag met een vooraf-gedefinieerde novatie naar Part of the Protocol B.V. zodra die BV is opgericht — onder NL-recht goed in een enterprise-MSA-context? Is dit een aan te raden route, of zijn er praktische, fiscale of juridische redenen om dit juist af te raden (bijv. hoofdelijke aansprakelijkheid van de VOF-vennoten in het interim, KvK-/registratie-implicaties, perceptie bij Live Nation's vendor-risk-management)? Zo ja, welke alternatieve route — bijv. wachten op oprichting Part of the Protocol B.V. en pas dan tekenen, of tekenen via Part of the Narrative B.V. (na doorzak) als interim — verdient juridisch de voorkeur, en waarom?
 
 > ⚠️ **Open vraag 1c (Authorized Affiliates — joint vs. several liability)**: Is "joint responsibility" tussen Live Nation Entertainment Netherlands B.V. en de ondertekenende venue-affiliate (Ziggo Dome B.V., AFAS Live B.V., MOJO Concerts B.V.) juridisch de juiste constructie voor SoW-aansprakelijkheid onder NL-recht, of is "several liability" (alleen de affiliate verantwoordelijk per individuele SoW) cleaner? Vervolgvraag: bij affiliate-failure of faillissement van een venue — kan Narrative recourse hebben op Live Nation Entertainment Netherlands B.V. als moederentiteit voor uitstaande facturen? Trade-off voor onderbouwing: jointly geeft Narrative een sterkere collection-positie, maar LN-Legal kan hierop pushbacken wegens administratieve last; several is simpeler maar zwakkere verhaalsmogelijkheid bij affiliate-insolventie.
 
@@ -2554,32 +2550,17 @@ Voorbeeld-clausule:
 
 ### Sectie 16 — Assignment, Subcontracting & Affiliates
 
-Vastgelegd 2026-05-11. Hybride structuur: blanket assignment binnen Narrative-groep + pre-agreed novation naar Part of the Protocol B.V. + symmetrisch Customer-side + change-of-control bescherming + subcontracting-regiem.
+Vastgelegd 2026-05-11. Blanket assignment binnen Narrative-groep + symmetrisch Customer-side + change-of-control bescherming + subcontracting-regiem.
 
 **Vijf sub-componenten met status-markering** (🟢 standaard / 🟡 onderhandelingspunt):
 
-**16a. Assignment Service Provider — hybride: blanket + pre-agreed novation** 🟡
-
-Bestaat uit twee gekoppelde clausules:
-
-**(i) Blanket assignment binnen Narrative-groep**
+**16a. Assignment Service Provider — blanket binnen corporate group** 🟢
 
 Voorbeeld-clausule:
 
 > *"Service Provider may assign this Agreement and any Statement of Work, without the consent of Customer, to (i) any Affiliate of Service Provider, (ii) any successor entity arising from a merger, consolidation, or restructuring of Service Provider's group, or (iii) any acquirer of all or substantially all of Service Provider's assets relating to the services hereunder, provided that Service Provider notifies Customer within thirty (30) days. Any other assignment requires Customer's prior written consent, not to be unreasonably withheld."*
 
-**(ii) Pre-agreed novation naar Part of the Protocol B.V.** (specifiek voor de lopende VOF→BV-transitie binnen Narrative-groep)
-
-Voorbeeld-clausule:
-
-> *"At the Effective Date of this Agreement, the Service Provider is Part of the Narrative VOF (KvK [number]), a Dutch general partnership ("vennootschap onder firma"). The Parties acknowledge that Service Provider's principals are in the process of incorporating Part of the Protocol B.V. (the "Operating Entity"), a Dutch private limited company intended to become the principal contracting entity providing services under this Agreement. Upon written notification by Service Provider to Customer that the Operating Entity has been duly incorporated and is operational, this Agreement, together with all Statements of Work then in effect and all associated Annexes (including the Data Processing Annex), shall automatically be novated to the Operating Entity as Service Provider, with effect from the date specified in such notification (the "Novation Date"). Following novation: (a) Part of the Narrative VOF (or its successor entity arising from the planned corporate restructuring) shall remain jointly and severally liable for the performance of obligations accrued prior to the Novation Date for a period of twelve (12) months; (b) the Operating Entity shall be solely responsible for performance of obligations arising from and after the Novation Date; (c) the Customer's consent to such novation is given by execution of this Agreement and no further consent, signature, or action by Customer is required."*
-
-**Drie sterke punten in deze formulering**:
-1. **"jointly and severally liable for 12 maanden"** — LN behoudt verhaal-recht op de oorspronkelijke signing party (VOF, of haar opvolger Part of the Narrative B.V. na doorzak) voor pre-novation verplichtingen
-2. **"no further consent required"** — geen herhandtekening, vooraf-akkoord zonder vertraging
-3. **"all associated Annexes including DPA"** — DPA + subprocessor-listing migreren automatisch mee (geen herhandeling Jennifer's DPA onder POTP)
-
-Status 🟡 want LN-Legal kan willen dat de novation-clausule wordt aangevuld met (i) een vereiste dat POTP-vendor-risk-assessment is voltooid vóór Novation Date, of (ii) een minimale notice-periode (60 wd i.p.v. willekeurige datum).
+Dekt toekomstige restructuring binnen de Narrative-groep (bv. Part of the Narrative B.V. doorzak na 1 juli 2026) zonder herhandtekening. Status 🟢 — NL-marktstandaard.
 
 **16b. Assignment Customer — mirror van 16a** 🟢
 
@@ -2636,31 +2617,22 @@ Voorbeeld-clausule:
 - **Sectie 7c carve-outs**: opzettelijke assignment-schendingen blijven unlimited
 - **Sectie 11f subprocessor listing** (DPA Annex Y): data-subcontracting separaat geregeld
 - **Sectie 14 Confidentiality**: identiteit van subcontractors valt onder Confidential Information
-- **Sectie 15 Non-solicitation**: pre-agreed novation naar POTP migreert ook 15-bescherming naar nieuwe entiteit (key contractors blijven beschermd)
-
 ---
 
 **Strategische keuzes vastgelegd**:
 
 | Keuze | Motivatie |
 |---|---|
-| **Hybride: blanket assignment + pre-agreed novation** | Blanket dekt toekomstige restructuring; pre-agreed novation dekt de huidige VOF→POTP-transitie zonder LN-vertraging |
-| **Specifiek POTP bij naam genoemd** | LN-IT/vendor-risk-management kan POTP vooraf-beoordelen (dual-track) i.p.v. herbeoordeling bij overdracht |
-| **12 mnd jointly liable post-novation** | LN behoudt verhaal-recht op de oorspronkelijke VOF (of haar BV-opvolger) voor pre-novation verplichtingen |
-| **DPA migreert automatisch mee in novation** | Geen herhandeling Jennifer's DPA-template onder POTP |
+| **Blanket assignment binnen corporate group** | Dekt toekomstige restructuring (bv. doorzak Part of the Narrative B.V. na 1 juli 2026) zonder herhandtekening |
 | **Material Competitor-lijst als Annex** | Beide partijen weten precies welke CoC een exit triggert; jaarlijks aanpasbaar |
 | **Subcontracting €10k-drempel** | Voorkomt notice-overhead voor ad-hoc freelancers; LN behoudt grip op structurele leveranciers |
 
-**Open vragen aan ICTRecht**:
-
-> ⚠️ **Open vraag 16a (novation-mechanisme NL-recht)**: Is een pre-agreed novation-clausule waarin Customer's consent ex ante wordt verleend voor toekomstige novation naar een nog niet-bestaande entiteit (POTP) onder NL-recht (BW 6:155 e.v.) afdwingbaar zonder aanvullende handtekening op Novation Date? Achtergrond: voorkomt vertraging bij oprichting POTP. Beschermingsbelang LN: jointly-and-severally-liable-clausule (12 mnd) + notice-procedure.
+**Geen open vragen aan ICTRecht** — standaard NL-marktstructuur.
 
 **Operationele actiepunten** (buiten MSA-tekst):
 
-1. **Brief Paul/LN-IT** dat POTP de uiteindelijke counterparty wordt (timing: oprichting POTP vóór 30-6-2026 per Dennis-tijdlijn)
-2. **Vraag of leveranciersbeoordeling dual-track kan**: VOF (signing party nu), POTP vooraf-geaccepteerd
-3. **Stuur KvK-nummer POTP** zodra Rosalie het in oprichting heeft, maar nog vóór passering — LN-IT kan de POTP-line al openzetten in vendor system
-4. **Material Competitor-lijst** opstellen vóór ICTRecht-briefing: 5-10 entities per kant
+1. **Stuur KvK-nummer POTP** aan Paul/LN-IT zodra beschikbaar, zodat het vendor-risk-assessment direct op de juiste entiteit kan starten.
+2. **Material Competitor-lijst** opstellen vóór ICTRecht-briefing: 5-10 entities per kant.
 
 ### Sectie 17 — Force Majeure
 
@@ -2750,12 +2722,12 @@ Vastgelegd 2026-05-11. Drielaagse escalatie + email-first voor routine + registe
 | Type notice | Medium |
 |---|---|
 | **Routine operational** (SoW-coordinatie, status updates, project-communicatie) | Email aan named addresses |
-| **Material notices** (termination, material breach, force majeure, change of control, novation, indemnification claim, payment default) | Email **+** registered mail (PostNL of equivalent) **of** qualified electronic signature |
+| **Material notices** (termination, material breach, force majeure, change of control, indemnification claim, payment default) | Email **+** registered mail (PostNL of equivalent) **of** qualified electronic signature |
 | **Algemene contractuele wijzigingen** (Tier 3 amendments per 6c) | Qualified electronic signature |
 
 Voorbeeld-clausule:
 
-> *"All notices, requests, consents, and other communications required or permitted under this Agreement shall be in writing. Routine operational communications regarding day-to-day performance of the services shall be deemed validly given when sent by email to the addresses specified in Section 18b. Material notices, including notices of termination, material breach, force majeure events, change of control, novation, indemnification claims, and payment default, shall be deemed validly given only when sent by both (i) email to the addresses specified in Section 18b, and (ii) either registered mail (or equivalent carrier providing delivery confirmation) or qualified electronic signature in accordance with eIDAS Regulation (EU) 910/2014. Amendments to this Agreement at Tier 3 amendment level (as defined in Section 6c) shall be executed exclusively by qualified electronic signature."*
+> *"All notices, requests, consents, and other communications required or permitted under this Agreement shall be in writing. Routine operational communications regarding day-to-day performance of the services shall be deemed validly given when sent by email to the addresses specified in Section 18b. Material notices, including notices of termination, material breach, force majeure events, change of control, indemnification claims, and payment default, shall be deemed validly given only when sent by both (i) email to the addresses specified in Section 18b, and (ii) either registered mail (or equivalent carrier providing delivery confirmation) or qualified electronic signature in accordance with eIDAS Regulation (EU) 910/2014. Amendments to this Agreement at Tier 3 amendment level (as defined in Section 6c) shall be executed exclusively by qualified electronic signature."*
 
 **18b. Notice-recipients** 🟢
 
