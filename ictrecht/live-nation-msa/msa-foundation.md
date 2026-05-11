@@ -279,10 +279,11 @@ Voorkomt dat een SoW (of een Authorized Affiliate die een SoW tekent) de constit
 
 ---
 
-**Voor in briefing aan ICTRecht**:
-- Bevestigen of Nederlandse contractenrecht "layered precedence" gangbaar formuleert in MSA's, of dat een alternatieve formulering juridisch sterker is
-- Check of de safeguard-clausule met "(not by Authorized Affiliates)" rechtsgeldig is — een affiliate die een SoW tekent kán in theorie nog steeds toekomstige aanspraken hebben tegen de moeder. ICTRecht moet deze constructie pressure-testen.
-- Bevestigen of "Master-DPA + sub-annexen"-structuur compatibel is met Jennifer's LN-template — anders compromis zoeken voor alignment
+> ⚠️ **Open vraag 2a (layered precedence — formulering NL-conform)**: Is een "layered precedence"-clausule (DPA-Annex → Master-DPA → SoW → MSA → AV) zoals voorgesteld in 2 een gangbare en juridisch sterke constructie onder Nederlands contractenrecht voor MSA's met meerdere onderliggende SoW's en DPA-annexen, of bestaat er een alternatieve formulering (bijv. een single integrated agreement clause met expliciete waiver-mechanismen) die voor onze positie verdedigbaarder is?
+
+> ⚠️ **Open vraag 2b (safeguard "not by Authorized Affiliates" — rechtsgeldigheid)**: Houdt de toevoeging *"and not by Authorized Affiliates"* in de safeguard-clausule onder NL-recht stand? Concreet: kan een venue-affiliate (Ziggo Dome, AFAS Live, MOJO) die een SoW tekent in theorie nog steeds toekomstige aanspraken tegen Live Nation Entertainment Netherlands B.V. doen op grond van het constitutionele MSA-niveau, ondanks deze contractuele beperking? Deze constructie is bedoeld om te voorkomen dat een SoW-tekenende affiliate de MSA-bescherming uitholt — graag pressure-testen op afdwingbaarheid.
+
+> ⚠️ **Open vraag 2c (Master-DPA + sub-annexen — compatibiliteit Jennifer's template)**: Is de voorgestelde "Master-DPA + sub-annexen per systeem"-structuur compatibel met Jennifer Quik's LN-group DPA Addendum-template (zoals ontvangen 20 april 2026)? Indien niet volledig compatibel: welk compromis is het cleanest om alignment te bereiken zonder Narrative's wens om per-systeem-detail in annexen te behouden op te geven? (Onderbouwing AVG Art 28(3)-conformiteit zelf zit in open vraag 11a — deze vraag betreft template-alignment, niet AVG-naleving.)
 
 ### Sectie 3 — Term & termination
 
@@ -388,11 +389,13 @@ Drie afwegingen drijven deze keuze:
 
 ---
 
-**Voor in briefing aan ICTRecht**:
-- Bevestigen of 3-jaars + 1-jaars renewals onder Nederlandse contractenrecht en gangbare LN-vendor-praktijk een verdedigbare opening positie is, of dat 2 jaar + renewals beter onderhandelbaar is
-- Toetsen of het cure-mechanisme (30 dagen / no-cure-categorieën) NL-rechtelijk goed staat — Nederlandse rechter beoordeelt redelijkheid soms anders dan Anglo-Saksisch standaard
-- Beoordelen of de "(non-payment 60 dagen + 30 dagen demand)"-constructie sterker is dan een directe verwijzing naar wettelijke handelsrente + verzuim-regeling onder NL-recht
-- Overwegen of "transition assistance tegen day-rate" of "20 free transition hours + day-rate daarna" de betere onderhandelingspositie is — input gewenst
+> ⚠️ **Open vraag 3a (3-jaars initial term — verdedigbaarheid)**: Is een 3-jaars initial term met 1-jaars automatische renewals onder Nederlands contractenrecht en gangbare LN-vendor-praktijk een verdedigbare opening positie voor een MSA met meerjarige operationele componenten, of is 2 jaar + renewals juridisch én commercieel beter onderhandelbaar gegeven Protocol's status als relatief jonge vendor?
+
+> ⚠️ **Open vraag 3b (cure-mechanisme — NL-rechtelijke houdbaarheid)**: Houdt het cure-mechanisme (30 dagen schriftelijke notice + remediation + verificatie, met no-cure-categorieën voor insolventie/fraude/gross misconduct) onder Nederlands recht stand? Achtergrond: de Nederlandse rechter beoordeelt "redelijke termijn voor herstel" soms strenger dan de Anglo-Saksische standaardpraktijk — graag toetsen of 30 dagen voor materiële breach NL-rechtelijk verdedigbaar is, of dat een ander mechanisme (bijv. 60 dagen + early-termination-right voor opzet) sterker staat.
+
+> ⚠️ **Open vraag 3c (non-payment 60+30 vs. wettelijke handelsrente)**: Is de "(non-payment 60 dagen + 30 dagen demand)"-termination-trigger sterker dan een directe verwijzing naar de wettelijke handelsrente + verzuim-regeling onder BW 6:119a/119b? Welke constructie is contractrechtelijk cleanest voor een MSA tussen NL-zakelijke partijen, gegeven dat Protocol vooraf-betalings-bescherming wil bij grote SoW's?
+
+> ⚠️ **Open vraag 3d (transition assistance — formulering)**: Welke transition-assistance-formulering verdient juridisch en commercieel de voorkeur: (a) "redelijke transitie-hulp gedurende max 90 dagen tegen reguliere day-rate", of (b) "20 free transition hours + day-rate daarna"? Trade-off: (a) geeft Protocol zekerheid van betaling vanaf uur 1; (b) geeft LN comfort dat termination niet onmiddellijk consultancy-kosten triggert.
 
 ### Sectie 4 — Fees & payment
 
@@ -524,13 +527,13 @@ Na go-live van een Client Automation biedt Protocol twee support-opties. Keuze l
 
 ---
 
-**Voor in briefing aan ICTRecht**:
-- Bevestigen dat de MSA-scope-formulering Owned Products effectief uitsluit (Sectie 0 + Achtergrond-tabel "Drie commerciële trajecten"). Voorkomt dat een SoW onder deze MSA per ongeluk een Owned Product zou raken — die horen onder Protocol's eigen Subscription-stack.
-- Toetsen of de "Discovery is not chargeable unless in SoW"-formulering NL-rechtelijk standhoudt — voorkomt latere claims dat pre-sales-uren toch als consulting gefactureerd hadden moeten worden
-- Bevestigen dat 14-dagen-dispute-window onder NL-recht handhaafbaar is, of dat de standaard (30 dagen onder Burgerlijk Wetboek) sterker is voor onze positie
-- CPI-indexatie + 5% cap toetsen aan recente NL-jurisprudentie over indexatie-clausules in B2B-contracten
-- Beoordelen of een aparte "Fee Schedule"-annex bij MSA helpt — zodat tarieven jaarlijks geüpdatet worden zonder de hele MSA opnieuw te tekenen
-- Adviseren of de change-order-procedure (Sectie 6) en de scope-protectie (geen T&M voor builds) sterker apart of geïntegreerd geformuleerd moeten worden
+> ⚠️ **Open vraag 4a (Owned-Products-uitsluiting — effectiviteit)**: Sluit de huidige MSA-scope-formulering (Sectie 0 + Achtergrond-tabel "Drie commerciële trajecten") Owned Products (Venue Vera, F&B Forecasting, Controle Carla, Draaiboek Donna) juridisch effectief uit, zodat geen SoW onder deze MSA per ongeluk een Owned Product kan raken? Owned Products vallen onder Protocol's eigen Subscription Order Form + Subscription Terms + Protocol-DPA; de scope-clausule moet voorkomen dat LN-affiliates dat traject onder deze MSA proberen te trekken.
+
+> ⚠️ **Open vraag 4b (Discovery niet-factureerbaar — NL-houdbaarheid)**: Houdt de "Discovery is not chargeable unless explicitly scoped in a SoW"-formulering onder Nederlands recht stand? Concreet: voorkomt deze formulering latere claims door Live Nation dat pre-sales-uren of scoping-werk toch als consulting-uren gefactureerd hadden moeten worden, of zijn er aanvullende voorwaarden (bijv. expliciete waiver-clausule of redelijkheidsstandaard onder BW 6:248) nodig om deze positie verdedigbaar te maken?
+
+> ⚠️ **Open vraag 4c (dispute-window 14 dagen — NL-handhaafbaarheid)**: Is een 14-dagen-dispute-window (waarbinnen Live Nation een factuur moet betwisten) onder NL-recht handhaafbaar in een B2B-context tussen gelijkwaardige zakelijke partijen, of is de standaard van 30 dagen onder Burgerlijk Wetboek sterker voor onze positie als leverancier (sneller closure = sterkere cashflow-positie)?
+
+> ⚠️ **Open vraag 4d (CPI-indexatie + 5% cap — recente NL-jurisprudentie)**: Toets de voorgestelde CPI-indexatie met 5% cap aan recente Nederlandse jurisprudentie over indexatie-clausules in B2B-contracten. Specifiek: is een 5% jaarlijks cap een verdedigbare middenweg (LN-vendor-praktijk), of bestaat er risico dat NL-rechter de cap-clausule pas-toepasselijk verklaart bij significante CPI-stijgingen?
 
 ### Sectie 5 — IP model
 
@@ -622,11 +625,11 @@ Reden voor pre-emptief opnemen: dit is een steeds vaker gevraagde clausule door 
 
 ---
 
-**Voor in briefing aan ICTRecht**:
-- Bevestigen of dual perpetual license en de Background-IP-formulering NL-rechtelijk zo sterk staan als ze nu staan, of dat aanvullende formulering ("ondeelbaar van het methodology-IP") helpt
-- Formulering van "no training Protocol's models"-clausule juridisch laten verfijnen — moet OpenAI/Anthropic-style gebruik niet onbedoeld blokkeren waar Protocol per SoW persoonsgegevens via API stuurt voor productie-doeleinden
-- Beoordelen of IP-indemnity een eigen super-cap moet krijgen (vs. inclusief in algemene liability-cap) — afhankelijk van risico-analyse rond derde-partij-licenties (OpenAI, Apify, Twilio)
-- Bevestigen dat de change-control-carve-out (geen indemnity bij door klant doorgevoerde wijzigingen) onder NL-recht goed staat — sluit aan op de change-control-clausule die als verplicht element in MSA komt
+> ⚠️ **Open vraag 5a (dual perpetual license + Background-IP — NL-houdbaarheid)**: Staan de voorgestelde dual perpetual license-constructie en de Background-IP-formulering onder NL-recht zo sterk als nu geformuleerd, of helpt aanvullende formulering ("ondeelbaar van het methodology-IP", expliciete non-exclusiviteit, of een eigen waiver-clausule) om de constructie meer pressure-test-bestendig te maken bij eventuele LN-Legal-bezwaren?
+
+> ⚠️ **Open vraag 5b (no-training-Protocol's-models — clausule-formulering)**: Laat de "no training Protocol's models"-clausule juridisch verfijnen zodat deze (a) Protocol blokkeert om klant-data te gebruiken voor model-training over andere klanten heen, maar (b) niet onbedoeld OpenAI/Anthropic-style API-gebruik blokkeert waar Protocol per SoW persoonsgegevens via API doorstuurt voor productie-doeleinden onder DPA Annex Y subprocessor-listing. Welke formulering vermijdt dit grijze gebied het beste?
+
+> ⚠️ **Open vraag 5d (change-control-carve-out — NL-recht)**: Houdt de change-control-carve-out (geen IP-indemnity bij door klant zelfstandig doorgevoerde wijzigingen op deliverables) onder NL-recht stand? Deze carve-out sluit aan op de change-control-clausule (Sectie 6c) als verplicht element in de MSA — graag pressure-testen of de combinatie 5d-carve-out + 6c-procedure juridisch sluitend is, of dat aanvullende bewijslast-clausules nodig zijn.
 
 ### Sectie 6 — Acceptance & change control
 
@@ -924,15 +927,15 @@ Specifiek scenario: production-blocking issues, security-issues, of compliance-i
 
 ---
 
-**Voor in briefing aan ICTRecht**:
-- Bevestigen dat 10-werkdagen-acceptance-window + deemed acceptance onder NL-recht goed staat — dit is markt-standaard maar specifiek toetsen op LN-context als enterprise-klant met multi-affiliate-structure
-- AI-acceptance-mechanisme (test-set + accuracy-target) juridisch laten verfijnen — moet expliciet maken dat afwijkingen binnen het accuracy-threshold geen defect-grond zijn, ook al is een individuele case voor de klant onbevredigend. Dit is een nieuwe juridische vraag specifiek voor AI-builds; ICTRecht kan dit best mooi formuleren
-- Third-party-provider-risk-clausule toetsen — markt-conform in 2026, maar specifiek de warranty-window-uitzondering (Protocol redelijkerwijs voorzienbaarheid bij oplevering) goed afgrenzen om ambiguïteit te vermijden
-- Drie-tier-change-order-formaliteit juridisch valideren — vooral de "vijf minimumvereisten voor Tier 2"-mechanisme moet sluitend bewijskrachtig zijn onder NL-recht. Eventueel verwijzen naar Wet elektronische handtekeningen (eIDAS) voor Tier 3
-- Beoordelen of de €25.000 / 50%-grens voor Tier 3 (Material Change Order) onder NL-recht een hard criterium kan zijn, of dat aanvullende formuleringen nodig zijn ("inclusief BTW", "cumulatief over alle Change Orders binnen één SoW", etc.)
-- Emergency Change Order-mechanisme contractrechtelijk valideren — het mondelinge akkoord-deel is juridisch grijs onder NL-recht; bewijslast-aspect goed regelen via achteraf-formalisering
-- Cross-verwijzing naar Sectie 5d (IP-warranty change-control-carve-out) consistent maken in finale formulering — dezelfde change-control-realiteit raakt zowel IP-warranty (5d) als defect-management (6b)
-- Beoordelen of de change-control-clausule (6c) naast MSA-niveau ook nog een aparte template-clausule per SoW nodig heeft — vooral voor Brand Shield-achtige klant-tenant-systemen
+> ⚠️ **Open vraag 6a (10-werkdagen acceptance + deemed acceptance — NL-houdbaarheid)**: Staat een 10-werkdagen-acceptance-window met deemed acceptance (klant moet binnen die termijn bezwaar maken of deliverable geldt als geaccepteerd) onder NL-recht goed in een enterprise-context met multi-affiliate-structuur (LN-NL + Ziggo Dome + AFAS Live + MOJO)? Markt-standaard, maar graag specifiek toetsen of een enterprise-klant met meerdere stakeholders deze termijn juridisch zou kunnen aanvechten als "te kort voor redelijke beoordeling".
+
+> ⚠️ **Open vraag 6b (AI-acceptance-mechanisme — defect-grond bij threshold-afwijking)**: Laat de AI-acceptance-formulering (test-set + accuracy-target, bijv. 92% accuracy op een vooraf overeengekomen evaluatie-set) juridisch verfijnen zodat onomstreden vaststaat dat individuele afwijkingen *binnen* de accuracy-threshold géén defect-grond zijn — ook al ervaart een eindgebruiker een specifieke output als onbevredigend. Dit is nieuw juridisch terrein specifiek voor AI-builds; welke formulering bindt klant het sterkst aan het statistische acceptance-criterium?
+
+> ⚠️ **Open vraag 6d (third-party-AI-provider warranty-window — afgrenzing)**: De third-party-AI-provider-risk-clausule (uitsluiting van warranty-claims voor schade veroorzaakt door OpenAI/Anthropic/Twilio-zijde uitvallen) is markt-conform in 2026. De warranty-window-uitzondering — Protocol redelijkerwijs voorzienbaarheid van third-party-risico bij oplevering — moet juridisch goed afgegrensd worden om ambiguïteit te vermijden. Welke formulering legt de bewijslast helder bij de klant (LN moet aantonen dat het risico voorzienbaar was) zonder Protocol onbedoeld aan een algemene best-efforts-warranty te binden?
+
+> ⚠️ **Open vraag 6e (drie-tier change-order-formaliteit — bewijskracht + €25k-grens)**: Valideer de drie-tier-change-order-formaliteit onder NL-recht. Twee deelvragen: (1) Is het "vijf minimumvereisten voor Tier 2"-mechanisme (email-thread met expliciete acceptance, scope, prijs, deadline, identiteit) sluitend bewijskrachtig onder NL-recht, of moet er expliciet verwezen worden naar Wet elektronische handtekeningen (eIDAS) voor Tier 3? (2) Kan de €25.000 / 50% scope-uitbreiding-grens voor Tier 3 als hard criterium worden gebruikt, of zijn aanvullende formuleringen nodig ("inclusief BTW", "cumulatief over alle Change Orders binnen één SoW", "berekend op gemiddeld kwartaal-volume") om interpretatie-disputes te vermijden?
+
+> ⚠️ **Open vraag 6f (Emergency Change Order — mondeling akkoord NL-bewijslast)**: Het Emergency Change Order-mechanisme staat een mondeling akkoord toe (telefoon/Slack) voor onmiddellijke start, met 5-werkdagen achteraf-formalisering. Het mondelinge-akkoord-deel is juridisch grijs onder NL-recht. Hoe regelt de Emergency CO-clausule de bewijslast het beste — bijv. via een verplichte gespreksnotitie binnen 4 uur met email-bevestiging door de klant, of via een achteraf-DocuSign-formalisering met expliciete erkenning dat mondeling akkoord op X-datum gegeven is?
 
 ### Sectie 7 — Liability cap-architectuur
 
@@ -1290,7 +1293,7 @@ AI Act Art 6 (high-risk-classificatie) moet pre-deployment worden vastgesteld. V
 
 ---
 
-#### Voor in briefing aan ICTRecht
+#### Onderbouwing & onderhandelingsruimte
 
 **Strategische keuzes die expliciete onderbouwing behoeven**:
 
@@ -1522,7 +1525,7 @@ Beide partijen kunnen onafhankelijk door AP onderzocht worden. Mutual indemnity 
 
 ---
 
-#### Voor in briefing aan ICTRecht
+#### Onderbouwing & onderhandelingsruimte
 
 **Strategische keuzes die expliciete onderbouwing behoeven**:
 
@@ -1710,7 +1713,7 @@ Geen Anglo-Amerikaanse "AS IS"-clause die in NL nietig kan zijn. NL-recht kent i
 
 ---
 
-#### Voor in briefing aan ICTRecht
+#### Onderbouwing & onderhandelingsruimte
 
 **Strategische keuzes die expliciete onderbouwing behoeven**:
 
@@ -1947,7 +1950,7 @@ In 2024-2026 zijn AI-uitsluitingen verschenen in sommige polissen (vooral USA-ma
 
 ---
 
-#### Voor in briefing aan ICTRecht
+#### Onderbouwing & onderhandelingsruimte
 
 **Strategische keuzes die expliciete onderbouwing behoeven**:
 
@@ -2162,7 +2165,7 @@ Sectie 11h regelt alleen de **routering**: AVG-audit in DPA, commercieel audit i
 
 ---
 
-#### Voor in briefing aan ICTRecht
+#### Onderbouwing & onderhandelingsruimte
 
 **Strategische keuzes die expliciete onderbouwing behoeven**:
 
