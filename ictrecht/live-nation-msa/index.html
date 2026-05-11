@@ -1054,27 +1054,39 @@
     let currentGroup = groups[0];
     let currentH2 = null;
 
+    function extractHeading(h) {
+      // If renderer added section-num + section-title spans, read those directly
+      const numEl = h.querySelector(':scope > .section-num');
+      const titleEl = h.querySelector(':scope > .section-title');
+      if (numEl && titleEl) {
+        return { id: h.id, num: numEl.textContent.trim(), label: titleEl.textContent.trim() };
+      }
+      // Otherwise fall back to plain textContent (strip trailing anchor icons)
+      const clone = h.cloneNode(true);
+      clone.querySelectorAll('a.anchor').forEach(a => a.remove());
+      return { id: h.id, num: null, label: clone.textContent.trim() };
+    }
+
     headings.forEach(h => {
-      const fullTxt = h.textContent.replace(/¶$/, '').trim();
-      const id = h.id;
+      const info = extractHeading(h);
       if (h.tagName === 'H2') {
-        if (/Achtergrond/i.test(fullTxt)) {
+        if (/Achtergrond/i.test(info.label)) {
           groups.push({ label: 'Context', sections: [] });
           currentGroup = groups[groups.length - 1];
-        } else if (/Decisions log/i.test(fullTxt)) {
-          groups.push({ label: 'Decisions log · Secties 0–20', sections: [] });
+        } else if (/Decisions log/i.test(info.label)) {
+          groups.push({ label: 'Decisions log · Secties 0–20', sections: [], skipH2: true });
           currentGroup = groups[groups.length - 1];
-        } else if (/Voortgang/i.test(fullTxt)) {
+        } else if (/Voortgang/i.test(info.label)) {
           groups.push({ label: 'Voortgang', sections: [] });
           currentGroup = groups[groups.length - 1];
-        } else if (/Open vragen/i.test(fullTxt)) {
+        } else if (/Open vragen/i.test(info.label)) {
           groups.push({ label: 'Open vragen', sections: [] });
           currentGroup = groups[groups.length - 1];
         }
-        currentH2 = { id, text: fullTxt, subs: [] };
+        currentH2 = { ...info, subs: [] };
         currentGroup.sections.push(currentH2);
       } else if (h.tagName === 'H3' && currentH2) {
-        currentH2.subs.push({ id, text: fullTxt });
+        currentH2.subs.push(info);
       }
     });
 
@@ -1089,16 +1101,18 @@
       const isDecisions = /Decisions log/i.test(g.label);
 
       g.sections.forEach(s => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = '#' + s.id;
-        a.dataset.target = s.id;
-
-        // For Decisions log, show subs as TOC entries instead of section names
-        // The H2 "Decisions log" entry itself doesn't need a clickable link in the TOC for subs
-        a.appendChild(makeLabel(s.text, null, false));
-        li.appendChild(a);
-        ul.appendChild(li);
+        // Skip the H2 entry for the Decisions log group (group header already names it)
+        if (g.skipH2) {
+          // still process subs below
+        } else {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = '#' + s.id;
+          a.dataset.target = s.id;
+          a.appendChild(makeLabel(s.label, s.num, false));
+          li.appendChild(a);
+          ul.appendChild(li);
+        }
 
         if (isDecisions && s.subs.length) {
           s.subs.forEach(sub => {
@@ -1107,14 +1121,7 @@
             const subA = document.createElement('a');
             subA.href = '#' + sub.id;
             subA.dataset.target = sub.id;
-
-            // Extract "Sectie X — Title" or fallback to raw text
-            const m = sub.text.match(/^Sectie (\d+) — (.+)$/);
-            if (m) {
-              subA.appendChild(makeLabel(m[2], m[1], true));
-            } else {
-              subA.appendChild(makeLabel(sub.text, null, true));
-            }
+            subA.appendChild(makeLabel(sub.label, sub.num, true));
             subLi.appendChild(subA);
             ul.appendChild(subLi);
           });
@@ -1126,13 +1133,12 @@
 
   function makeLabel(text, num, isSub) {
     const frag = document.createDocumentFragment();
-    if (num !== null && num !== undefined) {
+    if (num !== null && num !== undefined && num !== '') {
       const numEl = document.createElement('span');
       numEl.className = 'num';
       numEl.textContent = num;
       frag.appendChild(numEl);
     } else if (isSub) {
-      // empty spacer to keep alignment
       const numEl = document.createElement('span');
       numEl.className = 'num';
       numEl.textContent = '';
