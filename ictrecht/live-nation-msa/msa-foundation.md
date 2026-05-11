@@ -93,15 +93,12 @@ Voor de DPA-annex onder de MSA betekent dit wel iets praktisch: Protocol-tenant-
 
 ### De groepsstructuur (vanaf 1 juli 2026)
 
-```
-Runtime Holding BV  (persoonlijke holding Wytze de Haan)
-├── Part of the Narrative BV     (50/50 — Runtime + Springway Holding [Xander Kranenburg])
-└── Part of the Protocol BV      (1/3 / 1/3 / 1/3 — Runtime + Springway + D'urso Holding [Bjorn Veldmeijer])
-```
+Per 1 juli 2026 bestaat de Narrative-groep uit twee werk-BV's:
 
-Twee parallelle werk-BV's onder dezelfde holdingboom. Springway Holding (Xander) en D'urso Holding (Bjorn) houden hun aandelen via hun eigen persoonlijke holdings — net zoals Runtime dat voor Wytze doet. Alle vijf aktes (Runtime + 2 werk-BV's + inbreng VOF + doorzak) moeten vóór 1 juli 2026 gepasseerd zijn bij notaris Rosalie Wesseling (referentie OUDW_2026.0257.01).
+- **Part of the Narrative B.V.** — Wytze de Haan en Xander Kranenburg, 50/50.
+- **Part of the Protocol B.V.** — Wytze de Haan, Xander Kranenburg en Bjorn Veldmeijer, ieder 1/3.
 
-Vandaag (april 2026) bestaat alleen de VOF "Part of the Narrative". Beide BV's zijn in oprichting.
+Vandaag (mei 2026) bestaat alleen de VOF "Part of the Narrative"; beide BV's zijn in oprichting bij notaris Rosalie Wesseling. Alle aktes worden gepasseerd vóór 1 juli 2026.
 
 ### Wat doet Narrative? Wat doet Protocol?
 
@@ -160,53 +157,13 @@ Uitsluitend Traject 2 — Protocol Client Automations:
 
 Hosting-locatie maakt voor MSA-scope niet uit — een Client Automation kan in klant-tenant draaien (Brand Shield in MOJO MS365) of in Protocol-tenant (HR Agent voor AFAS) zolang het een custom build voor één klant blijft.
 
-### Wat als een opdracht gemengd is?
-
-Bijvoorbeeld het LN AI Year Plan (€270k/jaar voorstel, sinds maart 2026 geparkeerd), of een toekomstige opdracht waarin een venue zowel een custom HR-agent wil als toegang tot Venue Vera:
-
-- **Training-deel** → losse offerte onder Part of the Narrative BV + AV v1.3
-- **Custom build-deel** → SoW onder deze MSA, getekend door Part of the Protocol B.V.
-- **Owned Product-deel** → aparte Subscription Order Form onder Protocol's Subscription stack (niet onder deze MSA)
-- Drie facturen, drie P&L-bestemmingen, geen kruisaansprakelijkheid
-
-Voor LN als klant blijft dit transparant: één coördinerende lead (Wytze of Xander), gefactureerd vanuit twee leverende entiteiten met drie contractsporen. Vergelijkbaar met hoe een onderneming bij Microsoft tegelijk een Enterprise Agreement (volume licenses), Azure-subscription (cloud SaaS), en losse Professional Services SoW's kan hebben.
-
-### Bjorn Veldmeijer — implicaties voor MSA
-
-Bjorn (D'urso Holding) is 1/3 medeaandeelhouder van Part of the Protocol BV. Voor de LN-MSA betekent dat:
-
-1. **Hij moet meelezen op MSA-concepten voordat ondertekening** — als bestuurder/aandeelhouder van de tekenende entity.
-2. **Aansprakelijkheid van Protocol BV is mede zijn risico** — liability cap, indemnities, en insurance-niveau zijn voor hem net zo zwaar als voor Wytze en Xander.
-3. **Commerciële verdeling** van LN-build-werk gaat (vanaf BV-oprichting) door Protocol's P&L — Bjorn deelt 1/3 in de winst van dat werk. Dit is interne governance, niet iets voor de MSA, maar wel iets om met Bjorn te bevestigen voordat tekenen.
-4. **Voor LN-legal**: Bjorn als bestuurder/aandeelhouder hoeft niet expliciet in de MSA te verschijnen — Protocol BV is rechtspersoon, tekent als entity. Bestuurdersnamen volgen uit KvK-uittreksel als LN dat nodig vindt.
-
-### Mogelijk later: AV v1.3 audit (los traject)
-
-Onafhankelijk van het MSA-traject is het slim om Algemene Voorwaarden v1.3 een keer langs ICTRecht te halen voor een lichte audit:
-- Dekt het enterprise-training-werk voldoende (LN-niveau, niet alleen MKB)?
-- Aansprakelijkheidsbeperking voldoende sterk geformuleerd?
-- Eventueel update naar v1.4 of v2.0 met geleerde lessen uit LN-traject
-
-**Niet urgent. Geen onderdeel van MSA-track.** Half uurtje review-werk voor ICTRecht. Te overwegen ergens in juli/augustus 2026 als de MSA-onderhandeling op stoom is.
-
-### Toekomstige enterprise-klanten — pattern
-
-De drie-trajecten-architectuur wordt het pattern voor alle toekomstige enterprise-relaties:
-
-- **Klant heeft alleen training/advisory nodig** → Traject 1: AV v1.3 + offerte + NDA volstaat. Geen MSA.
-- **Klant heeft custom builds / data-verwerking nodig** → Traject 2: MSA via Part of the Protocol BV. Eén MSA-template hergebruiken (LN-versie wordt onze blueprint).
-- **Klant wil één van Protocol's Owned Products afnemen** → Traject 3: aparte Subscription Order Form + Protocol's Product Terms + Protocol's eigen DPA. Geen MSA-uitbreiding nodig — sterker, een MSA op een SaaS-product is bewust afgewend.
-- **Mixed scope** → splitsen langs deze drie trajecten. Eén lead, meerdere contractsporen, transparant gefactureerd.
-
-LN is de eerste enterprise-klant waarmee dit pattern volledig wordt neergezet. ICTRecht's MSA-werk is daarmee een investering die zich terugbetaalt over alle toekomstige Traject 2-engagements — niet een eenmalige LN-kostenpost. Voor Traject 3 (Owned Products) wordt de Subscription stack apart opgebouwd; dat is een eigen track buiten dit MSA-document.
-
 ---
 
 ## Decisions log
 
-*Elke sectie hieronder wordt pas ingevuld zodra we er in het interview doorheen zijn.*
+*Per standaard MSA-onderdeel heb ik geprobeerd vast te leggen welke positie of route het beste lijkt te passen bij de Protocol-praktijk, met korte onderbouwing waar relevant. Punten waar we expliciet jouw input op willen zijn gemarkeerd als **⚠️ Open vraag voor ICTRecht** — via de filterknop bovenaan zie je die ook losstaand op één pagina.*
 
-### Sectie 0 — Scope statement (Fase 0) ✅
+### Sectie 0 — Scope statement (Fase 0)
 
 **MSA dekt uitsluitend Protocol Client Automations**: custom builds, workflow-automation, managed support op die builds, en alle DPA-relevante custom-werk dat Protocol levert aan LN/affiliates. Twee categorieën vallen expliciet **buiten** MSA-scope:
 
@@ -225,12 +182,12 @@ LN is de eerste enterprise-klant waarmee dit pattern volledig wordt neergezet. I
 
 Zie Achtergrond-sectie hierboven voor volledige onderbouwing en de tabel met de drie commerciële trajecten.
 
-### Sectie 1 — Contracting entities ✅
+### Sectie 1 — Contracting entities
 
 **Narrative-zijde (signing party)**:
 - **MSA wordt getekend door**: `Part of the Protocol B.V.` (in oprichting; afronding vóór 1 juli 2026)
 - **Reden**: Protocol-BV doet de automation/builds — wat onder MSA valt. Narrative-BV blijft buiten MSA-scope.
-- **Aandeelhouders Protocol BV**: Runtime Holding BV (Wytze, 1/3) + Springway Holding BV (Xander, 1/3) + D'urso Holding BV (Bjorn Veldmeijer, 1/3)
+- **Aandeelhouders Protocol B.V.**: Wytze de Haan (1/3), Xander Kranenburg (1/3) en Bjorn Veldmeijer (1/3)
 - **Voor de tussenfase (tussen nu en oprichting Protocol BV)**:
   - **Voorkeur**: wachten tot Protocol BV bestaat en die direct laten tekenen. Geen assignment-clausule nodig, geen administratieve rompslomp later. Praktisch betekent dit ondertekening in juli/augustus 2026.
   - **Fallback** (als LN per se nu wil tekenen): VOF "Part of the Narrative" tekent voorlopig met expliciete assignment-clausule naar Part of the Protocol BV zodra die bestaat. Side-letter / assignment notice in juli/augustus 2026.
@@ -238,7 +195,7 @@ Zie Achtergrond-sectie hierboven voor volledige onderbouwing en de tabel met de 
 
 **Assignment-clausule (concept-formulering — alleen nodig als VOF moet tekenen als interim, NL → ICTRecht naar EN)**:
 
-> *"Service Provider may, upon written notice to Live Nation, assign or transfer this Agreement and all rights and obligations hereunder to any affiliate or successor entity within the Runtime Holding group (including without limitation Part of the Protocol B.V., established as part of the corporate restructuring of Service Provider's group). Such assignment shall not require Live Nation's prior consent. Any assignment outside the Runtime Holding group requires Live Nation's prior written consent, not to be unreasonably withheld."*
+> *"Service Provider may, upon written notice to Live Nation, assign or transfer this Agreement and all rights and obligations hereunder to any affiliate or successor entity within Service Provider's corporate group (including without limitation Part of the Protocol B.V., established as part of the corporate restructuring of Service Provider's group). Such assignment shall not require Live Nation's prior consent. Any assignment outside Service Provider's corporate group requires Live Nation's prior written consent, not to be unreasonably withheld."*
 
 **LN-zijde (counterparty)**:
 - **Primary signing party**: `Live Nation Entertainment Netherlands B.V.` (groepsmoeder NL). Jennifer mag definitieve entity-naam bevestigen of corrigeren tijdens review.
@@ -251,7 +208,7 @@ Zie Achtergrond-sectie hierboven voor volledige onderbouwing en de tabel met de 
 - Vraag: is "joint responsibility" tussen LN NL en de venue-affiliate juridisch de juiste constructie, of is "several liability" (alleen de affiliate verantwoordelijk per SoW) cleaner? Trade-off: jointly = sterkere collection-positie voor Narrative, maar LN-legal zou hier op kunnen pushbacken.
 - Bij affiliate-failure / faillissement: kan Narrative recourse hebben op LN NL-moeder voor uitstaande facturen?
 
-### Sectie 2 — Documentarchitectuur + order of precedence ✅
+### Sectie 2 — Documentarchitectuur + order of precedence
 
 **Documentarchitectuur**: drielaags model met master-DPA en sub-annexen per systeem.
 
@@ -332,7 +289,7 @@ Voorkomt dat een SoW (of een Authorized Affiliate die een SoW tekent) de constit
 - Check of de safeguard-clausule met "(not by Authorized Affiliates)" rechtsgeldig is — een affiliate die een SoW tekent kán in theorie nog steeds toekomstige aanspraken hebben tegen de moeder. ICTRecht moet deze constructie pressure-testen.
 - Bevestigen of "Master-DPA + sub-annexen"-structuur compatibel is met Jennifer's LN-template — anders compromis zoeken voor alignment
 
-### Sectie 3 — Term & termination ✅
+### Sectie 3 — Term & termination
 
 Vier sub-componenten: looptijd, termination-for-convenience, termination-for-cause, en effect van termination. Onderbouwing per sub-component opgenomen zodat ICTRecht het Nederlandse-rechtelijk kan beoordelen en eventueel andere termijnen kan voorstellen.
 
@@ -442,7 +399,7 @@ Drie afwegingen drijven deze keuze:
 - Beoordelen of de "(non-payment 60 dagen + 30 dagen demand)"-constructie sterker is dan een directe verwijzing naar wettelijke handelsrente + verzuim-regeling onder NL-recht
 - Overwegen of "transition assistance tegen day-rate" of "20 free transition hours + day-rate daarna" de betere onderhandelingspositie is — input gewenst
 
-### Sectie 4 — Fees & payment ✅
+### Sectie 4 — Fees & payment
 
 Vier sub-componenten: pricing-structuur per SoW-type, payment terms, late interest, en indexatie. Alle bedragen zijn richtprijzen op basis van het huidige Protocol-model — concrete cijfers per SoW worden bij ondertekening van die SoW vastgesteld. MSA legt het kader vast, niet de prijzen.
 
@@ -580,7 +537,7 @@ Na go-live van een Client Automation biedt Protocol twee support-opties. Keuze l
 - Beoordelen of een aparte "Fee Schedule"-annex bij MSA helpt — zodat tarieven jaarlijks geüpdatet worden zonder de hele MSA opnieuw te tekenen
 - Adviseren of de change-order-procedure (Sectie 6) en de scope-protectie (geen T&M voor builds) sterker apart of geïntegreerd geformuleerd moeten worden
 
-### Sectie 5 — IP model ✅
+### Sectie 5 — IP model
 
 > **Scope-reminder**: deze sectie geldt alleen voor Client Automations (Traject 2). Training-IP zit onder AV v1.3 Art 9 (Traject 1); Owned Products-IP onder Protocol's eigen Subscription stack (Traject 3). Beide buiten deze MSA.
 
@@ -676,7 +633,7 @@ Reden voor pre-emptief opnemen: dit is een steeds vaker gevraagde clausule door 
 - Beoordelen of IP-indemnity een eigen super-cap moet krijgen (vs. inclusief in algemene liability-cap) — afhankelijk van risico-analyse rond derde-partij-licenties (OpenAI, Apify, Twilio)
 - Bevestigen dat de change-control-carve-out (geen indemnity bij door klant doorgevoerde wijzigingen) onder NL-recht goed staat — sluit aan op de change-control-clausule die als verplicht element in MSA komt
 
-### Sectie 6 — Acceptance & change control ✅
+### Sectie 6 — Acceptance & change control
 
 > **Scope-reminder**: deze sectie geldt alleen voor Client Automations (Traject 2). Owned Products (Traject 3) hebben hun eigen Subscription-stack met eigen acceptance- en change-mechanismen; Training (Traject 1) valt onder AV v1.3 + offerte-acceptance.
 
@@ -982,7 +939,7 @@ Specifiek scenario: production-blocking issues, security-issues, of compliance-i
 - Cross-verwijzing naar Sectie 5d (IP-warranty change-control-carve-out) consistent maken in finale formulering — dezelfde change-control-realiteit raakt zowel IP-warranty (5d) als defect-management (6b)
 - Beoordelen of de change-control-clausule (6c) naast MSA-niveau ook nog een aparte template-clausule per SoW nodig heeft — vooral voor Brand Shield-achtige klant-tenant-systemen
 
-### Sectie 7 — Liability cap-architectuur ✅
+### Sectie 7 — Liability cap-architectuur
 
 **Datum vastgelegd**: 2026-05-03 (research-pass via deep-research agents tegen ICTRecht/NLdigital 2025/AI Act/PLD 2024/2853)
 
@@ -1379,7 +1336,7 @@ AI Act Art 6 (high-risk-classificatie) moet pre-deployment worden vastgesteld. V
 
 ---
 
-### Sectie 8 — Indemnification ✅
+### Sectie 8 — Indemnification
 
 **Datum vastgelegd**: 2026-05-11
 
@@ -1607,7 +1564,7 @@ Beide partijen kunnen onafhankelijk door AP onderzocht worden. Mutual indemnity 
 - AVG Art 82 (civielrechtelijke aansprakelijkheid jegens betrokkenen) vs Art 83 (administratieve sancties)
 - AVG Art 80 (representatieve actie/class action)
 
-### Sectie 9 — Warranties services ✅
+### Sectie 9 — Warranties services
 
 **Datum vastgelegd**: 2026-05-11
 
@@ -1796,7 +1753,7 @@ Geen Anglo-Amerikaanse "AS IS"-clause die in NL nietig kan zijn. NL-recht kent i
 - ICTRecht-blog "AI en contractuele aansprakelijkheid" (al opgenomen bij Sectie 7)
 - PLD 2024/2853 (al opgenomen bij Sectie 7m)
 
-### Sectie 10 — Insurance baseline ✅
+### Sectie 10 — Insurance baseline
 
 **Datum vastgelegd**: 2026-05-11
 
@@ -2026,7 +1983,7 @@ In 2024-2026 zijn AI-uitsluitingen verschenen in sommige polissen (vooral USA-ma
 - ARBIT (rijksinkoop-voorwaarden, insurance-baseline)
 - NL-rechtelijke positie named beneficiary onder E&O — BW 6:253 derdenbeding-leerstuk
 
-### Sectie 11 — DPA-referentie ✅
+### Sectie 11 — DPA-referentie
 
 **Datum vastgelegd**: 2026-05-11
 
@@ -2248,7 +2205,7 @@ Sectie 11h regelt alleen de **routering**: AVG-audit in DPA, commercieel audit i
 - NLdigital Voorwaarden 2025 (referentie marktstandaard)
 - ICTRecht-blog "Aansprakelijkheid in verwerkersovereenkomst" (al opgenomen bij Sectie 7)
 
-### Sectie 12 — Security baseline ✅
+### Sectie 12 — Security baseline
 
 > **Inleidende paragraaf — relatie met DPA-zijde**
 >

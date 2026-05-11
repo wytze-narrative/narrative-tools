@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>MSA Foundation — Live Nation × Narrative · For ICTRecht review</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='80' font-size='80'%3E📜%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230F1F4C'/%3E%3Ctext x='50' y='70' font-size='62' font-family='Georgia,serif' font-weight='700' fill='white' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Inter:wght@400;500;600;700&display=swap">
+
   <style>
     /* ------------------------------------------------------------------ */
     /*  Design tokens                                                      */
@@ -13,52 +18,65 @@
     :root {
       --bg: #fafaf7;
       --paper: #ffffff;
+      --paper-2: #faf8f2;
       --border: #e7e4dc;
       --border-strong: #d4d0c5;
-      --ink: #1a1917;
-      --ink-soft: #4d4945;
+      --ink: #181715;
+      --ink-soft: #4a4742;
       --muted: #8b8780;
-      --accent: #111;
+
+      --accent: #0F1F4C;
+      --accent-2: #1E3A8A;
       --accent-soft: #f0efe9;
+      --accent-tint: rgba(15, 31, 76, 0.08);
       --highlight: #fde68a;
 
       --ok-bg: #ecfdf5;
       --ok-border: #6ee7b7;
       --ok-ink: #065f46;
+      --ok-dot: #10b981;
 
       --warn-bg: #fffbeb;
       --warn-border: #fcd34d;
       --warn-ink: #92400e;
+      --warn-dot: #f59e0b;
 
       --err-bg: #fef2f2;
       --err-border: #fca5a5;
       --err-ink: #991b1b;
+      --err-dot: #dc2626;
 
       --open-bg: #f5f3ff;
       --open-border: #c4b5fd;
       --open-ink: #5b21b6;
 
-      --sidebar-w: 300px;
+      --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --font-body: 'Newsreader', Georgia, "Times New Roman", Times, serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      --sidebar-w: 304px;
       --header-h: 64px;
-      --max-content: 880px;
+      --max-content: 720px;
       --radius: 10px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--ink);
       margin: 0;
-      line-height: 1.65;
-      font-size: 16px;
+      line-height: 1.7;
+      font-size: 17px;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
-    a { color: var(--ink); }
-    a:hover { color: #000; }
+    a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(15, 31, 76, 0.25); text-underline-offset: 2px; }
+    a:hover { text-decoration-color: var(--accent); }
+
+    ::selection { background: rgba(15, 31, 76, 0.18); color: var(--ink); }
 
     /* ------------------------------------------------------------------ */
     /*  Header                                                             */
@@ -72,14 +90,24 @@
       height: var(--header-h);
       display: flex; align-items: center;
       padding: 0 24px;
-      gap: 24px;
+      gap: 20px;
+      font-family: var(--font-ui);
     }
-    .brand { display: flex; align-items: baseline; gap: 14px; min-width: 0; }
-    .brand .name { font-weight: 700; letter-spacing: -0.01em; font-size: 1.05rem; white-space: nowrap; }
+    .brand { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+    .brand .mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px;
+      background: var(--accent); color: var(--paper);
+      border-radius: 6px;
+      font-family: Georgia, serif; font-weight: 700; font-size: 0.95rem;
+      line-height: 1;
+    }
+    .brand .name { font-weight: 700; letter-spacing: -0.01em; font-size: 1rem; white-space: nowrap; color: var(--ink); }
     .brand .crumb { color: var(--muted); font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .brand .crumb::before { content: "/ "; margin-right: 4px; color: var(--border-strong); }
+    .brand .crumb::before { content: "/"; margin-right: 8px; color: var(--border-strong); }
 
-    .topbar-controls { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+    .topbar-controls { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
     .search {
       position: relative;
       width: 280px;
@@ -87,6 +115,7 @@
     .search input {
       width: 100%;
       font: inherit;
+      font-family: var(--font-ui);
       font-size: 0.9rem;
       padding: 0.5rem 0.75rem 0.5rem 2.2rem;
       border: 1px solid var(--border);
@@ -96,22 +125,21 @@
       outline: none;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,0,0,0.06); }
-    .search::before {
-      content: "🔍";
+    .search input::placeholder { color: var(--muted); }
+    .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-tint); }
+    .search-icon {
       position: absolute;
-      left: 0.65rem;
-      top: 50%;
+      left: 0.7rem; top: 50%;
       transform: translateY(-50%);
-      opacity: 0.5;
-      font-size: 0.9rem;
+      pointer-events: none;
+      color: var(--muted);
+      display: inline-flex;
     }
     .search kbd {
       position: absolute;
-      right: 0.45rem;
-      top: 50%;
+      right: 0.45rem; top: 50%;
       transform: translateY(-50%);
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: var(--font-mono);
       font-size: 0.7rem;
       color: var(--muted);
       background: var(--accent-soft);
@@ -120,23 +148,40 @@
       padding: 1px 5px;
       pointer-events: none;
     }
-    .search input:focus + kbd { display: none; }
+    .search input:focus ~ kbd { display: none; }
 
     .btn {
       font: inherit;
+      font-family: var(--font-ui);
       font-size: 0.85rem;
+      font-weight: 500;
       padding: 0.45rem 0.85rem;
       border: 1px solid var(--border);
       background: var(--paper);
       color: var(--ink);
       border-radius: 8px;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
       white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 6px;
     }
+    .btn svg { flex-shrink: 0; }
     .btn:hover { background: var(--accent-soft); border-color: var(--border-strong); }
-    .btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-    .btn.active:hover { background: var(--accent-soft); color: var(--ink); border-color: var(--border-strong); }
+    .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .btn.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+    .btn.active:hover { background: var(--accent-2); }
+
+    .btn .count {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 18px; height: 18px;
+      padding: 0 5px;
+      font-size: 0.7rem; font-weight: 700;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      line-height: 1;
+    }
+    .btn.active .count { background: rgba(255,255,255,0.2); color: var(--paper); }
 
     /* Reading progress bar */
     .progress-bar {
@@ -150,7 +195,7 @@
     }
     .progress-bar > div {
       height: 100%;
-      background: linear-gradient(90deg, var(--ink), #555);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
       width: 0%;
       transition: width 0.1s;
     }
@@ -175,20 +220,24 @@
       border-right: 1px solid var(--border);
       padding: 24px 12px 48px 24px;
       background: var(--bg);
+      font-family: var(--font-ui);
     }
     .sidebar h3 {
+      font-family: var(--font-ui);
       font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--muted);
-      margin: 18px 8px 8px;
+      margin: 22px 8px 8px;
       font-weight: 600;
     }
     .sidebar h3:first-child { margin-top: 0; }
     .toc-list { list-style: none; padding: 0; margin: 0; }
     .toc-list li { line-height: 1.4; }
     .toc-list a {
-      display: block;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
       padding: 5px 10px;
       color: var(--ink-soft);
       text-decoration: none;
@@ -198,33 +247,39 @@
       transition: background 0.1s, color 0.1s, border-color 0.1s;
     }
     .toc-list a:hover { background: var(--accent-soft); color: var(--ink); }
+    .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
     .toc-list a.active {
-      background: var(--accent-soft);
-      color: var(--ink);
-      border-left-color: var(--ink);
+      background: var(--accent-tint);
+      color: var(--accent);
+      border-left-color: var(--accent);
       font-weight: 600;
     }
+    .toc-list a .num {
+      flex: 0 0 22px;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+    .toc-list a.active .num { color: var(--accent); }
+    .toc-list a .label { flex: 1; }
     .toc-list .sub a {
-      padding-left: 22px;
+      padding-left: 18px;
       font-size: 0.83rem;
       color: var(--muted);
     }
-    .toc-list .sub a.active { color: var(--ink); }
+    .toc-list .sub a.active { color: var(--accent); }
+    .toc-list .sub a .num { font-size: 0.7rem; flex-basis: 28px; }
     .toc-list li.hidden { display: none; }
-    .toc-list .has-status::after {
-      content: attr(data-status);
-      float: right;
-      font-size: 0.75rem;
-      margin-left: 6px;
-      opacity: 0.85;
-    }
 
     /* Main */
     .main {
-      padding: 32px 48px 96px;
-      max-width: calc(var(--max-content) + 96px);
+      padding: 36px 56px 96px;
+      max-width: calc(var(--max-content) + 112px);
       width: 100%;
-      overflow: hidden; /* prevent overflow from pre/tables */
+      overflow: hidden;
     }
     .doc { max-width: var(--max-content); }
 
@@ -235,28 +290,96 @@
       background: var(--paper);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 24px 28px;
-      margin-bottom: 32px;
+      padding: 28px 32px;
+      margin-bottom: 36px;
       box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+      font-family: var(--font-ui);
     }
     .intro h1 {
-      margin: 0 0 6px;
-      font-size: 1.75rem;
+      margin: 0 0 8px;
+      font-family: var(--font-ui);
+      font-size: 2rem;
       letter-spacing: -0.02em;
-      line-height: 1.2;
+      line-height: 1.18;
+      font-weight: 700;
+      color: var(--ink);
     }
-    .intro .sub { color: var(--ink-soft); margin: 0 0 18px; font-size: 1rem; }
-    .intro .stats {
-      display: flex; flex-wrap: wrap; gap: 18px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
-      font-size: 0.88rem;
+    .intro .sub {
+      color: var(--ink-soft);
+      margin: 0 0 22px;
+      font-size: 1rem;
+      max-width: 60ch;
+    }
+    .intro .sub strong { color: var(--ink); font-weight: 600; }
+
+    .reading-guide {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      padding: 16px 18px;
+      background: var(--paper-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 22px;
+      font-size: 0.85rem;
       color: var(--ink-soft);
     }
-    .intro .stats strong { color: var(--ink); font-weight: 600; }
-    .intro .legend {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-top: 16px;
+    .reading-guide .row { display: flex; align-items: flex-start; gap: 8px; line-height: 1.45; }
+    .reading-guide .row svg { color: var(--accent); margin-top: 2px; flex-shrink: 0; }
+    .reading-guide kbd {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0 4px;
+      color: var(--ink);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .stat-card {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--paper-2);
+    }
+    .stat-card .n {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .stat-card .l {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+    .stat-card.highlight { background: var(--open-bg); border-color: var(--open-border); }
+    .stat-card.highlight .n { color: var(--open-ink); }
+    .stat-card.highlight .l { color: var(--open-ink); opacity: 0.85; }
+
+    .meta-strip {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .meta-strip strong { color: var(--ink-soft); font-weight: 600; }
+
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 12px;
     }
 
     /* ------------------------------------------------------------------ */
@@ -268,13 +391,14 @@
       gap: 5px;
       padding: 2px 9px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-family: var(--font-ui);
+      font-size: 0.73rem;
       font-weight: 600;
       letter-spacing: 0.01em;
       vertical-align: middle;
       white-space: nowrap;
       border: 1px solid transparent;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .pill-ok   { background: var(--ok-bg);   color: var(--ok-ink);   border-color: var(--ok-border); }
     .pill-warn { background: var(--warn-bg); color: var(--warn-ink); border-color: var(--warn-border); }
@@ -285,29 +409,71 @@
     .pill.tiny {
       width: 1.5rem; height: 1.5rem;
       padding: 0; justify-content: center;
-      font-size: 0.8rem; border-radius: 6px;
+      font-size: 0.85rem; border-radius: 6px;
     }
 
     /* ------------------------------------------------------------------ */
     /*  Markdown content typography                                        */
     /* ------------------------------------------------------------------ */
     .doc h1, .doc h2, .doc h3, .doc h4, .doc h5 {
-      letter-spacing: -0.01em;
+      font-family: var(--font-ui);
+      letter-spacing: -0.015em;
       font-weight: 700;
       color: var(--ink);
       scroll-margin-top: calc(var(--header-h) + 16px);
     }
     .doc h1 { font-size: 1.9rem; margin: 48px 0 12px; line-height: 1.25; }
     .doc h2 {
-      font-size: 1.4rem;
-      margin: 56px 0 14px;
-      padding-top: 24px;
+      font-size: 1.5rem;
+      margin: 64px 0 18px;
+      padding-top: 28px;
       border-top: 1px solid var(--border);
       line-height: 1.3;
+      letter-spacing: -0.02em;
     }
-    .doc h3 { font-size: 1.15rem; margin: 36px 0 10px; line-height: 1.35; }
-    .doc h4 { font-size: 1rem; margin: 28px 0 8px; color: var(--ink); font-weight: 700; }
-    .doc h5 { font-size: 0.95rem; margin: 20px 0 6px; color: var(--ink-soft); }
+    .doc h3 {
+      font-size: 1.35rem;
+      margin: 42px 0 12px;
+      line-height: 1.3;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .doc h3 .section-num {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      color: var(--paper);
+      background: var(--accent);
+      padding: 2px 8px;
+      border-radius: 6px;
+      line-height: 1.3;
+      vertical-align: middle;
+      position: relative;
+      top: -3px;
+    }
+    .doc h4 {
+      font-size: 1.05rem;
+      margin: 30px 0 8px;
+      color: var(--ink);
+      font-weight: 700;
+      padding-left: 12px;
+      border-left: 3px solid var(--border-strong);
+      line-height: 1.4;
+    }
+    .doc h4 .sub-id {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .doc h5 { font-size: 0.95rem; margin: 22px 0 6px; color: var(--ink-soft); font-weight: 600; }
+
     .doc p { margin: 0 0 14px; }
     .doc strong { font-weight: 600; color: var(--ink); }
     .doc em { color: var(--ink); }
@@ -316,18 +482,21 @@
     .doc h2, .doc h3, .doc h4 { position: relative; }
     .doc .anchor {
       position: absolute;
-      left: -1.5rem;
+      left: -1.6rem;
       top: 50%;
       transform: translateY(-50%);
       opacity: 0;
       color: var(--muted);
       text-decoration: none;
       font-weight: 400;
-      transition: opacity 0.15s;
+      transition: opacity 0.15s, color 0.15s;
       padding: 0 4px;
+      display: inline-flex;
+      align-items: center;
     }
     .doc h2:hover .anchor, .doc h3:hover .anchor, .doc h4:hover .anchor { opacity: 1; }
-    .doc .anchor:hover { color: var(--ink); }
+    .doc .anchor:hover { color: var(--accent); }
+    .doc .anchor.copied { opacity: 1; color: var(--ok-dot); }
 
     /* Lists */
     .doc ul, .doc ol { padding-left: 1.5rem; margin: 0 0 14px; }
@@ -342,6 +511,7 @@
       background: var(--paper);
       color: var(--ink-soft);
       border-radius: 0 8px 8px 0;
+      font-family: var(--font-body);
     }
     .doc blockquote p:last-child { margin-bottom: 0; }
     .doc blockquote.callout-open {
@@ -349,18 +519,19 @@
       background: var(--open-bg);
       color: var(--open-ink);
       border-radius: 8px;
-      padding: 16px 20px;
+      padding: 18px 22px;
       position: relative;
     }
     .doc blockquote.callout-open::before {
       content: "ICTRecht — open vraag";
       display: block;
+      font-family: var(--font-ui);
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--open-ink);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       opacity: 0.85;
     }
     .doc blockquote.callout-open strong { color: var(--open-ink); }
@@ -369,7 +540,7 @@
     /* Tables */
     .doc .table-wrap {
       overflow-x: auto;
-      margin: 16px 0;
+      margin: 18px 0;
       border: 1px solid var(--border);
       border-radius: 8px;
       background: var(--paper);
@@ -377,28 +548,34 @@
     .doc table {
       border-collapse: collapse;
       width: 100%;
+      font-family: var(--font-ui);
       font-size: 0.88rem;
     }
     .doc th, .doc td {
       text-align: left;
-      padding: 9px 12px;
+      padding: 10px 14px;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
+      line-height: 1.55;
     }
     .doc thead th {
-      background: #f6f4ee;
+      background: var(--paper-2);
       font-weight: 600;
       color: var(--ink);
       border-bottom: 1px solid var(--border-strong);
       position: sticky;
       top: 0;
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
     .doc tbody tr:last-child td { border-bottom: none; }
-    .doc tbody tr:hover { background: #fdfcf7; }
+    .doc tbody tr:hover { background: var(--accent-soft); }
 
     /* Code */
     .doc code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-family: var(--font-mono);
       font-size: 0.85em;
       background: var(--accent-soft);
       padding: 0.1em 0.35em;
@@ -414,13 +591,13 @@
       line-height: 1.55;
       border: 1px solid var(--border);
     }
-    .doc pre code { background: transparent; padding: 0; }
+    .doc pre code { background: transparent; padding: 0; font-family: var(--font-mono); }
 
     /* HR */
     .doc hr {
       border: none;
       border-top: 1px solid var(--border);
-      margin: 32px 0;
+      margin: 36px 0;
     }
 
     /* Search highlight */
@@ -432,30 +609,29 @@
     }
 
     /* Filter mode: only open questions */
-    body.filter-open .doc > :not(.callout-open):not(h1):not(h2):not(h3):not(.section-with-open) {
-      display: none;
-    }
-    body.filter-open .doc blockquote.callout-open { display: block; }
-    body.filter-open .intro { display: block; }
-    body.filter-open .filter-mode-note { display: block; }
     .filter-mode-note {
       display: none;
       background: var(--open-bg);
       color: var(--open-ink);
       border: 1px solid var(--open-border);
       border-radius: 8px;
-      padding: 12px 16px;
-      margin-bottom: 24px;
+      padding: 14px 18px;
+      margin-bottom: 26px;
       font-size: 0.9rem;
+      font-family: var(--font-ui);
     }
+    .filter-mode-note a { color: var(--open-ink); font-weight: 600; }
+    body.filter-open .filter-mode-note { display: block; }
+    body.filter-open .doc-footer { display: none; }
 
     /* Footer */
     .doc-footer {
-      margin-top: 64px;
+      margin-top: 72px;
       padding-top: 24px;
       border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: 0.85rem;
+      font-family: var(--font-ui);
     }
 
     /* Loading */
@@ -463,13 +639,14 @@
       text-align: center;
       padding: 96px 24px;
       color: var(--muted);
+      font-family: var(--font-ui);
     }
     .loading::before {
       content: "";
       display: inline-block;
       width: 14px; height: 14px;
       border: 2px solid var(--border-strong);
-      border-top-color: var(--ink);
+      border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
       margin-right: 10px;
@@ -484,19 +661,20 @@
       right: 24px;
       width: 40px; height: 40px;
       border-radius: 50%;
-      background: var(--ink);
+      background: var(--accent);
       color: var(--paper);
       border: none;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 14px rgba(15, 31, 76, 0.22);
       display: none;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
       z-index: 40;
+      transition: background 0.15s, transform 0.15s;
     }
     .to-top.show { display: flex; }
-    .to-top:hover { background: #000; }
+    .to-top:hover { background: var(--accent-2); transform: translateY(-1px); }
+    .to-top:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
     /* Mobile sidebar toggle button */
     .menu-toggle { display: none; }
@@ -504,13 +682,15 @@
     /* ------------------------------------------------------------------ */
     /*  Mobile responsive                                                  */
     /* ------------------------------------------------------------------ */
-    @media (max-width: 900px) {
-      :root { --sidebar-w: 0px; --header-h: 56px; }
-      .topbar { padding: 0 16px; gap: 12px; }
+    @media (max-width: 960px) {
+      :root { --sidebar-w: 0px; --header-h: 56px; --max-content: 100%; }
+      .topbar { padding: 0 14px; gap: 10px; }
       .brand .name { font-size: 0.95rem; }
       .brand .crumb { display: none; }
-      .search { width: auto; flex: 1; max-width: 200px; }
+      .search { width: auto; flex: 1; max-width: 220px; }
       .search kbd { display: none; }
+      .btn .label-text { display: none; }
+      .btn .count { display: inline-flex; }
 
       .menu-toggle {
         display: inline-flex;
@@ -519,11 +699,12 @@
         width: 36px; height: 36px;
         border: 1px solid var(--border);
         background: var(--paper);
+        color: var(--ink);
         border-radius: 8px;
         cursor: pointer;
-        font-size: 1rem;
         padding: 0;
       }
+      .menu-toggle:hover { background: var(--accent-soft); }
 
       .layout { grid-template-columns: 1fr; }
 
@@ -539,7 +720,7 @@
         transform: translateX(-100%);
         transition: transform 0.25s ease;
         z-index: 40;
-        box-shadow: 2px 0 16px rgba(0,0,0,0.05);
+        box-shadow: 2px 0 16px rgba(0,0,0,0.06);
       }
       body.sidebar-open .sidebar { transform: translateX(0); }
       body.sidebar-open::after {
@@ -550,11 +731,26 @@
         z-index: 39;
       }
 
-      .main { padding: 20px 18px 64px; }
-      .doc h1 { font-size: 1.5rem; }
-      .doc h2 { font-size: 1.2rem; }
-      .intro { padding: 18px 20px; }
-      .intro h1 { font-size: 1.35rem; }
+      .main { padding: 22px 18px 64px; }
+      .doc h1 { font-size: 1.6rem; }
+      .doc h2 { font-size: 1.3rem; }
+      .doc h3 { font-size: 1.2rem; }
+      .intro { padding: 22px 22px; }
+      .intro h1 { font-size: 1.5rem; }
+      .reading-guide { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ------------------------------------------------------------------ */
+    /*  Reduced motion                                                     */
+    /* ------------------------------------------------------------------ */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .progress-bar > div { transition: none; }
+      .sidebar { transition: none; }
+      .to-top { transition: none; }
+      .loading::before { animation: none; }
+      *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
     }
 
     /* ------------------------------------------------------------------ */
@@ -562,14 +758,16 @@
     /* ------------------------------------------------------------------ */
     @media print {
       :root { --header-h: 0; }
-      .topbar, .sidebar, .progress-bar, .to-top, .menu-toggle { display: none !important; }
+      .topbar, .sidebar, .progress-bar, .to-top, .menu-toggle, .filter-mode-note { display: none !important; }
       body { background: white; font-size: 11pt; }
       .layout { display: block; }
       .main { max-width: 100%; padding: 0; }
       .doc { max-width: 100%; }
       .doc h2 { page-break-before: always; border-top: none; }
       .doc h2:first-of-type { page-break-before: avoid; }
-      .doc h3, .doc h4 { page-break-after: avoid; }
+      .doc h3 { page-break-before: auto; page-break-after: avoid; }
+      .doc h3 + p, .doc h3 + ul, .doc h3 + .table-wrap, .doc h4 { page-break-before: avoid; }
+      .doc h4 { page-break-after: avoid; }
       .doc table, .doc blockquote, .doc pre { page-break-inside: avoid; }
       .doc blockquote.callout-open {
         background: white !important;
@@ -578,24 +776,79 @@
       }
       .intro { box-shadow: none; }
       .pill { border: 1px solid currentColor !important; background: white !important; }
+      .doc h3 .section-num { background: white !important; color: var(--ink) !important; border: 1px solid var(--ink) !important; }
       a { color: var(--ink); text-decoration: none; }
     }
   </style>
 </head>
 <body>
+  <!-- SVG icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </symbol>
+      <symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+      </symbol>
+      <symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5"></path>
+        <path d="m5 12 7-7 7 7"></path>
+      </symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" y1="6" x2="20" y2="6"></line>
+        <line x1="4" y1="12" x2="20" y2="12"></line>
+        <line x1="4" y1="18" x2="20" y2="18"></line>
+      </symbol>
+      <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </symbol>
+      <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="8" y1="6" x2="21" y2="6"></line>
+        <line x1="8" y1="12" x2="21" y2="12"></line>
+        <line x1="8" y1="18" x2="21" y2="18"></line>
+        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+      </symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </symbol>
+      <symbol id="i-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+        <rect x="6" y="14" width="12" height="8"></rect>
+      </symbol>
+      <symbol id="i-keyboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+        <path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M10 14h.01M14 14h.01M18 14h.01"></path>
+      </symbol>
+    </defs>
+  </svg>
+
   <header class="topbar">
-    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">☰</button>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar">
+      <svg width="20" height="20" aria-hidden="true"><use href="#i-menu"></use></svg>
+    </button>
     <div class="brand">
+      <span class="mark" aria-hidden="true">N</span>
       <span class="name">Narrative</span>
       <span class="crumb">Live Nation MSA Foundation · for ICTRecht</span>
     </div>
     <div class="topbar-controls">
       <div class="search">
-        <input id="search" type="search" placeholder="Search clauses, parties, sections…" autocomplete="off" spellcheck="false">
+        <span class="search-icon" aria-hidden="true"><svg width="15" height="15"><use href="#i-search"></use></svg></span>
+        <input id="search" type="search" placeholder="Search clauses, parties, sections…" autocomplete="off" spellcheck="false" aria-label="Search document">
         <kbd>⌘K</kbd>
       </div>
-      <button class="btn" id="filter-open" title="Show only the 10 ICTRecht-focus questions">
-        ⚠️ Open questions
+      <button class="btn" id="filter-open" title="Show only the open questions for ICTRecht" aria-pressed="false">
+        <svg width="14" height="14" aria-hidden="true"><use href="#i-filter"></use></svg>
+        <span class="label-text">Open questions</span>
+        <span class="count" id="filter-count">10</span>
       </button>
     </div>
   </header>
@@ -603,7 +856,7 @@
   <div class="progress-bar" aria-hidden="true"><div id="progress-fill"></div></div>
 
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Table of contents">
       <nav id="toc">
         <h3>Loading…</h3>
       </nav>
@@ -613,38 +866,71 @@
       <article class="doc" id="doc">
         <div class="intro">
           <h1>MSA Foundation — Live Nation × Narrative</h1>
-          <p class="sub">Narrative's foundation-posities voor de Master Services Agreement met Live Nation. Drafting-bron voor de Engelse MSA en de DPA-redline op LN's template. <strong>Bedoeld voor ICTRecht-review.</strong></p>
+          <p class="sub">Narrative's voorgenomen posities voor de Master Services Agreement met Live Nation. Drafting-bron voor de Engelse MSA en de DPA-redline op LN's template. <strong>Bedoeld voor ICTRecht-review.</strong></p>
 
-          <div class="legend">
-            <span class="pill pill-ok">🟢 Compatibel</span>
+          <div class="reading-guide" aria-label="How to read this document">
+            <div class="row">
+              <svg width="14" height="14" aria-hidden="true"><use href="#i-list"></use></svg>
+              <span>Gebruik de zijbalk links om naar een sectie te springen.</span>
+            </div>
+            <div class="row">
+              <svg width="14" height="14" aria-hidden="true"><use href="#i-keyboard"></use></svg>
+              <span>Druk <kbd>⌘ K</kbd> (of <kbd>Ctrl K</kbd>) om te zoeken in de tekst.</span>
+            </div>
+            <div class="row">
+              <svg width="14" height="14" aria-hidden="true"><use href="#i-alert"></use></svg>
+              <span>De paarse callouts markeren de open vragen waar we jouw input op willen.</span>
+            </div>
+            <div class="row">
+              <svg width="14" height="14" aria-hidden="true"><use href="#i-printer"></use></svg>
+              <span>Print-vriendelijk via je browser (<kbd>⌘ P</kbd> / <kbd>Ctrl P</kbd>).</span>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span class="n" id="stat-sections">20</span>
+              <span class="l">MSA-secties</span>
+            </div>
+            <div class="stat-card">
+              <span class="n" id="stat-subs">74</span>
+              <span class="l">Sub-componenten</span>
+            </div>
+            <div class="stat-card highlight">
+              <span class="n" id="stat-open">10</span>
+              <span class="l">Open vragen voor ICTRecht</span>
+            </div>
+          </div>
+
+          <div class="legend" aria-label="Status legend">
+            <span class="pill pill-ok">🟢 Compatibel met LN-template</span>
             <span class="pill pill-warn">🟡 Onderhandelingspunt</span>
             <span class="pill pill-err">🔴 Conflict / redline</span>
             <span class="pill pill-open">⚠️ Open vraag voor ICTRecht</span>
           </div>
 
-          <div class="stats">
-            <span><strong id="stat-sections">20</strong> sections</span>
-            <span><strong id="stat-subs">74</strong> sub-components</span>
-            <span><strong id="stat-open">10</strong> open ICTRecht questions</span>
-            <span><strong>Last updated:</strong> 2026-05-11</span>
-            <span><strong>Drafter:</strong> Wytze de Haan (Narrative)</span>
+          <div class="meta-strip">
+            <span><strong>Laatste update:</strong> 2026-05-11</span>
+            <span><strong>Drafter:</strong> Wytze de Haan · Narrative</span>
           </div>
         </div>
 
         <div class="filter-mode-note">
-          <strong>Filter mode active:</strong> showing only the open ICTRecht questions. <a href="#" id="clear-filter">Clear filter</a> to see the full document.
+          <strong>Filter actief:</strong> alleen de open ICTRecht-vragen worden getoond. <a href="#" id="clear-filter">Toon volledig document</a>.
         </div>
 
-        <div id="content"><div class="loading">Loading foundation document…</div></div>
+        <div id="content"><div class="loading">Foundation-document laden…</div></div>
 
         <div class="doc-footer">
-          <p>Document source: <code>projects/Live Nation Group/agreements/msa-template-foundation.md</code> in Narrative's internal repository · Generated for ICTRecht review · No personal data is sent to third parties — this is a static document rendered in your browser.</p>
+          <p>Bron: <code>projects/Live Nation Group/agreements/msa-template-foundation.md</code> in Narrative's interne repository · Gegenereerd voor ICTRecht-review · Geen persoonsgegevens worden naar derden gestuurd — dit is een statisch document in je browser.</p>
         </div>
       </article>
     </main>
   </div>
 
-  <button class="to-top" id="to-top" aria-label="Scroll to top" title="Back to top">↑</button>
+  <button class="to-top" id="to-top" aria-label="Terug naar boven" title="Terug naar boven">
+    <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow-up"></use></svg>
+  </button>
 
   <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
   <script>
@@ -659,12 +945,12 @@
     .then(md => render(md))
     .catch(err => {
       document.getElementById('content').innerHTML =
-        '<div class="loading" style="color:var(--err-ink)">Could not load document: ' + err.message + '</div>';
+        '<div class="loading" style="color:var(--err-ink)">Kon document niet laden: ' + err.message + '</div>';
     });
 
   function preprocessStatusMarkers(md) {
     // Status pills with labels in headings/text
-    md = md.replace(/🟢\s*\*?\*?(?:[Cc]ompatibel|nieuw[^|\n]*?|akkoord)\*?\*?(?:\s*\([^)]*\))?/g,
+    md = md.replace(/🟢\s*\*?\*?(?:[Cc]ompatibel|nieuw[^|\n]*?|akkoord|standaard)\*?\*?(?:\s*\([^)]*\))?/g,
       '<span class="pill pill-ok">🟢 Compatibel</span>');
     md = md.replace(/🟡\s*\*?\*?[Oo]nderhandelingspunt\*?\*?(?:\s*\([^)]*\))?/g,
       '<span class="pill pill-warn">🟡 Onderhandelingspunt</span>');
@@ -685,14 +971,34 @@
     // Custom renderer (marked v4 API)
     const renderer = new marked.Renderer();
     renderer.heading = function(text, level) {
-      const slug = slugify(stripHTML(text));
-      const anchor = `<a class="anchor" href="#${slug}" aria-label="Anchor link">¶</a>`;
-      return `<h${level} id="${slug}">${text}${level >= 2 ? anchor : ''}</h${level}>\n`;
+      const stripped = stripHTML(text);
+      const slug = slugify(stripped);
+      let inner = text;
+
+      // Section number badge for "### Sectie X — Title"
+      if (level === 3) {
+        const m = stripped.match(/^Sectie (\d+) — (.+)$/);
+        if (m) {
+          inner = `<span class="section-num">${m[1]}</span><span class="section-title">${escapeAttr(m[2])}</span>`;
+        }
+      }
+      // Sub-component prefix highlight: "#### 7c. Title"
+      if (level === 4) {
+        const m = text.match(/^(\d+[a-z])\.\s+(.+)$/);
+        if (m) {
+          inner = `<span class="sub-id">${m[1]}.</span>${m[2]}`;
+        }
+      }
+
+      const anchor = level >= 2
+        ? `<a class="anchor" href="#${slug}" aria-label="Copy link to section" data-copy="#${slug}"><svg width="14" height="14" aria-hidden="true"><use href="#i-link"></use></svg></a>`
+        : '';
+      return `<h${level} id="${slug}">${inner}${anchor}</h${level}>\n`;
     };
     renderer.blockquote = function(quote) {
       const isOpen = /Open vraag/i.test(quote) && /⚠️/.test(quote);
-      const cls = isOpen ? ' class="callout-open"' : '';
-      return `<blockquote${cls}>${quote}</blockquote>\n`;
+      const attrs = isOpen ? ' class="callout-open" role="note" aria-label="Open vraag voor ICTRecht"' : '';
+      return `<blockquote${attrs}>${quote}</blockquote>\n`;
     };
     renderer.table = function(header, body) {
       return `<div class="table-wrap"><table><thead>${header}</thead><tbody>${body}</tbody></table></div>\n`;
@@ -710,6 +1016,7 @@
     wireToTop();
     wireMenuToggle();
     wireProgress();
+    wireCopyLink();
 
     // Jump to anchor if present in URL
     if (location.hash) {
@@ -722,6 +1029,7 @@
      2. Helpers
      ==================================================================== */
   function stripHTML(s) { return s.replace(/<[^>]+>/g, ''); }
+  function escapeAttr(s) { return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function slugify(s) {
     return s.toLowerCase()
       .normalize('NFKD').replace(/[̀-ͯ]/g, '')
@@ -741,40 +1049,34 @@
     const tocEl = document.getElementById('toc');
     tocEl.innerHTML = '';
 
-    // Group: each h2 becomes a section; h3 under it becomes sub.
-    // We also group by document area (Achtergrond / Decisions log / Voortgang / Open vragen).
-    const groups = [
-      { label: 'Document', sections: [] }
-    ];
+    const groups = [{ label: 'Document', sections: [] }];
     let currentGroup = groups[0];
     let currentH2 = null;
 
     headings.forEach(h => {
-      const txt = h.textContent.replace(/¶$/, '').trim();
+      const fullTxt = h.textContent.replace(/¶$/, '').trim();
       const id = h.id;
       if (h.tagName === 'H2') {
-        // Decide group based on text
-        if (/Achtergrond/i.test(txt)) {
+        if (/Achtergrond/i.test(fullTxt)) {
           groups.push({ label: 'Context', sections: [] });
           currentGroup = groups[groups.length - 1];
-        } else if (/Decisions log/i.test(txt)) {
-          groups.push({ label: 'Decisions log (Secties 0–20)', sections: [] });
+        } else if (/Decisions log/i.test(fullTxt)) {
+          groups.push({ label: 'Decisions log · Secties 0–20', sections: [] });
           currentGroup = groups[groups.length - 1];
-        } else if (/Voortgang/i.test(txt)) {
+        } else if (/Voortgang/i.test(fullTxt)) {
           groups.push({ label: 'Voortgang', sections: [] });
           currentGroup = groups[groups.length - 1];
-        } else if (/Open vragen/i.test(txt)) {
+        } else if (/Open vragen/i.test(fullTxt)) {
           groups.push({ label: 'Open vragen', sections: [] });
           currentGroup = groups[groups.length - 1];
         }
-        currentH2 = { id, text: txt, subs: [] };
+        currentH2 = { id, text: fullTxt, subs: [] };
         currentGroup.sections.push(currentH2);
       } else if (h.tagName === 'H3' && currentH2) {
-        currentH2.subs.push({ id, text: txt });
+        currentH2.subs.push({ id, text: fullTxt });
       }
     });
 
-    // Render
     groups.forEach(g => {
       if (!g.sections.length) return;
       const h3 = document.createElement('h3');
@@ -782,24 +1084,36 @@
       tocEl.appendChild(h3);
       const ul = document.createElement('ul');
       ul.className = 'toc-list';
+
+      const isDecisions = /Decisions log/i.test(g.label);
+
       g.sections.forEach(s => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = '#' + s.id;
-        a.textContent = s.text;
         a.dataset.target = s.id;
+
+        // For Decisions log, show subs as TOC entries instead of section names
+        // The H2 "Decisions log" entry itself doesn't need a clickable link in the TOC for subs
+        a.appendChild(makeLabel(s.text, null, false));
         li.appendChild(a);
         ul.appendChild(li);
 
-        // Only include subs for Decisions log (otherwise TOC explodes)
-        if (/Decisions log/i.test(g.label) && s.subs.length) {
+        if (isDecisions && s.subs.length) {
           s.subs.forEach(sub => {
             const subLi = document.createElement('li');
             subLi.className = 'sub';
             const subA = document.createElement('a');
             subA.href = '#' + sub.id;
-            subA.textContent = sub.text.replace(/^Sectie \d+ — /, '');
             subA.dataset.target = sub.id;
+
+            // Extract "Sectie X — Title" or fallback to raw text
+            const m = sub.text.match(/^Sectie (\d+) — (.+)$/);
+            if (m) {
+              subA.appendChild(makeLabel(m[2], m[1], true));
+            } else {
+              subA.appendChild(makeLabel(sub.text, null, true));
+            }
             subLi.appendChild(subA);
             ul.appendChild(subLi);
           });
@@ -809,22 +1123,48 @@
     });
   }
 
+  function makeLabel(text, num, isSub) {
+    const frag = document.createDocumentFragment();
+    if (num !== null && num !== undefined) {
+      const numEl = document.createElement('span');
+      numEl.className = 'num';
+      numEl.textContent = num;
+      frag.appendChild(numEl);
+    } else if (isSub) {
+      // empty spacer to keep alignment
+      const numEl = document.createElement('span');
+      numEl.className = 'num';
+      numEl.textContent = '';
+      frag.appendChild(numEl);
+    }
+    const lblEl = document.createElement('span');
+    lblEl.className = 'label';
+    lblEl.textContent = text;
+    frag.appendChild(lblEl);
+    return frag;
+  }
+
   /* ====================================================================
      4. Count stats from rendered DOM
      ==================================================================== */
   function countStats() {
     const doc = document.getElementById('doc');
-    // Sections = h3 inside "Decisions log" — count Sectie 0 + 1..20 = 20 (Sectie 13 merged)
-    const sectionHeadings = Array.from(doc.querySelectorAll('h3')).filter(h => /^Sectie \d+/i.test(h.textContent));
-    document.getElementById('stat-sections').textContent = sectionHeadings.length || 20;
+    // Sections = h3 inside "Decisions log" — match "Sectie X — ..." in section-title span or text
+    const sectionHeadings = Array.from(doc.querySelectorAll('h3')).filter(h => {
+      const t = h.textContent;
+      return /^\d+\s+/.test(t.trim()) || /Sectie \d+/.test(t);
+    });
+    if (sectionHeadings.length) document.getElementById('stat-sections').textContent = sectionHeadings.length;
 
-    // Sub-components: h4 elements that look like "1a." / "11a." pattern
-    const subComponents = Array.from(doc.querySelectorAll('h4')).filter(h => /^\d+[a-z]\.?\s/i.test(h.textContent.replace(/¶$/, '').trim()));
+    const subComponents = Array.from(doc.querySelectorAll('h4')).filter(h => /^\d+[a-z]\.?\s/i.test(h.textContent.trim()));
     if (subComponents.length) document.getElementById('stat-subs').textContent = subComponents.length;
 
-    // Open questions = blockquotes with callout-open class
     const openQs = doc.querySelectorAll('blockquote.callout-open').length;
-    if (openQs) document.getElementById('stat-open').textContent = openQs;
+    if (openQs) {
+      document.getElementById('stat-open').textContent = openQs;
+      const fc = document.getElementById('filter-count');
+      if (fc) fc.textContent = openQs;
+    }
   }
 
   /* ====================================================================
@@ -845,10 +1185,9 @@
       if (!query) return;
       const doc = document.getElementById('doc');
       const re = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-      // Walk text nodes
       const walker = document.createTreeWalker(doc, NodeFilter.SHOW_TEXT, {
         acceptNode(n) {
-          if (n.parentElement.closest('script, style, .intro, .pill, mark')) return NodeFilter.FILTER_REJECT;
+          if (n.parentElement.closest('script, style, .intro, .pill, mark, .section-num, .sub-id')) return NodeFilter.FILTER_REJECT;
           return n.nodeValue.match(re) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
         }
       });
@@ -878,7 +1217,6 @@
         const q = e.target.value.trim();
         clearHighlights();
 
-        // Filter TOC
         tocLinks.forEach(a => {
           const match = !q || a.textContent.toLowerCase().includes(q.toLowerCase());
           a.parentElement.classList.toggle('hidden', !match);
@@ -886,14 +1224,12 @@
 
         if (q.length >= 2) {
           highlight(q);
-          // Scroll to first hit
           const first = document.querySelector('.doc mark.search-hit');
           if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }, 180);
     });
 
-    // ⌘K / Ctrl+K to focus
     document.addEventListener('keydown', e => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
@@ -909,7 +1245,7 @@
   }
 
   /* ====================================================================
-     6. Scroll spy — highlight active TOC entry
+     6. Scroll spy
      ==================================================================== */
   function wireScrollSpy() {
     const links = Array.from(document.querySelectorAll('#toc a'));
@@ -919,13 +1255,20 @@
       .filter(Boolean);
 
     const observer = new IntersectionObserver(entries => {
-      // Find the topmost intersecting entry
       const visible = entries
         .filter(e => e.isIntersecting)
         .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
       if (!visible.length) return;
       const id = visible[0].target.id;
-      links.forEach(a => a.classList.toggle('active', a.dataset.target === id));
+      links.forEach(a => {
+        const isActive = a.dataset.target === id;
+        a.classList.toggle('active', isActive);
+        if (isActive) {
+          a.setAttribute('aria-current', 'location');
+        } else {
+          a.removeAttribute('aria-current');
+        }
+      });
       const activeLink = map.get(id);
       if (activeLink) activeLink.scrollIntoView({ block: 'nearest' });
     }, {
@@ -943,44 +1286,12 @@
     const btn = document.getElementById('filter-open');
     const clear = document.getElementById('clear-filter');
 
-    function applyFilter(on) {
-      document.body.classList.toggle('filter-open', on);
-      btn.classList.toggle('active', on);
-      if (on) {
-        // Hide non-relevant sections in content
-        const doc = document.getElementById('doc');
-        Array.from(doc.children).forEach(el => {
-          if (el.classList.contains('intro') || el.classList.contains('filter-mode-note') || el.classList.contains('doc-footer')) return;
-          if (el.id === 'content') {
-            // walk inside content
-            Array.from(el.children).forEach(inner => {
-              const hasOpen = inner.matches('blockquote.callout-open') || inner.querySelector?.('blockquote.callout-open');
-              const isH2 = inner.tagName === 'H2';
-              if (!hasOpen && !isH2 && !inner.matches('blockquote.callout-open')) {
-                inner.style.display = inner.matches('blockquote.callout-open') ? '' : 'none';
-              } else {
-                inner.style.display = '';
-              }
-            });
-            return;
-          }
-          el.style.display = 'none';
-        });
-        // Easier: just show only callouts plus their preceding h3 (section title)
-        showOnlyOpenQuestions();
-      } else {
-        // Restore
-        document.getElementById('doc').querySelectorAll('[style*="display"]').forEach(el => el.style.display = '');
-      }
-    }
-
     function showOnlyOpenQuestions() {
       const content = document.getElementById('content');
       Array.from(content.children).forEach(el => el.style.display = 'none');
 
       const callouts = content.querySelectorAll('blockquote.callout-open');
       callouts.forEach(cb => {
-        // Find preceding h3 (section) and h4 (sub-component) for context
         let ctxNodes = [];
         let prev = cb.previousElementSibling;
         let foundH3 = false, foundH4 = false;
@@ -993,6 +1304,17 @@
         ctxNodes.forEach(n => n.style.display = '');
         cb.style.display = '';
       });
+    }
+
+    function applyFilter(on) {
+      document.body.classList.toggle('filter-open', on);
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (on) {
+        showOnlyOpenQuestions();
+      } else {
+        document.getElementById('content').querySelectorAll('[style*="display"]').forEach(el => el.style.display = '');
+      }
     }
 
     btn.addEventListener('click', () => {
@@ -1014,7 +1336,7 @@
     const btn = document.getElementById('to-top');
     window.addEventListener('scroll', () => {
       btn.classList.toggle('show', window.scrollY > 600);
-    });
+    }, { passive: true });
     btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
@@ -1023,18 +1345,21 @@
      ==================================================================== */
   function wireMenuToggle() {
     const btn = document.getElementById('menu-toggle');
-    btn.addEventListener('click', () => document.body.classList.toggle('sidebar-open'));
-    // Close on link click (mobile)
+    btn.addEventListener('click', () => {
+      const isOpen = document.body.classList.toggle('sidebar-open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
     document.getElementById('toc').addEventListener('click', e => {
-      if (e.target.tagName === 'A' && window.innerWidth < 900) {
+      if (e.target.closest('a') && window.innerWidth < 960) {
         document.body.classList.remove('sidebar-open');
+        btn.setAttribute('aria-expanded', 'false');
       }
     });
-    // Close on backdrop tap
     document.addEventListener('click', e => {
       if (!document.body.classList.contains('sidebar-open')) return;
       if (e.target.closest('.sidebar') || e.target.closest('#menu-toggle')) return;
       document.body.classList.remove('sidebar-open');
+      btn.setAttribute('aria-expanded', 'false');
     });
   }
 
@@ -1051,6 +1376,28 @@
     }
     window.addEventListener('scroll', update, { passive: true });
     update();
+  }
+
+  /* ====================================================================
+     11. Copy anchor link
+     ==================================================================== */
+  function wireCopyLink() {
+    document.getElementById('doc').addEventListener('click', e => {
+      const a = e.target.closest('a.anchor');
+      if (!a) return;
+      e.preventDefault();
+      const hash = a.dataset.copy || a.getAttribute('href');
+      const url = location.origin + location.pathname + hash;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          a.classList.add('copied');
+          history.replaceState(null, '', hash);
+          setTimeout(() => a.classList.remove('copied'), 1200);
+        });
+      } else {
+        location.hash = hash;
+      }
+    });
   }
   </script>
 </body>
