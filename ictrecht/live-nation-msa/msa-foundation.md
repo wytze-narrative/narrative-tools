@@ -163,7 +163,7 @@ Hosting-locatie maakt voor MSA-scope niet uit — een Client Automation kan in k
 
 *Per standaard MSA-onderdeel heb ik geprobeerd vast te leggen welke positie of route het beste lijkt te passen bij de Protocol-praktijk, met korte onderbouwing waar relevant. Punten waar we expliciet jouw input op willen zijn gemarkeerd als **⚠️ Open vraag voor ICTRecht** — via de filterknop bovenaan zie je die ook losstaand op één pagina.*
 
-### Sectie 0 — Scope statement (Fase 0)
+### Sectie 0 — Scope statement
 
 **MSA dekt uitsluitend Protocol Client Automations**: custom builds, workflow-automation, managed support op die builds, en alle DPA-relevante custom-werk dat Protocol levert aan LN/affiliates. Twee categorieën vallen expliciet **buiten** MSA-scope:
 
