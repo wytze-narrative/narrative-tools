@@ -163,6 +163,8 @@ Hosting-locatie maakt voor MSA-scope niet uit — een Client Automation kan in k
 
 *Per standaard MSA-onderdeel heb ik geprobeerd vast te leggen welke positie of route het beste lijkt te passen bij de Protocol-praktijk, met korte onderbouwing waar relevant. Punten waar we expliciet jouw input op willen zijn gemarkeerd als **⚠️ Open vraag voor ICTRecht** — via de filterknop bovenaan zie je die ook losstaand op één pagina.*
 
+> ⚠️ **Open vraag aan ICTRecht (cross-cutting — AI Act)**: Protocol is een AI-bouwer; vrijwel elke build die onder deze MSA valt gebruikt AI-modellen of -systemen. De AI Act (Reg. EU 2024/1689) is daarmee een dwarsdoorsnijdend kader voor dit hele document. We hebben de meest in het oog springende plekken al benoemd — **7h** (Provider/Deployer-rolverdeling Art 16/26), **7n** (per-SoW Annex III-classificatie), **7m** (PLD-readiness-evaluatieclausule), **9c** (AI-output-warranty-disclaimer) en **11e** (GDPR-rollen separaat van AI Act-rollen) — maar wij missen waarschijnlijk nuances. Graag in jouw pass van het document met een schuin oog meekijken of de geformuleerde clausules cross-cutting compatibel zijn met de AI Act-verplichtingen, met name **Art 6** (high-risk-classificatie), **Art 16** (Provider-verplichtingen, deadline 2 augustus 2026) en **Art 26** (Deployer-verplichtingen). Aanvullende clausules of aanscherpingen waar wij iets missen graag aandragen.
+
 ### Sectie 0 — Scope statement
 
 **MSA dekt uitsluitend Protocol Client Automations**: custom builds, workflow-automation, managed support op die builds, en alle DPA-relevante custom-werk dat Protocol levert aan LN/affiliates. Twee categorieën vallen expliciet **buiten** MSA-scope:
