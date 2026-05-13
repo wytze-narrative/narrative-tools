@@ -57,6 +57,14 @@ Deze sectie legt vast hoe Narrative en Protocol zich tot elkaar verhouden, waaro
 
 Het werk dat Narrative/Protocol levert valt uiteen in drie distincte commerciële trajecten. Elk traject heeft een eigen contract-stack, een eigen DPA-spoor, en een eigen leverende entity. **Alleen Traject 2 (Protocol Client Automations) valt onder deze LN-MSA.** Dit is een bewuste afbakening die de MSA scherp houdt en commercieel correct positioneert — vergelijkbaar met hoe SaaS-vendors als Salesforce, Stripe, Microsoft en Twilio dit afhandelen.
 
+**Scope-overzicht per traject** (quick reference — voor diepte zie de uitgebreide tabel hieronder):
+
+| Traject | Voorbeelden | MSA-scope | Juridisch kader |
+|---|---|---|---|
+| 1 — Training & Advisory | Workshops, MT-sparring, audits | Buiten MSA | AV v1.3 + per-opdracht offerte |
+| 2 — Client Automations | Brand Shield, HR Agent, WhatsApp-bots | **Deze MSA** + DPA | MSA + per-SoW DPA-Annex |
+| 3 — Owned Products | Venue Vera, F&B Forecast, Carla, Donna, Booking Risk Agent | Buiten MSA | Eigen subscription-overeenkomst + Protocol-DPA |
+
 | | **Traject 1: Narrative Training & Advisory** | **Traject 2: Protocol Client Automations** | **Traject 3: Protocol Owned Products** |
 |---|---|---|---|
 | **Voorbeelden** | AI Fundamentals workshops, MT-sessies, AI Manifesto, AI Year Plan-coaching, advisory | Brand Shield, WhatsApp HR Agent, Mailbox Ticket Counting, custom n8n-workflows | Venue Vera (Booking Risk Agent), F&B Forecasting (toekomstig), Controle Carla, Draaiboek Donna |
@@ -99,6 +107,10 @@ Per 1 juli 2026 bestaat de Narrative-groep uit twee werk-BV's:
 - **Part of the Protocol B.V.** — Wytze de Haan, Xander Kranenburg en Bjorn Veldmeijer, ieder 1/3.
 
 Beide BV's zijn op dit moment in oprichting bij notaris Rosalie Wesseling en worden naar verwachting gepasseerd voordat deze MSA wordt ondertekend. Part of the Protocol B.V. wordt onder de MSA de leverende entiteit voor Client Automations; Part of the Narrative B.V. verzorgt training- en advisory-werk onder AV v1.3 en valt buiten de MSA-scope.
+
+### Operationele filosofie
+
+Live Nation kijkt vanuit enterprise-perspectief (standaardisatie, beheersbaarheid, herhaalbaarheid, auditability), Protocol opereert AI-first met snel experimenteren en best-of-breed combinatie van tools. Deze MSA codificeert de richting naar productisering: voorspelbare stack-keuzes, gestandaardiseerde data-flows, levende documentatie per build. Per-build maatwerk wordt strakker afgekaderd via SoW + change-control + DPA-Annex i.p.v. ad-hoc per project. Per Traject (zie tabel hieronder) verschilt het productiseringsniveau: Client Automations (Traject 2) zijn maatwerk-met-SoW-disclosure, Owned Products (Traject 3) zijn productized met vaste stack.
 
 ### Wat doet Narrative? Wat doet Protocol?
 
@@ -164,6 +176,8 @@ Hosting-locatie maakt voor MSA-scope niet uit — een Client Automation kan in k
 *Per standaard MSA-onderdeel heb ik geprobeerd vast te leggen welke positie of route het beste lijkt te passen bij de Protocol-praktijk, met korte onderbouwing waar relevant. Punten waar we expliciet jouw input op willen zijn gemarkeerd als **⚠️ Open vraag voor ICTRecht** — via de filterknop bovenaan zie je die ook losstaand op één pagina.*
 
 > ⚠️ **Open vraag aan ICTRecht (cross-cutting — AI Act)**: Protocol is een AI-bouwer; vrijwel elke build die onder deze MSA valt gebruikt AI-modellen of -systemen. De AI Act (Reg. EU 2024/1689) is daarmee een dwarsdoorsnijdend kader voor dit hele document. We hebben de meest in het oog springende plekken al benoemd — **7h** (Provider/Deployer-rolverdeling Art 16/26), **7n** (per-SoW Annex III-classificatie), **7m** (PLD-readiness-evaluatieclausule), **9c** (AI-output-warranty-disclaimer) en **11e** (GDPR-rollen separaat van AI Act-rollen) — maar wij missen waarschijnlijk nuances. Graag in jouw pass van het document met een schuin oog meekijken of de geformuleerde clausules cross-cutting compatibel zijn met de AI Act-verplichtingen, met name **Art 6** (high-risk-classificatie), **Art 16** (Provider-verplichtingen, deadline 2 augustus 2026) en **Art 26** (Deployer-verplichtingen). Aanvullende clausules of aanscherpingen waar wij iets missen graag aandragen.
+
+> ⚠️ **Open vraag aan ICTRecht (cross-cutting — Scope Owned Products)**: Protocol levert drie soorten engagement aan Live Nation: Training & Advisory (1, onder AV+offerte), Client Automations (2, onder deze MSA), en Owned Products (3, eigen subscription-vorm). Onze huidige aanpak: aparte documenten — deze MSA scherp afgekaderd op Traject 2, Owned Products via eigen subscription-overeenkomst + Protocol-DPA. Live Nation's IT (Paul Meester, MOJO) heeft in correspondentie geïmpliceerd dat hij liever één generieke umbrella zou zien voor "alle Narrative-systemen". Vraag: is twee-documenten met kruisverwijzingen (huidige aanpak) juridisch cleanst, of een umbrella MSA met SoW-types (één voor Client Automations, één lichtere voor Owned Product Subscription) onder dezelfde DPA-structuur? Aandachtspunten voor de afweging: (a) rolverdeling in DPA verschilt per traject (Protocol-as-processor voor 2, Protocol-as-controller-of-joint voor 3), (b) commercieel model verschilt (project-fee + recurring per SoW voor 2, vaste subscription voor 3), (c) Live Nation's TPRM-flow loopt op product-niveau, niet op MSA-niveau.
 
 ### Sectie 0 — Scope statement
 
@@ -766,6 +780,17 @@ Bij hosted-by-Protocol-builds is Protocol vendor én operator. Daarom moet expli
 - Zonder dit ontstaat ambiguïteit: bij HR Agent-hosting kunnen wij in principe alles veranderen zonder iemand te informeren — dat is voor LN-legal onaanvaardbaar bij productie-systemen
 - 3-tier op functionele impact (geen / notice / change-order) geeft beide partijen helderheid
 - Beschermt klant tegen verrassingen, beschermt Protocol tegen "jullie hebben zomaar wat veranderd"-claims
+
+**TPRM-trigger bij subprocessor-wijziging** (cross-link 11f + 12j):
+
+Een materiële wijziging in de subprocessor-keten (zoals gedefinieerd in 11f: nieuwe data-rakende processor, jurisdictie-wijziging, data-categorie-uitbreiding) triggert naast de standaard change-control-procedure een TPRM-flow richting Live Nation IT:
+
+- **Update van het data-flow-document (12j)** binnen 10 werkdagen na materiële wijziging
+- **Schriftelijke melding aan Live Nation's TPRM-contact** (default: Paul Meester / MOJO IT, met cc Henk Sanders) parallel aan het 15wd-verzetstermijn uit 11f — geen sequentiële stap maar gelijktijdig met de subprocessor-notificatie
+- **Production-hold voor de gewijzigde flow** tot TPRM-accordering, indien Live Nation TPRM-her-assessment vereist. LN-IT bepaalt bij melding of het om een light-touch confirmatie gaat of om een volledig TPRM-traject
+
+**Reden voor TPRM-integratie**:
+Paul Meester heeft (samen met Henk Sanders, 5 mei 2026) al een TPRM-aanvraag ingediend voor de Booking Risk Agent — TPRM-flow is dus een levende werkelijkheid bij LN-IT. Door TPRM-trigger expliciet in 6c te institutionaliseren, voorkomen we dat elke nieuwe Client Automation-build of subprocessor-wijziging een ad-hoc proces wordt. Dit geeft LN-IT enterprise-readiness-comfort: de keten-disclosure (12j) + change-control-koppeling (6c) + tiered verzetsrecht (11f) vormen samen één governance-frame.
 
 ---
 
@@ -2084,23 +2109,50 @@ Default processor/controller is standaard voor agency-builds. Joint controller i
 
 ---
 
-#### 11f. Sub-processor-listing in Annex Y 🔴 conflict reeds als redline geïdentificeerd
+#### 11f. Sub-processor-listing in Annex Y 🟡 tiered listing + materiële-wijziging-definitie
 
 | Element | Positie |
 |---|---|
 | Locatie | Annex Y van DPA (niet MSA-body) |
 | Initial list | Bij MSA-ondertekening (OpenAI, Apify, Resend, Hostinger, Vercel, Supabase, etc. per SoW relevant) |
-| Update-procedure | AVG Art 28 lid 2: schriftelijke notificatie + verzetsrecht binnen **15 werkdagen** |
-| Cross-link | Sluit aan op 7k subprocessor-cascade (Protocol step-in) + 10i polis-uitsluitingen (subprocessor-failures gedekt) |
+| Update-procedure | AVG Art 28 lid 2: schriftelijke notificatie + verzetsrecht binnen **15 werkdagen** — uitsluitend bij **materiële wijziging** (zie definitie hieronder) |
+| Cross-link | Sluit aan op 7k subprocessor-cascade (Protocol step-in) + 10i polis-uitsluitingen (subprocessor-failures gedekt) + 6c TPRM-trigger (data-flow-document + LN-IT-melding parallel) + 12j data-flow-document (Annex II referentiepunt) |
+
+**Definitie "materiële wijziging in subprocessor-keten"**:
+
+Een wijziging in de subprocessor-keten triggert het 15wd verzetsrecht uitsluitend wanneer aan minimaal één van de volgende voorwaarden is voldaan:
+
+- Toevoeging van een **nieuwe processor die persoonsgegevens raakt**, OF
+- Wijziging van **jurisdictie** van een bestaande processor (bv. EU → non-EU, of vice versa), OF
+- Wijziging van **data-categorie** die verwerkt wordt door een bestaande processor (bv. uitbreiding van metadata-only naar persoonsgegevens-met-content).
+
+Operationele wijzigingen vallen buiten de definitie van "materiële wijziging" en vereisen alleen **change-notification** zonder veto-recht:
+- Region-migratie binnen EU (bv. Frankfurt → Amsterdam binnen dezelfde processor)
+- Infrastructuur-shuffle zonder data-impact (bv. database-cluster-rebalancing bij Supabase)
+- Versie-upgrades van bestaande subprocessor-services zonder scope-uitbreiding
+
+**Tiered subprocessor-listing**:
+
+Niet alle subprocessors dragen hetzelfde risicoprofiel. De listing in Annex Y wordt daarom getierd:
+
+| Tier | Voorbeelden | Verplichtingen |
+|---|---|---|
+| **Top-tier** — data-rakende AI-leveranciers, non-EU processors, processors die bijzondere categorieën raken | OpenAI (US), xAI (US), Apify (CZ — non-EEA-component), toekomstige AI-providers buiten EU | Volledige SCC's + Transfer Impact Assessment (TIA) per processor + **15wd verzetsrecht** bij materiële wijziging |
+| **Infrastructuur-tier** — hosting, CDN, transactional infra die geen persoonsgegevens raakt of alleen pseudonieme metadata | Hostinger (NL/DE), Vercel (EU edge), Cloudflare CDN, Resend (US, transactional email) | Listed in Annex Y + **change-notification** binnen 10wd, géén veto-recht — focus op transparantie i.p.v. consent |
+
+Top-tier nieuwe processors → klant heeft verzetsrecht (15wd). Infrastructuur-tier nieuwe processors → klant wordt geïnformeerd, geen blokkade.
 
 **Reden — waarom Annex Y i.p.v. DPA-body**:
 Annex-Y-listing maakt updates via 6c Tier 2 (email-thread) mogelijk i.p.v. e-signature voor elke nieuwe subprocessor. Standaard AVG-procedure.
 
-**Reden — waarom 15 werkdagen verzetsrecht**:
+**Reden — waarom 15 werkdagen verzetsrecht (top-tier)**:
 AVG Art 28 lid 2 zegt "redelijke termijn". NL-marktstandaard varieert van 10 tot 30 werkdagen. 15 werkdagen balanceert tussen LN-comfort en Protocol's onboardingsflexibiliteit.
 
+**Reden — waarom tiering + materiële-wijziging-definitie**:
+Paul Meester (MOJO IT, 6 mei 2026-mail) opent expliciet de deur voor disclosure-zonder-uitputtende-veto: hij heeft "voldoende inzicht in de keten en de datastromen" nodig om verantwoord te accorderen, maar wil geen veto-per-schroefje. Door tiering + materiële-wijziging-definitie maken we het verzetsrecht functioneel werkbaar (alleen bij echte data-impact), terwijl LN-IT volledige transparantie behoudt via 12j-data-flow-document. Dit adresseert ook EDPB Opinion 22/2024-conformiteit: substantively equivalent flow-down via publieke DPA's bij top-tier, lichtere change-notification bij infrastructuur-tier waar geen persoonsgegevens-impact bestaat.
+
 **Conflict met Jennifer's template (P52/P54)**:
-Jennifer's template P52/P54 wil flow-down "woord-voor-woord mirror" + jaarlijkse audits van elke subprocessor. Per DPA-strategie-Besluit 2 is de counter: "Annex Y met subprocessor-exhibit + EDPB Opinion 22/2024-beroep op substantively equivalent via publieke DPA's (OpenAI, Meta, Twilio) + SCC's voor international transfers". Onze 11f formulering ondersteunt deze counter-positie maar de redline op Jennifer's template-body blijft het zwaartepunt van de onderhandeling.
+Jennifer's template P52/P54 wil flow-down "woord-voor-woord mirror" + jaarlijkse audits van elke subprocessor. Per DPA-strategie-Besluit 2 is de counter: "Annex Y met subprocessor-exhibit + EDPB Opinion 22/2024-beroep op substantively equivalent via publieke DPA's (OpenAI, Meta, Twilio) + SCC's voor international transfers, getierd per risicoprofiel". Onze 11f formulering ondersteunt deze counter-positie maar de redline op Jennifer's template-body blijft het zwaartepunt van de onderhandeling.
 
 **EN concept-formulering**:
 > *"The authorized sub-processors used by Protocol in the provision of services under this Agreement and any Statement of Work shall be listed in Annex Y to the Master-DPA. Protocol shall provide written notice to Customer of any intended addition or replacement of sub-processors. Customer shall have a period of fifteen (15) business days from receipt of such notice to object on reasonable grounds related to the protection of personal data. If Customer objects, the Parties shall use good faith efforts to resolve the objection, including consideration of alternative sub-processors or scope adjustments. Protocol shall flow down to its sub-processors data protection obligations substantively equivalent to those contained in the Master-DPA, recognizing that direct word-for-word mirroring may not be feasible with major third-party providers (e.g., OpenAI, Meta, Twilio), in which case Protocol shall rely on such providers' published Data Processing Agreements and Standard Contractual Clauses as the contractual flow-down mechanism, consistent with EDPB Opinion 22/2024."*
@@ -2157,7 +2209,7 @@ Sectie 11h regelt alleen de **routering**: AVG-audit in DPA, commercieel audit i
 | 11c Order of precedence | 🟢 compatibel | DPA wint over data-onderwerpen, MSA over commercieel, split bij dubbel onderwerp |
 | 11d DPA-amendment hybrid | 🟡 onderhandelingspunt | Tier 3 DPA-body; Tier 2 Annex X/Y; Tier 2 Annex Z mits upgrade |
 | 11e Rolverdeling | 🟢 compatibel | Default LN=controller, Protocol=processor; SoW-override voor joint controller; AI-rollen separaat per 7h |
-| 11f Sub-processor listing | 🔴 conflict reeds als redline | Annex Y, 15 wd verzetsrecht, EDPB Opinion 22/2024-beroep op substantively equivalent |
+| 11f Sub-processor listing | 🟡 tiered listing + materiële-wijziging-definitie | Annex Y, top-tier 15wd verzetsrecht bij materiële wijziging, infra-tier change-notification, EDPB Opinion 22/2024-beroep op substantively equivalent |
 | 11g Data subject rights | 🟢 compatibel | MSA cross-link only, geen herhaling |
 | 11h Audit rights gesplitst | 🔴 conflict reeds als redline | AVG Art 28-audit in DPA; commercieel audit in Sectie 12; toezichthouder-audit in DPA |
 
@@ -2173,7 +2225,7 @@ Sectie 11h regelt alleen de **routering**: AVG-audit in DPA, commercieel audit i
 
 3. **Master-DPA + Annex-per-SoW-structuur (11a)** — Jennifer's template als Master, onze Annex-architectuur eronder. Open vraag 2 aan ICTRecht over AVG Art 28(3)-conformiteit.
 
-4. **Sub-processor verzetsrecht 15 werkdagen (11f)** — balanceert LN-comfort en Protocol-flexibiliteit. NL-marktstandaard.
+4. **Sub-processor verzetsrecht 15 werkdagen + tiering (11f)** — top-tier (AI/non-EU/data-rakend) heeft 15wd verzetsrecht bij materiële wijziging, infra-tier heeft alleen change-notification. Adresseert Paul Meester's "voldoende inzicht zonder veto-per-schroefje"-positie en EDPB Opinion 22/2024-conformiteit.
 
 5. **Default rolverdeling met SoW-override (11e)** — voorkomt herbevestiging per SoW voor standaard cases. Joint controller pre-emptief vermijden — pas in SoW vastleggen.
 
@@ -2343,6 +2395,36 @@ Sectie 11h regelt alleen de **routering**: AVG-audit in DPA, commercieel audit i
 | Klant-controle | LN mag specifieke US-subprocessor blokkeren via verzetsrecht 11f (15 wd) |
 
 **Reden — transparency + SCC's i.p.v. P41 warranty**: Jennifer's P41 ("TPV does not engage in Restricted International Transfer") is feitelijk onjuist voor onze stack. Counter via Besluit 2: open over alle US-transfers, gebruik EU SCC's als legal-transfer-mechanism, plus TIA (EDPB Recommendations 01/2020). Dat geeft LN-Legal compliance-comfort zonder onmogelijke warranty.
+
+---
+
+**12j. Per-SoW data-flow-document** 🟢 Protocol-side deliverable
+
+Bij elke SoW levert Protocol een data-flow-document met:
+
+- **Volledige vendor-lijst** (alle subprocessors, getierd per 11f — top-tier vs infrastructuur-tier expliciet gemarkeerd)
+- **Data-categorieën per processor** (persoonsgegevens, financieel, operationeel, pseudonieme metadata, geen-data, etc.)
+- **Jurisdictie van elke processor** en hosting-locatie van de data (EU/EER, US, andere derde landen)
+- **Transfer-mechanisme per non-EU processor** (SCC's met module-specificatie, BCR's, adequacy-decision indien van toepassing)
+- **Diagram van de end-to-end data-flow** — visueel: van inputbron (gebruiker, klantsysteem, externe API) via Protocol-componenten naar verwerkende subprocessors tot output/opslag
+
+Document wordt onderhouden door Protocol en bij materiële wijziging (zie 11f-definitie) bijgewerkt binnen 10 werkdagen. Vormt het primaire **referentiepunt voor DPA-Annex II "Description of processing"** — geen separate Annex II-vulling per SoW nodig, alleen verwijzing naar het data-flow-document.
+
+| Element | Positie |
+|---|---|
+| Frequentie levering | Per SoW (eenmalig bij SoW-ondertekening) + update bij materiële wijziging in de keten |
+| Update-trigger | Materiële wijziging zoals gedefinieerd in 11f (nieuwe data-rakende processor, jurisdictie-wijziging, data-categorie-uitbreiding) |
+| Update-deadline | Binnen 10 werkdagen na materiële wijziging, parallel aan 11f-notificatie + 6c-TPRM-melding aan LN-IT |
+| Toegankelijkheid | LN-IT (Paul Meester / Henk Sanders) krijgt directe toegang via SoW-portaal of email-distributie |
+| Cross-link | DPA Annex II (Description of processing) + 11f tiered listing + 6c TPRM-trigger |
+
+**Reden — waarom data-flow-document als verplichte deliverable**:
+Paul Meester's 6 mei 2026-mail vraagt expliciet: *"Is/komt er documentatie hoe de flows gaan lopen en waar welke data verwerkt wordt?"* Dit is LN-IT's primaire enterprise-readiness-zorg — multi-vendor + AI + non-EU stacks vereisen ketenoverzicht voor TPRM-accordering. Door het data-flow-document tot een vaste per-SoW-deliverable te maken, ontstaat één canonical artifact dat zowel DPA Annex II vult als TPRM-flow voedt. Geen losse documenten meer per LN-traject.
+
+**Status 🟢 — geen onderhandelingspunt**:
+Dit is volledig Protocol's deliverable en aansluitend op bestaande werkwijze. Geen LN-pushback verwacht; het structureert wat we toch al doen.
+
+**Geen open vragen aan ICTRecht** — Protocol-side deliverable, formuleert bestaande paper-trail-praktijk in MSA-structuur.
 
 ---
 
@@ -2635,6 +2717,7 @@ Voorbeeld-clausule:
 
 1. **Stuur KvK-nummer POTP** aan Paul/LN-IT zodra beschikbaar, zodat het vendor-risk-assessment direct op de juiste entiteit kan starten.
 2. **Material Competitor-lijst** opstellen vóór ICTRecht-briefing: 5-10 entities per kant.
+3. **Owned Products scope-keuze afstemmen met Paul Meester** vóór finalisering MSA-draft: bevestigen of Owned Products in eigen subscription-vorm (huidige aanpak) of als sub-SoW-type onder umbrella MSA gaan. Direct gekoppeld aan cross-cutting open vraag #2 (Scope Owned Products) bovenaan Decisions log; uitkomst bepaalt of we twee-documenten-architectuur (huidig) houden of pivoten naar één umbrella MSA met SoW-types.
 
 ### Sectie 17 — Force Majeure
 

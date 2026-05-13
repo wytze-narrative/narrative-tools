@@ -899,8 +899,8 @@
               <span class="l">Sub-componenten</span>
             </div>
             <div class="stat-card highlight">
-              <span class="n" id="stat-open">31</span>
-              <span class="l">Open vragen voor ICTRecht</span>
+              <span class="n" id="stat-open">11</span>
+              <span class="l">Focus-areas voor ICTRecht</span>
             </div>
           </div>
 
@@ -1169,7 +1169,8 @@
 
     const openQs = doc.querySelectorAll('blockquote.callout-open').length;
     if (openQs) {
-      document.getElementById('stat-open').textContent = openQs;
+      // stat-open shows focus-areas count (hardcoded in HTML, not derived from callout count).
+      // filter-count reflects total filterable callouts in the document.
       const fc = document.getElementById('filter-count');
       if (fc) fc.textContent = openQs;
     }
