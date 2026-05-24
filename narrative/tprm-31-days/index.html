@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TPRM Submission · 31 Days · One-Founder Stack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --paper: #f5f0e1;
+      --paper-2: #ebe4d0;
+      --pink: #ff006e;
+      --yellow: #ffd60a;
+      --green: #b6ff00;
+      --red: #ff2d00;
+      --cyan: #00fff0;
+      --grid: rgba(245, 240, 225, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      line-height: 1.5;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      /* CRT scanlines */
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.02) 0px,
+          rgba(255, 255, 255, 0.02) 1px,
+          transparent 1px,
+          transparent 3px
+        ),
+        radial-gradient(ellipse at top, #1a0d14 0%, #0a0a0a 60%);
+    }
+
+    /* Halftone overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(255, 0, 110, 0.04) 1px, transparent 1px);
+      background-size: 6px 6px;
+      z-index: 1;
+      mix-blend-mode: screen;
+    }
+
+    /* Subtle noise */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.04;
+      z-index: 2;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px 96px;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* ───────── MASTHEAD ───────── */
+    .masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      border-top: 2px solid var(--paper);
+      border-bottom: 2px solid var(--paper);
+      padding: 8px 0;
+      margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+    .masthead .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      margin-right: 8px;
+      animation: blink 1.4s steps(2, end) infinite;
+      vertical-align: middle;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ───────── HERO ───────── */
+    .hero { position: relative; padding: 24px 0 48px; }
+
+    .hero-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(72px, 14vw, 200px);
+      line-height: 0.82;
+      letter-spacing: -0.04em;
+      color: var(--paper);
+      text-transform: uppercase;
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .hero-title .stroke {
+      -webkit-text-stroke: 2px var(--paper);
+      color: transparent;
+    }
+    .hero-title .accent { color: var(--pink); }
+    .hero-title .glitch {
+      position: relative;
+      display: inline-block;
+    }
+    .hero-title .glitch::before,
+    .hero-title .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+    }
+    .hero-title .glitch::before {
+      color: var(--cyan);
+      transform: translate(-3px, 0);
+      mix-blend-mode: screen;
+    }
+    .hero-title .glitch::after {
+      color: var(--pink);
+      transform: translate(3px, 0);
+      mix-blend-mode: screen;
+    }
+
+    .hero-meta {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: 0.08em;
+      color: var(--yellow);
+      margin-top: 8px;
+    }
+    .hero-dates {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      color: var(--paper);
+      opacity: 0.7;
+      margin-top: 16px;
+    }
+    .hero-tagline {
+      font-family: 'Special Elite', serif;
+      font-size: clamp(18px, 2.4vw, 28px);
+      color: var(--paper);
+      margin-top: 24px;
+      padding: 12px 20px;
+      display: inline-block;
+      background: var(--ink);
+      border: 2px solid var(--paper);
+      transform: rotate(-1deg);
+      box-shadow: 6px 6px 0 var(--pink);
+    }
+
+    .stamp {
+      position: absolute;
+      top: 20px;
+      right: -10px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 18px;
+      color: var(--red);
+      border: 4px double var(--red);
+      padding: 10px 18px;
+      letter-spacing: 0.15em;
+      transform: rotate(8deg);
+      text-transform: uppercase;
+      opacity: 0.88;
+      text-shadow: 0 0 1px var(--red);
+    }
+    @media (max-width: 720px) {
+      .stamp { position: static; display: inline-block; margin-top: 16px; }
+    }
+
+    /* ───────── HAZARD STRIPES ───────── */
+    .hazard {
+      height: 18px;
+      background: repeating-linear-gradient(
+        135deg,
+        var(--ink) 0,
+        var(--ink) 14px,
+        var(--yellow) 14px,
+        var(--yellow) 28px
+      );
+      margin: 40px 0;
+      border-top: 2px solid var(--paper);
+      border-bottom: 2px solid var(--paper);
+    }
+
+    /* ───────── SECTION HEADERS ───────── */
+    .section-h {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--paper);
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 4px solid var(--pink);
+      display: inline-block;
+    }
+    .section-h .num {
+      font-family: 'Bebas Neue', sans-serif;
+      color: var(--yellow);
+      font-size: 0.65em;
+      margin-right: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ───────── STATS GRID ───────── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 880px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+    .stat {
+      border: 3px solid var(--paper);
+      padding: 18px 14px;
+      background: var(--ink);
+      position: relative;
+      transition: transform 0.18s ease;
+    }
+    .stat:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--pink); }
+    .stat:nth-child(2n) { transform: rotate(-0.6deg); }
+    .stat:nth-child(2n):hover { transform: rotate(-0.6deg) translate(-2px, -2px); }
+    .stat:nth-child(3n) { transform: rotate(0.8deg); }
+    .stat:nth-child(3n):hover { transform: rotate(0.8deg) translate(-2px, -2px); }
+
+    .stat-num {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 48px;
+      line-height: 1;
+      color: var(--green);
+      letter-spacing: -0.02em;
+    }
+    .stat:nth-child(odd) .stat-num { color: var(--yellow); }
+    .stat:nth-child(3n) .stat-num { color: var(--pink); }
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--paper);
+      opacity: 0.85;
+      margin-top: 8px;
+    }
+
+    /* ───────── DOCS GRID ───────── */
+    .docs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 720px) { .docs { grid-template-columns: 1fr; } }
+
+    .doc {
+      background: var(--paper);
+      color: var(--ink);
+      padding: 14px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      border-left: 6px solid var(--pink);
+      position: relative;
+      transition: transform 0.18s ease;
+    }
+    .doc:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--yellow); }
+    .doc:nth-child(3n+1) { border-left-color: var(--pink); }
+    .doc:nth-child(3n+2) { border-left-color: var(--yellow); }
+    .doc:nth-child(3n+3) { border-left-color: var(--green); }
+    .doc .doc-meta {
+      display: block;
+      font-weight: 400;
+      font-size: 10px;
+      opacity: 0.65;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .doc::before {
+      content: '▸';
+      color: var(--pink);
+      margin-right: 6px;
+    }
+
+    /* ───────── EXTRAS ───────── */
+    .extras {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 720px) { .extras { grid-template-columns: 1fr; } }
+
+    .extra {
+      padding: 24px;
+      border: 3px solid var(--paper);
+      background: var(--ink);
+      position: relative;
+    }
+    .extra.portal { border-color: var(--cyan); }
+    .extra.evidence { border-color: var(--green); }
+    .extra-tag {
+      position: absolute;
+      top: -14px;
+      left: 16px;
+      background: var(--ink);
+      padding: 4px 12px;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.15em;
+      font-size: 16px;
+    }
+    .portal .extra-tag { color: var(--cyan); border: 2px solid var(--cyan); }
+    .evidence .extra-tag { color: var(--green); border: 2px solid var(--green); }
+    .extra-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 22px;
+      text-transform: uppercase;
+      margin: 8px 0 12px;
+      color: var(--paper);
+    }
+    .extra-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--cyan);
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+    .extra-body {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--paper);
+      opacity: 0.92;
+    }
+    .extra-body strong { color: var(--yellow); }
+    .extra-stats {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .extra-stat {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      color: var(--cyan);
+    }
+    .evidence .extra-stat { color: var(--green); }
+    .extra-stat span {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--paper);
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+
+    /* ───────── COMPARISON (HERO PIECE) ───────── */
+    .comparison {
+      margin: 56px 0;
+      padding: 40px 0;
+      position: relative;
+    }
+    .comparison-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(40px, 7vw, 88px);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 0.9;
+      margin-bottom: 32px;
+      color: var(--paper);
+    }
+    .comparison-title .vs {
+      color: var(--pink);
+      font-style: italic;
+      display: inline-block;
+      transform: rotate(-4deg);
+      text-shadow: 4px 4px 0 var(--yellow);
+    }
+
+    .versus {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    @media (max-width: 880px) {
+      .versus { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      padding: 32px 24px;
+      position: relative;
+      background: var(--ink);
+      border: 4px solid;
+    }
+    .panel.with-ai {
+      border-color: var(--green);
+      transform: rotate(-1deg);
+    }
+    .panel.pre-ai {
+      border-color: var(--red);
+      transform: rotate(1.2deg);
+    }
+    .panel-tag {
+      position: absolute;
+      top: -18px;
+      left: 24px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.15em;
+      padding: 6px 14px;
+      background: var(--ink);
+      text-transform: uppercase;
+    }
+    .with-ai .panel-tag { color: var(--green); border: 3px solid var(--green); }
+    .pre-ai .panel-tag { color: var(--red); border: 3px solid var(--red); }
+
+    .panel-hours {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(56px, 10vw, 96px);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      margin: 18px 0 8px;
+    }
+    .with-ai .panel-hours { color: var(--green); }
+    .pre-ai .panel-hours { color: var(--red); }
+    .panel-unit {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.15em;
+      color: var(--paper);
+      opacity: 0.85;
+      margin-bottom: 20px;
+    }
+
+    .panel-divider {
+      height: 2px;
+      background: var(--paper);
+      opacity: 0.3;
+      margin: 16px 0;
+    }
+
+    .panel-list {
+      list-style: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--paper);
+    }
+    .panel-list li::before {
+      content: '·';
+      color: var(--yellow);
+      font-weight: 700;
+      margin-right: 8px;
+    }
+    .with-ai .panel-list li::before { color: var(--green); }
+    .pre-ai .panel-list li::before { color: var(--red); }
+
+    .panel-cost {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 24px;
+      margin-top: 18px;
+      color: var(--paper);
+    }
+    .panel-cost span {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 400;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      opacity: 0.6;
+      margin-bottom: 4px;
+    }
+    .with-ai .panel-cost strong { color: var(--green); }
+    .pre-ai .panel-cost strong { color: var(--red); }
+
+    .vs-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(48px, 7vw, 88px);
+      color: var(--yellow);
+      letter-spacing: -0.05em;
+      transform: rotate(-6deg);
+      text-shadow: 4px 4px 0 var(--pink);
+    }
+    @media (max-width: 880px) {
+      .vs-divider { font-size: 56px; padding: 12px 0; }
+    }
+
+    .compression {
+      margin-top: 40px;
+      padding: 32px 24px;
+      background: repeating-linear-gradient(
+        135deg,
+        var(--ink) 0,
+        var(--ink) 24px,
+        var(--yellow) 24px,
+        var(--yellow) 48px
+      );
+      text-align: center;
+      position: relative;
+    }
+    .compression-inner {
+      background: var(--ink);
+      padding: 20px 24px;
+      border: 3px solid var(--paper);
+      display: inline-block;
+    }
+    .compression-text {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(26px, 4.5vw, 44px);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--paper);
+    }
+    .compression-text .hl-1 { color: var(--green); }
+    .compression-text .hl-2 { color: var(--pink); }
+    .compression-text .dot { color: var(--yellow); margin: 0 12px; }
+
+    /* ───────── FOOTER QUOTE ───────── */
+    .footer-quote {
+      margin: 80px 0 24px;
+      padding: 32px;
+      border: 2px dashed var(--paper);
+      font-family: 'Special Elite', serif;
+      font-size: clamp(18px, 2.6vw, 28px);
+      color: var(--paper);
+      text-align: center;
+      transform: rotate(-0.5deg);
+      position: relative;
+      background: var(--ink);
+    }
+    .footer-quote::before, .footer-quote::after {
+      content: '"';
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 72px;
+      color: var(--pink);
+      position: absolute;
+      line-height: 1;
+    }
+    .footer-quote::before { top: 8px; left: 16px; }
+    .footer-quote::after { bottom: -16px; right: 16px; transform: rotate(180deg); }
+
+    .colophon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--paper);
+      opacity: 0.5;
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--paper);
+    }
+
+    /* ───────── LOAD ANIMATION ───────── */
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      48% { opacity: 1; }
+      50% { opacity: 0.6; }
+      52% { opacity: 1; }
+    }
+    .hero-title { animation: flicker 6s ease-in-out infinite; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .stat, .doc, .extra, .panel, .compression { animation: slideUp 0.6s ease both; }
+    .stat:nth-child(1) { animation-delay: 0.05s; }
+    .stat:nth-child(2) { animation-delay: 0.1s; }
+    .stat:nth-child(3) { animation-delay: 0.15s; }
+    .stat:nth-child(4) { animation-delay: 0.2s; }
+    .stat:nth-child(5) { animation-delay: 0.25s; }
+    .stat:nth-child(6) { animation-delay: 0.3s; }
+    .stat:nth-child(7) { animation-delay: 0.35s; }
+    .stat:nth-child(8) { animation-delay: 0.4s; }
+    .stat:nth-child(9) { animation-delay: 0.45s; }
+    .stat:nth-child(10) { animation-delay: 0.5s; }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- MASTHEAD -->
+    <div class="masthead">
+      <span><span class="dot"></span>Field Report · Vol. 01</span>
+      <span>Filed 2026-05-24</span>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="stamp">Audit-Ready</div>
+      <h1 class="hero-title">
+        <span class="glitch" data-text="TPRM">TPRM</span><br>
+        <span class="stroke">SUBMISSION</span>
+      </h1>
+      <div class="hero-meta">AFAS LIVE × VENUE VERA</div>
+      <div class="hero-dates">2026-04-23 → 2026-05-24 · 31 DAYS · 1 FOUNDER</div>
+      <div class="hero-tagline">What a 5-person specialist team used to do.<br>Done solo, in a month, while running 40 other engagements.</div>
+    </section>
+
+    <div class="hazard"></div>
+
+    <!-- SHIPPED STATS -->
+    <section>
+      <h2 class="section-h"><span class="num">01</span>Shipped</h2>
+      <div class="stats">
+        <div class="stat"><div class="stat-num">46</div><div class="stat-label">Deliverable files</div></div>
+        <div class="stat"><div class="stat-num">102.6k</div><div class="stat-label">Words of policy</div></div>
+        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Signed PDFs</div></div>
+        <div class="stat"><div class="stat-num">258</div><div class="stat-label">Audit-trail rows</div></div>
+        <div class="stat"><div class="stat-num">8</div><div class="stat-label">Trust Portal docs</div></div>
+        <div class="stat"><div class="stat-num">606</div><div class="stat-label">Git commits</div></div>
+        <div class="stat"><div class="stat-num">24</div><div class="stat-label">GitHub issues</div></div>
+        <div class="stat"><div class="stat-num">47</div><div class="stat-label">Continuity briefs</div></div>
+        <div class="stat"><div class="stat-num">71</div><div class="stat-label">Voice-sweep fixes</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Compliance epics</div></div>
+      </div>
+    </section>
+
+    <div class="hazard"></div>
+
+    <!-- DOCUMENT INVENTORY -->
+    <section>
+      <h2 class="section-h"><span class="num">02</span>Document Inventory</h2>
+      <div class="docs">
+        <div class="doc">TOMs<span class="doc-meta">19 pages</span></div>
+        <div class="doc">DPA Template<span class="doc-meta">16 pages · GDPR Art. 28</span></div>
+        <div class="doc">TPRM Answer Draft<span class="doc-meta">33 pages · 11 sections</span></div>
+        <div class="doc">Controller Obligations Memo<span class="doc-meta">GDPR Art. 14/24/30</span></div>
+        <div class="doc">AI Act Classification Memo<span class="doc-meta">EU 2024/1689 mapping</span></div>
+        <div class="doc">AI Governance Memo<span class="doc-meta">Internal controls</span></div>
+        <div class="doc">DPIA-positie<span class="doc-meta">Risk-based assessment</span></div>
+        <div class="doc">EUD Hardening Standard<span class="doc-meta">Endpoint baseline</span></div>
+        <div class="doc">Modern Slavery Statement<span class="doc-meta">UK MSA-style policy</span></div>
+        <div class="doc">Anti-Bribery & Corruption Policy<span class="doc-meta">v1.0 ratified</span></div>
+        <div class="doc">Art. 14 Notificatie Template<span class="doc-meta">Deployer-fillable</span></div>
+        <div class="doc">Claim Register<span class="doc-meta">258 rows · every cell sourced</span></div>
+      </div>
+    </section>
+
+    <!-- TRUST PORTAL + EVIDENCE -->
+    <section class="extras">
+      <div class="extra portal">
+        <div class="extra-tag">Trust Portal</div>
+        <div class="extra-title">Custom-built<br>Compliance Surface</div>
+        <div class="extra-url">partoftheprotocol.com/trust</div>
+        <div class="extra-body">
+          Next.js app with <strong>Supabase email-OTP gating</strong>, audit logging, document explorer, branded chrome, and a public <code>/privacy</code> page. Built &amp; secured in 7 days.
+        </div>
+        <div class="extra-stats">
+          <div class="extra-stat">34<span>PRs</span></div>
+          <div class="extra-stat">141<span>Files</span></div>
+          <div class="extra-stat">+8.3k<span>Lines</span></div>
+          <div class="extra-stat">8<span>Days</span></div>
+        </div>
+      </div>
+
+      <div class="extra evidence">
+        <div class="extra-tag">Evidence Pack</div>
+        <div class="extra-title">Defensible<br>Under Audit</div>
+        <div class="extra-url">Bundled · timestamped · signed</div>
+        <div class="extra-body">
+          OWASP ZAP scans (6 HTML reports), <strong>branch-protection rulesets</strong> as JSON, training-opt-out attestations from <strong>OpenAI · Anthropic · xAI</strong>, governance-alias acceptance, EUD hardening confirmations.
+        </div>
+        <div class="extra-stats">
+          <div class="extra-stat">6<span>ZAP scans</span></div>
+          <div class="extra-stat">3<span>Vendor attests</span></div>
+          <div class="extra-stat">13<span>Hard-stops closed</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hazard"></div>
+
+    <!-- THE COMPARISON -->
+    <section class="comparison">
+      <h2 class="comparison-title">The <span class="vs">vs.</span> Reveal</h2>
+
+      <div class="versus">
+        <!-- WITH AI -->
+        <div class="panel with-ai">
+          <div class="panel-tag">With AI</div>
+          <div class="panel-hours">~105</div>
+          <div class="panel-unit">Hours</div>
+          <div class="panel-divider"></div>
+          <ul class="panel-list">
+            <li>1 founder</li>
+            <li>+15h from Xander &amp; Daniel</li>
+            <li>No new hires</li>
+            <li>No external counsel for Owned Products</li>
+          </ul>
+          <div class="panel-cost">
+            <span>Out-of-pocket</span>
+            <strong>≈ €2k AI spend</strong>
+          </div>
+        </div>
+
+        <!-- VS -->
+        <div class="vs-divider">VS</div>
+
+        <!-- PRE-AI -->
+        <div class="panel pre-ai">
+          <div class="panel-tag">Pre-AI</div>
+          <div class="panel-hours">370<span style="opacity:.5">–</span>550</div>
+          <div class="panel-unit">Hours</div>
+          <div class="panel-divider"></div>
+          <ul class="panel-list">
+            <li>Privacy lawyer</li>
+            <li>Senior compliance consultant</li>
+            <li>Full-stack developer</li>
+            <li>Security operations engineer</li>
+            <li>PM / paralegal</li>
+          </ul>
+          <div class="panel-cost">
+            <span>External invoice load</span>
+            <strong>€56k – €81k · 9–14 weeks</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPRESSION BANNER -->
+      <div class="compression">
+        <div class="compression-inner">
+          <div class="compression-text">
+            <span class="hl-1">4–5×</span> Faster
+            <span class="dot">·</span>
+            <span class="hl-2">3–4×</span> Cheaper
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER QUOTE -->
+    <div class="footer-quote">
+      ...and the same month I migrated Brownys to ChatGPT Business,<br>
+      rolled out transcription pilots to 5 of their team,<br>
+      and kept 40 other engagements moving.<br>
+      Half of it from a rooftop in Marrakesh.
+    </div>
+
+    <div class="colophon">
+      Compiled by Wytze de Haan · Narrative AI Consultancy · partofthenarrative.com<br>
+      Field Report Vol. 01 · Last Filed 2026-05-24
+    </div>
+
+  </div>
+</body>
+</html>
