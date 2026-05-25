@@ -865,6 +865,153 @@
       margin-right: auto;
     }
 
+    /* ─── MOBILE (≤600px) ─── */
+    @media (max-width: 600px) {
+      /* Hide the custom cursor entirely — body already swaps to cursor:auto at 880px */
+      .cursor-dot, .cursor-ring { display: none !important; }
+
+      /* Page chrome */
+      .page { padding: 52px 16px 70px; }
+      .scene { padding: 56px 0; }
+      .ticker { padding: 6px 0; }
+      .ticker-track { font-size: 10px; gap: 32px; padding-left: 32px; letter-spacing: 0.15em; animation-duration: 28s; }
+      .ticker.bottom .ticker-track { animation-duration: 42s; }
+
+      /* Boot overlay */
+      .boot { gap: 12px; padding: 0 18px; text-align: center; }
+      .boot-line { font-size: 10px; letter-spacing: 0.12em; line-height: 1.4; }
+      .boot-bar { width: 240px; }
+      .boot-glitch { font-size: 32px; text-shadow: 2px 0 var(--magenta), -2px 0 var(--cyan); }
+
+      /* Hero */
+      .hero { min-height: auto; padding-top: 12px; }
+      .hero-backdrop {
+        font-size: clamp(180px, 75vw, 260px);
+        right: -16px;
+        opacity: 0.55;
+      }
+      .hero-meta-top { font-size: 10px; letter-spacing: 0.22em; margin-bottom: 18px; gap: 10px; flex-wrap: wrap; }
+      .hero-title { font-size: clamp(44px, 13.5vw, 72px); margin-bottom: 6px; }
+      .hero-meta { font-size: clamp(22px, 5.5vw, 32px); margin-top: 14px; }
+      .hero-meta .x { margin: 0 4px; transform: scale(1.2); }
+      .hero-dates { font-size: 11px; letter-spacing: 0.08em; margin-top: 14px; }
+      .hero-tagline {
+        font-size: 15px;
+        padding: 14px 16px;
+        margin-top: 28px;
+        box-shadow: 5px 5px 0 var(--magenta);
+        max-width: 100%;
+        display: block;
+      }
+      .stamp {
+        position: static;
+        align-self: flex-start;
+        margin-top: 24px;
+        font-size: 14px;
+        padding: 8px 14px;
+        border-width: 3px;
+        letter-spacing: 0.14em;
+      }
+
+      /* Hazard stripes */
+      .hazard { margin: 48px 0 36px; height: 24px; }
+      .hazard-tag { left: 16px; font-size: 10px; padding: 3px 10px; letter-spacing: 0.22em; }
+
+      /* Section headers */
+      .section-h { gap: 12px; margin-bottom: 32px; flex-wrap: wrap; align-items: center; }
+      .section-h .num { font-size: 11px; padding: 4px 9px; letter-spacing: 0.22em; }
+      .section-h .title { font-size: clamp(32px, 9.5vw, 50px); }
+
+      /* Stats grid */
+      .stats { gap: 8px; }
+      .stat { padding: 16px 14px; border-width: 2px; }
+      .stat-num { font-size: 44px; }
+      .stat-label { font-size: 10px; margin-top: 8px; letter-spacing: 0.12em; }
+
+      /* Docs grid */
+      .doc { padding: 14px 16px; font-size: 12px; border-left-width: 6px; }
+      .doc-meta { font-size: 9px; letter-spacing: 0.06em; }
+
+      /* Infrastructure (portal + evidence) */
+      .portal-chrome { padding: 8px 12px; gap: 8px; }
+      .portal-chrome .dot { width: 8px; height: 8px; }
+      .portal-url { font-size: 9px; padding: 3px 9px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .portal-body { padding: 20px; }
+      .portal-tag, .evidence-tag { font-size: 12px; }
+      .portal-title { font-size: 26px; margin-bottom: 14px; }
+      .portal-body p, .evidence-card p { font-size: 12px; line-height: 1.65; }
+      .portal-stats { gap: 14px; margin-top: 18px; padding-top: 16px; }
+      .portal-stat { font-size: 22px; }
+      .portal-stat span { font-size: 9px; margin-top: 4px; }
+      .evidence-card { padding: 22px; }
+      .evidence-card::before { font-size: 9px; padding: 3px 30px; top: 16px; right: -34px; }
+      .evidence-title { font-size: 22px; margin-bottom: 14px; }
+      .evidence-list { font-size: 11px; margin-top: 14px; }
+      .evidence-list li { padding: 5px 0; gap: 12px; }
+
+      /* Comparison */
+      .comparison { padding: 70px 0; }
+      .comparison-title {
+        font-size: clamp(48px, 16vw, 84px);
+        margin-bottom: 36px;
+        line-height: 0.9;
+      }
+      .comparison-title .vs { padding: 0 8px; text-shadow: 4px 4px 0 var(--yellow), -2px -2px 0 var(--cyan); }
+      .versus { gap: 22px; margin-bottom: 50px; }
+      .panel { padding: 32px 18px; border-width: 3px; }
+      .panel.with-ai, .panel.pre-ai { /* GSAP starts from these transforms — keep less extreme on mobile */ }
+      .panel-tag { font-size: 17px; padding: 6px 14px; top: -16px; left: 16px; letter-spacing: 0.14em; }
+      .panel-hours-row { margin: 22px 0 6px; gap: 8px; flex-wrap: wrap; }
+      .panel-hours { font-size: clamp(64px, 18vw, 88px); line-height: 0.88; }
+      .panel-hours-suffix { font-size: 20px; letter-spacing: 0.12em; }
+      .panel-divider { margin: 18px 0; }
+      .panel-list { font-size: 13px; line-height: 1.85; }
+      .panel-list li::before { margin-right: 8px; }
+      .panel-cost { font-size: 22px; margin-top: 20px; }
+      .panel-cost span { font-size: 10px; letter-spacing: 0.16em; }
+
+      .vs-divider { padding: 8px 0; font-size: clamp(60px, 18vw, 100px); text-shadow: 4px 4px 0 var(--magenta); }
+
+      .compression { padding: 22px 0; }
+      .compression-marquee { font-size: clamp(28px, 8vw, 44px); gap: 28px; animation-duration: 22s; }
+
+      /* Footer quote */
+      .footer-scene { padding: 80px 0 40px; }
+      .footer-quote {
+        padding: 30px 20px;
+        font-size: 16px;
+        max-width: 100%;
+        line-height: 1.55;
+      }
+      .footer-quote::before, .footer-quote::after { font-size: 56px; }
+      .footer-quote::before { top: -10px; left: 10px; }
+      .footer-quote::after { bottom: -34px; right: 10px; }
+      .footer-quote .punch { margin-top: 14px; font-size: 1.05em; }
+
+      /* Outro */
+      .outro { padding: 60px 0 28px; }
+      .outro-line { font-size: 11px; letter-spacing: 0.24em; }
+      .colophon { font-size: 9px; letter-spacing: 0.1em; line-height: 1.7; padding-top: 16px; margin-top: 24px; }
+    }
+
+    /* ─── EXTRA-NARROW (≤380px) ─── */
+    @media (max-width: 380px) {
+      .page { padding: 50px 12px 64px; }
+      .hero-title { font-size: clamp(38px, 13vw, 56px); }
+      .hero-meta { font-size: 20px; }
+      .stat-num { font-size: 38px; }
+      .stat { padding: 14px 12px; }
+      .section-h .title { font-size: 30px; }
+      .panel { padding: 28px 14px; }
+      .panel-hours { font-size: 58px; }
+      .panel-hours-suffix { font-size: 17px; }
+      .panel-cost { font-size: 19px; }
+      .comparison-title { font-size: 44px; }
+      .footer-quote { padding: 26px 16px; font-size: 15px; }
+      .boot-glitch { font-size: 28px; }
+      .boot-bar { width: 200px; }
+    }
+
     /* ─── REDUCED MOTION ─── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
