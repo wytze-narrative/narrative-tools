@@ -878,6 +878,9 @@
   <div class="boot" id="boot">
     <div class="boot-line" id="boot-line-1">▸ Initializing Field Report v01.exe</div>
     <div class="boot-line" id="boot-line-2">▸ Loading 31 days of compliance evidence...</div>
+    <div class="boot-line" id="boot-line-3">▸ Crawling 606 commits across 1,442 files...</div>
+    <div class="boot-line" id="boot-line-4">▸ Cross-referencing 47 relay briefs...</div>
+    <div class="boot-line" id="boot-line-5">▸ Compiling 102,600 words of evidence...</div>
     <div class="boot-bar" id="boot-bar"><div class="boot-bar-fill" id="boot-bar-fill"></div></div>
     <div class="boot-glitch" id="boot-glitch">TRANSMITTING</div>
   </div>
@@ -1164,20 +1167,26 @@
       }
     });
     bootTl
-      .to('#boot-line-1', { opacity: 1, duration: 0.3 })
-      .to('#boot-line-2', { opacity: 1, duration: 0.3 }, '+=0.3')
-      .to('#boot-bar', { opacity: 1, duration: 0.2 }, '+=0.1')
-      .to('#boot-bar-fill', { width: '100%', duration: 1.1, ease: 'power1.inOut' })
-      .to('#boot-glitch', { opacity: 1, duration: 0.15 }, '+=0.1')
+      .to('#boot-line-1', { opacity: 1, duration: 0.35 })
+      .to('#boot-line-2', { opacity: 1, duration: 0.35 }, '+=0.5')
+      .to('#boot-line-3', { opacity: 1, duration: 0.35 }, '+=0.5')
+      .to('#boot-line-4', { opacity: 1, duration: 0.35 }, '+=0.5')
+      .to('#boot-line-5', { opacity: 1, duration: 0.35 }, '+=0.5')
+      .to('#boot-bar', { opacity: 1, duration: 0.25 }, '+=0.35')
+      .to('#boot-bar-fill', { width: '100%', duration: 2.4, ease: 'power1.inOut' })
+      .to('#boot-glitch', { opacity: 1, duration: 0.2 }, '+=0.15')
       .to('#boot-glitch', {
         keyframes: [
           { x: -4, color: '#ff1493' },
           { x: 4, color: '#00fff0' },
+          { x: -2, color: '#ff1493' },
+          { x: 2, color: '#00fff0' },
           { x: 0, color: '#fff' }
         ],
-        duration: 0.4
+        duration: 0.6
       })
-      .to(boot, { opacity: 0, duration: 0.6, ease: 'power2.inOut' }, '+=0.3')
+      .to({}, { duration: 0.8 })
+      .to(boot, { opacity: 0, duration: 0.7, ease: 'power2.inOut' })
       .set(boot, { display: 'none' });
 
     /* ─────────────────────────────────────────────────────────
