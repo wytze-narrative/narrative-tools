@@ -1157,6 +1157,15 @@
 
   <script>
     /* ─────────────────────────────────────────────────────────
+       FORCE SCROLL TO TOP ON RELOAD
+       ───────────────────────────────────────────────────────── */
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+    window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+
+    /* ─────────────────────────────────────────────────────────
        BOOT SEQUENCE
        ───────────────────────────────────────────────────────── */
     const boot = document.getElementById('boot');
