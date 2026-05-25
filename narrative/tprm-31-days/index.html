@@ -959,7 +959,9 @@
       .comparison-title .vs { padding: 0 8px; text-shadow: 4px 4px 0 var(--yellow), -2px -2px 0 var(--cyan); }
       .versus { gap: 22px; margin-bottom: 50px; }
       .panel { padding: 32px 18px; border-width: 3px; }
-      .panel.with-ai, .panel.pre-ai { /* GSAP starts from these transforms — keep less extreme on mobile */ }
+      /* Keep panels in-viewport before their scroll-triggered slide-in (no horizontal offset) */
+      .panel.with-ai { transform: translateY(40px) rotate(-1.5deg); }
+      .panel.pre-ai { transform: translateY(40px) rotate(1.5deg); }
       .panel-tag { font-size: 17px; padding: 6px 14px; top: -16px; left: 16px; letter-spacing: 0.14em; }
       .panel-hours-row { margin: 22px 0 6px; gap: 8px; flex-wrap: wrap; }
       .panel-hours { font-size: clamp(64px, 18vw, 88px); line-height: 0.88; }
@@ -1398,6 +1400,7 @@
        SCROLL TRIGGER setup
        ───────────────────────────────────────────────────────── */
     gsap.registerPlugin(ScrollTrigger);
+    const isMobile = window.matchMedia('(max-width: 600px)').matches;
 
     // STATS counter animation
     document.querySelectorAll('.stat-num').forEach((el) => {
@@ -1449,14 +1452,16 @@
     gsap.from('.portal-frame', {
       scrollTrigger: { trigger: '.extras', start: 'top 80%' },
       opacity: 0,
-      x: -60,
+      x: isMobile ? 0 : -60,
+      y: isMobile ? 40 : 0,
       duration: 0.8,
       ease: 'power3.out'
     });
     gsap.from('.evidence-card', {
       scrollTrigger: { trigger: '.extras', start: 'top 80%' },
       opacity: 0,
-      x: 60,
+      x: isMobile ? 0 : 60,
+      y: isMobile ? 40 : 0,
       duration: 0.8,
       ease: 'power3.out'
     });
