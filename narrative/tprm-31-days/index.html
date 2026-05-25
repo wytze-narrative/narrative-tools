@@ -898,7 +898,7 @@
       <span class="ticker-item">606 COMMITS</span>
       <span class="ticker-item yellow">★ 12 LEGAL DOCS</span>
       <span class="ticker-item">8 TRUST PORTAL PAGES</span>
-      <span class="ticker-item lime">● 4–5× COMPRESSION</span>
+      <span class="ticker-item lime">● 5× COMPRESSION</span>
       <span class="ticker-item">ONE FOUNDER</span>
       <span class="ticker-item hot">▲ 40 PARALLEL ENGAGEMENTS</span>
       <span class="ticker-item">FIELD REPORT VOL. 01</span>
@@ -908,7 +908,7 @@
       <span class="ticker-item">606 COMMITS</span>
       <span class="ticker-item yellow">★ 12 LEGAL DOCS</span>
       <span class="ticker-item">8 TRUST PORTAL PAGES</span>
-      <span class="ticker-item lime">● 4–5× COMPRESSION</span>
+      <span class="ticker-item lime">● 5× COMPRESSION</span>
       <span class="ticker-item">ONE FOUNDER</span>
       <span class="ticker-item hot">▲ 40 PARALLEL ENGAGEMENTS</span>
       <span class="ticker-item">FIELD REPORT VOL. 01</span>
@@ -1081,32 +1081,32 @@
           </ul>
           <div class="panel-cost">
             <span>External invoice load</span>
-            <strong>€56k – €81k · 9–14 weeks</strong>
+            <strong>€81k · 14 weeks</strong>
           </div>
         </div>
       </div>
 
       <div class="compression">
         <div class="compression-marquee">
-          <span>4–5× FASTER</span>
+          <span>5× FASTER</span>
           <span class="star">★</span>
-          <span>3–4× CHEAPER</span>
-          <span class="star">★</span>
-          <span>SHIPPED SOLO</span>
-          <span class="star">★</span>
-          <span>AUDIT-READY</span>
-          <span class="star">★</span>
-          <span>4–5× FASTER</span>
-          <span class="star">★</span>
-          <span>3–4× CHEAPER</span>
+          <span>4× CHEAPER</span>
           <span class="star">★</span>
           <span>SHIPPED SOLO</span>
           <span class="star">★</span>
           <span>AUDIT-READY</span>
           <span class="star">★</span>
-          <span>4–5× FASTER</span>
+          <span>5× FASTER</span>
           <span class="star">★</span>
-          <span>3–4× CHEAPER</span>
+          <span>4× CHEAPER</span>
+          <span class="star">★</span>
+          <span>SHIPPED SOLO</span>
+          <span class="star">★</span>
+          <span>AUDIT-READY</span>
+          <span class="star">★</span>
+          <span>5× FASTER</span>
+          <span class="star">★</span>
+          <span>4× CHEAPER</span>
           <span class="star">★</span>
           <span>SHIPPED SOLO</span>
           <span class="star">★</span>
@@ -1143,13 +1143,13 @@
       <span class="ticker-item">NARRATIVE.</span>
       <span class="ticker-item hot">▲ ONE FOUNDER. ONE MONTH. AUDIT-READY.</span>
       <span class="ticker-item lime">● 105 H WITH AI · 550 H PRE-AI</span>
-      <span class="ticker-item yellow">★ COMPRESSION RATIO: 4-5X</span>
+      <span class="ticker-item yellow">★ COMPRESSION RATIO: 5X</span>
       <span class="ticker-item">PARTOFTHENARRATIVE.COM</span>
       <span class="ticker-item hot">▲ 31 DAYS · 102.6K WORDS · 606 COMMITS</span>
       <span class="ticker-item">NARRATIVE.</span>
       <span class="ticker-item hot">▲ ONE FOUNDER. ONE MONTH. AUDIT-READY.</span>
       <span class="ticker-item lime">● 105 H WITH AI · 550 H PRE-AI</span>
-      <span class="ticker-item yellow">★ COMPRESSION RATIO: 4-5X</span>
+      <span class="ticker-item yellow">★ COMPRESSION RATIO: 5X</span>
       <span class="ticker-item">PARTOFTHENARRATIVE.COM</span>
       <span class="ticker-item hot">▲ 31 DAYS · 102.6K WORDS · 606 COMMITS</span>
     </div>
@@ -1344,13 +1344,7 @@
             delay: 0.6,
             ease: 'power3.out',
             onUpdate: () => {
-              if (target === 550) {
-                // pre-AI range: 370–550
-                const lo = Math.round(obj.v * (370 / 550));
-                el.innerHTML = `${lo}<span style="opacity:.5">–</span>${Math.round(obj.v)}`;
-              } else {
-                el.innerHTML = '~' + Math.round(obj.v);
-              }
+              el.innerHTML = '~' + Math.round(obj.v);
             }
           });
         });
