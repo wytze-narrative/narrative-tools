@@ -194,7 +194,7 @@
         <li>ID</li>
       </ul>
       <p class="field-note">💡 <strong>Locatie</strong> staat niet standaard aan. Voeg eenmalig een veld toe dat begint met "Locatie" — bijvoorbeeld <code>Locatie in standaard voorraadlocatie</code>.</p>
-      <p class="field-note">📐 <strong>Afmetingen + notities (optioneel)</strong>: wil je dat Ronnie ook maten en opmerkingen kent? Vink dan <code>Lengte</code>, <code>Hoogte</code> en <code>Notities / opmerkingen</code> aan. De tool maakt er één <code>L × H</code>-cel van en filtert inkoop-links uit de notities. Laat je ze weg, dan werkt de tool gewoon zonder die kolommen.</p>
+      <p class="field-note">📐 <strong>Afmetingen + notities (optioneel)</strong>: wil je dat Ronnie ook maten en opmerkingen kent? Vink dan <code>Lengte</code>, <code>Breedte</code>, <code>Hoogte</code> en <code>Notities / opmerkingen</code> aan. De tool maakt er één <code>L × B × H</code>-cel van en filtert inkoop-links uit de notities. Laat je ze weg, dan werkt de tool gewoon zonder die kolommen.</p>
       <a class="screenshot-link" id="open-screenshot">📷 Bekijk screenshot van het Rentman export scherm</a>
     </section>
 
@@ -258,13 +258,14 @@
     // Optional columns: included in the output only when present in the export.
     // An export without these still converts fine.
     //
-    // Afmetingen: Rentman exporteert losse velden (Lengte, Hoogte) i.p.v. één
-    // afmetingen-kolom. We voegen Lengte+Hoogte samen tot één leesbare cel.
-    // Er is géén breedte-veld in de export, dus we labelen eerlijk als "L × H".
-    // (Een toekomstige export met een kant-en-klare "Afmeting"-kolom wordt ook
-    // herkend en dan 1:1 overgenomen.)
+    // Afmetingen: Rentman exporteert losse velden (Lengte, Breedte, Hoogte)
+    // i.p.v. één afmetingen-kolom. We voegen ze samen tot één leesbare cel,
+    // in de vaste volgorde "L … × B … × H …". Ontbreekt een waarde (leeg of 0),
+    // dan laten we dat deel weg. Heeft een toekomstige export een kant-en-klare
+    // "Afmeting"-kolom, dan wordt die 1:1 overgenomen.
     const OPTIONAL_FIELDS = {
       length:     ['Lengte'],
+      width:      ['Breedte'],
       height:     ['Hoogte'],
       dimensions: [{ startsWith: 'Afmeting' }, 'LxBxH', 'L x B x H', 'Dimensions'],
       notes:      ['Notitities / opmerkingen', 'Notitites / opmerkingen', 'Notities / opmerkingen', { startsWith: 'Notit' }],
@@ -273,7 +274,7 @@
 
     function buildMarkdownHeader(date, total, hasDimensions, hasNotes) {
       const dimKeyDoc = hasDimensions
-        ? '\n- **Afmetingen**: Maten uit Rentman, waar ingevuld. Formaat "L … × H …" (Rentman levert geen breedte). Leeg = geen maat bekend.'
+        ? '\n- **Afmetingen**: Maten uit Rentman, waar ingevuld. Formaat "L … × B … × H …" (lengte × breedte × hoogte, in cm). Ontbreekt een waarde, dan staat alleen wat bekend is. Leeg = geen maat bekend.'
         : '';
       const notesKeyDoc = hasNotes
         ? '\n- **Notities**: Inhoudelijke opmerkingen uit Rentman (inkoop-links zijn eruit gefilterd).'
@@ -376,16 +377,19 @@ This is the complete equipment database for Brownys Event Productions.
       return Number.isInteger(n) ? String(n) : String(n);
     }
 
-    // Build one readable dimensions cell from separate Lengte/Hoogte fields,
-    // OR pass through a ready-made afmetingen column if the export has one.
+    // Build one readable dimensions cell from separate Lengte/Breedte/Hoogte
+    // fields, in the fixed order "L … × B … × H …". A missing/0 value drops that
+    // part. OR pass through a ready-made afmetingen column if the export has one.
     function buildDimensionCell(row, indexes) {
       if (indexes.dimensions != null) {
         return cleanCell(row[indexes.dimensions]);
       }
       const L = indexes.length != null ? dimNum(row[indexes.length]) : null;
+      const B = indexes.width  != null ? dimNum(row[indexes.width])  : null;
       const H = indexes.height != null ? dimNum(row[indexes.height]) : null;
       const parts = [];
       if (L != null) parts.push(`L ${L}`);
+      if (B != null) parts.push(`B ${B}`);
       if (H != null) parts.push(`H ${H}`);
       return parts.join(' × ');
     }
@@ -407,7 +411,7 @@ This is the complete equipment database for Brownys Event Productions.
 
     function rowsToMarkdown(rows, indexes, dateStr) {
       // Dimensions are present if there's a ready-made column OR separate L/H fields.
-      const hasDimensions = indexes.dimensions != null || indexes.length != null || indexes.height != null;
+      const hasDimensions = indexes.dimensions != null || indexes.length != null || indexes.width != null || indexes.height != null;
       const hasNotes = indexes.notes != null;
       const body = [];
       let locatieFilled = 0;
@@ -458,8 +462,8 @@ This is the complete equipment database for Brownys Event Productions.
         ? `<p class="warn">⚠ ${missing} item${missing === 1 ? '' : 's'} zonder Locatie — deze blijven leeg in de output.</p>`
         : '';
       const dimNote = hasDimensions
-        ? `<p class="warn" style="color:#14532d">📐 Afmetingen meegenomen — ${dimFilled} van ${count} items heeft een maat (L × H). De rest blijft leeg; Ronnie verwijst dan netjes naar het Look Book.</p>`
-        : `<p class="warn">📐 Geen afmetingen-veld in deze export — kolom overgeslagen. Wil je afmetingen meenemen? Zet bij de export de velden "Lengte" en "Hoogte" aan (of een veld dat met "Afmeting" begint).</p>`;
+        ? `<p class="warn" style="color:#14532d">📐 Afmetingen meegenomen — ${dimFilled} van ${count} items heeft een maat (L × B × H). De rest blijft leeg; Ronnie verwijst dan netjes naar het Look Book.</p>`
+        : `<p class="warn">📐 Geen afmetingen-veld in deze export — kolom overgeslagen. Wil je afmetingen meenemen? Zet bij de export de velden "Lengte", "Breedte" en "Hoogte" aan (of een veld dat met "Afmeting" begint).</p>`;
       const notesNote = hasNotes
         ? `<p class="warn" style="color:#14532d">📝 Notities meegenomen — ${notesFilled} van ${count} items heeft een notitie (inkoop-links zijn gefilterd).</p>`
         : '';
