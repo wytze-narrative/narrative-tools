@@ -194,6 +194,7 @@
         <li>ID</li>
       </ul>
       <p class="field-note">💡 <strong>Locatie</strong> staat niet standaard aan. Voeg eenmalig een veld toe dat begint met "Locatie" — bijvoorbeeld <code>Locatie in standaard voorraadlocatie</code>.</p>
+      <p class="field-note">📐 <strong>Afmetingen + notities (optioneel)</strong>: wil je dat Ronnie ook maten en opmerkingen kent? Vink dan <code>Lengte</code>, <code>Hoogte</code> en <code>Notities / opmerkingen</code> aan. De tool maakt er één <code>L × H</code>-cel van en filtert inkoop-links uit de notities. Laat je ze weg, dan werkt de tool gewoon zonder die kolommen.</p>
       <a class="screenshot-link" id="open-screenshot">📷 Bekijk screenshot van het Rentman export scherm</a>
     </section>
 
@@ -254,14 +255,38 @@
       type:     ['Verhuur/verkoop'],
       location: [{ startsWith: 'Locatie' }, 'Location in warehouse'],
     };
+    // Optional columns: included in the output only when present in the export.
+    // An export without these still converts fine.
+    //
+    // Afmetingen: Rentman exporteert losse velden (Lengte, Hoogte) i.p.v. één
+    // afmetingen-kolom. We voegen Lengte+Hoogte samen tot één leesbare cel.
+    // Er is géén breedte-veld in de export, dus we labelen eerlijk als "L × H".
+    // (Een toekomstige export met een kant-en-klare "Afmeting"-kolom wordt ook
+    // herkend en dan 1:1 overgenomen.)
+    const OPTIONAL_FIELDS = {
+      length:     ['Lengte'],
+      height:     ['Hoogte'],
+      dimensions: [{ startsWith: 'Afmeting' }, 'LxBxH', 'L x B x H', 'Dimensions'],
+      notes:      ['Notitities / opmerkingen', 'Notitites / opmerkingen', 'Notities / opmerkingen', { startsWith: 'Notit' }],
+    };
     const LOCATION_DISPLAY_NAME = 'Locatie in magazijn';
 
-    const MARKDOWN_HEADER =
-`# Brownys Materiaallijst (met ID)
+    function buildMarkdownHeader(date, total, hasDimensions, hasNotes) {
+      const dimKeyDoc = hasDimensions
+        ? '\n- **Afmetingen**: Maten uit Rentman, waar ingevuld. Formaat "L … × H …" (Rentman levert geen breedte). Leeg = geen maat bekend.'
+        : '';
+      const notesKeyDoc = hasNotes
+        ? '\n- **Notities**: Inhoudelijke opmerkingen uit Rentman (inkoop-links zijn eruit gefilterd).'
+        : '';
+      const dimCol = hasDimensions ? ' Afmetingen |' : '';
+      const dimSep = hasDimensions ? '------------|' : '';
+      const notesCol = hasNotes ? ' Notities |' : '';
+      const notesSep = hasNotes ? '----------|' : '';
+      return `# Brownys Materiaallijst (met ID)
 
-> **Last updated**: {date}
+> **Last updated**: ${date}
 > **Source**: Eva de Kemp (Rentman Export)
-> **Total items**: {total}
+> **Total items**: ${total}
 > **ID Coverage**: 100% (all items have API IDs)
 
 ---
@@ -276,7 +301,7 @@ This is the complete equipment database for Brownys Event Productions.
 - **Naam**: Item name
 - **Huidig aantal**: Current stock quantity
 - **Verhuur/Verkoop**: Rental (Verhuur) or Sale (Verkoop) item
-- **Locatie**: Warehouse location
+- **Locatie**: Warehouse location${dimKeyDoc}${notesKeyDoc}
 
 **Note**: ID != Code. The API requires the ID, not the Code.
 
@@ -284,9 +309,10 @@ This is the complete equipment database for Brownys Event Productions.
 
 ## Equipment List
 
-| ID | Code | Naam | Huidig aantal | Verhuur/Verkoop | Locatie |
-|----|------|------|---------------|-----------------|---------|
+| ID | Code | Naam | Huidig aantal | Verhuur/Verkoop | Locatie |${dimCol}${notesCol}
+|----|------|------|---------------|-----------------|---------|${dimSep}${notesSep}
 `;
+    }
 
     const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     const formatDate = (d) => `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
@@ -324,6 +350,11 @@ This is the complete equipment database for Brownys Event Productions.
           `Ga terug naar Rentman, voeg ${plural ? 'deze kolommen' : 'deze kolom'} toe aan je export template, en exporteer opnieuw.`
         );
       }
+      // Optional fields: add to indexes if present, never error if missing.
+      for (const [key, matchers] of Object.entries(OPTIONAL_FIELDS)) {
+        const idx = normalized.findIndex(h => matchers.some(m => matches(h, m)));
+        if (idx !== -1) indexes[key] = idx;
+      }
       return indexes;
     }
 
@@ -336,9 +367,52 @@ This is the complete equipment database for Brownys Event Productions.
       return s.trim();
     }
 
+    // A numeric dimension value that is empty, 0, or "0" means "not filled in".
+    function dimNum(value) {
+      if (value == null) return null;
+      const n = Number(String(value).replace(',', '.').trim());
+      if (!isFinite(n) || n === 0) return null;
+      // trim trailing .0 for whole numbers
+      return Number.isInteger(n) ? String(n) : String(n);
+    }
+
+    // Build one readable dimensions cell from separate Lengte/Hoogte fields,
+    // OR pass through a ready-made afmetingen column if the export has one.
+    function buildDimensionCell(row, indexes) {
+      if (indexes.dimensions != null) {
+        return cleanCell(row[indexes.dimensions]);
+      }
+      const L = indexes.length != null ? dimNum(row[indexes.length]) : null;
+      const H = indexes.height != null ? dimNum(row[indexes.height]) : null;
+      const parts = [];
+      if (L != null) parts.push(`L ${L}`);
+      if (H != null) parts.push(`H ${H}`);
+      return parts.join(' × ');
+    }
+
+    // Notes are mostly purchase URLs (Coolblue, Makro, kabelshop…) — those add
+    // nothing for an AM, so drop any cell that is purely a link. Keep textual
+    // notes ("Zelfbouw", "Niet meer te koop", pixel-specs).
+    function buildNotesCell(row, indexes) {
+      const raw = cleanCell(row[indexes.notes]);
+      if (!raw) return '';
+      // Strip if the whole cell is one URL (optionally with surrounding noise).
+      const urlOnly = /^(https?:\/\/\S+)$/i.test(raw);
+      if (urlOnly) return '';
+      // If the cell is mostly a URL with little else, also drop the URL part
+      // but keep any leading/trailing words.
+      const withoutUrls = raw.replace(/https?:\/\/\S+/gi, '').replace(/\s{2,}/g, ' ').trim();
+      return withoutUrls;
+    }
+
     function rowsToMarkdown(rows, indexes, dateStr) {
+      // Dimensions are present if there's a ready-made column OR separate L/H fields.
+      const hasDimensions = indexes.dimensions != null || indexes.length != null || indexes.height != null;
+      const hasNotes = indexes.notes != null;
       const body = [];
       let locatieFilled = 0;
+      let dimFilled = 0;
+      let notesFilled = 0;
       for (const row of rows) {
         if (!row || row.every(c => c == null || String(c).trim() === '')) continue;
         const id = cleanCell(row[indexes.id]);
@@ -348,12 +422,22 @@ This is the complete equipment database for Brownys Event Productions.
         const type = cleanCell(row[indexes.type]);
         const loc = cleanCell(row[indexes.location]);
         if (loc) locatieFilled++;
-        body.push(`| ${id} | ${code} | ${name} | ${stock} | ${type} | ${loc} |`);
+        let extra = '';
+        if (hasDimensions) {
+          const dim = buildDimensionCell(row, indexes);
+          if (dim) dimFilled++;
+          extra += ` ${dim} |`;
+        }
+        if (hasNotes) {
+          const note = buildNotesCell(row, indexes);
+          if (note) notesFilled++;
+          extra += ` ${note} |`;
+        }
+        body.push(`| ${id} | ${code} | ${name} | ${stock} | ${type} | ${loc} |${extra}`);
       }
-      const markdown = MARKDOWN_HEADER
-        .replace('{date}', dateStr)
-        .replace('{total}', body.length) + body.join('\n') + '\n';
-      return { markdown, count: body.length, locatieFilled };
+      const markdown = buildMarkdownHeader(dateStr, body.length, hasDimensions, hasNotes)
+        + body.join('\n') + '\n';
+      return { markdown, count: body.length, locatieFilled, hasDimensions, hasNotes, dimFilled, notesFilled };
     }
 
     // ── UI wiring ─────────────────────────────────────────────────────────
@@ -367,16 +451,25 @@ This is the complete equipment database for Brownys Event Productions.
     const copyBtn = document.getElementById('copy-btn');
     const downloadBtn = document.getElementById('download-btn');
 
-    function showSuccess(count, locatieFilled) {
+    function showSuccess(stats) {
+      const { count, locatieFilled, hasDimensions, hasNotes, dimFilled, notesFilled } = stats;
       const missing = count - locatieFilled;
       const warn = missing > 0
         ? `<p class="warn">⚠ ${missing} item${missing === 1 ? '' : 's'} zonder Locatie — deze blijven leeg in de output.</p>`
+        : '';
+      const dimNote = hasDimensions
+        ? `<p class="warn" style="color:#14532d">📐 Afmetingen meegenomen — ${dimFilled} van ${count} items heeft een maat (L × H). De rest blijft leeg; Ronnie verwijst dan netjes naar het Look Book.</p>`
+        : `<p class="warn">📐 Geen afmetingen-veld in deze export — kolom overgeslagen. Wil je afmetingen meenemen? Zet bij de export de velden "Lengte" en "Hoogte" aan (of een veld dat met "Afmeting" begint).</p>`;
+      const notesNote = hasNotes
+        ? `<p class="warn" style="color:#14532d">📝 Notities meegenomen — ${notesFilled} van ${count} items heeft een notitie (inkoop-links zijn gefilterd).</p>`
         : '';
       statusEl.innerHTML = `
         <div class="status-ok">
           <strong>✓ ${count} items verwerkt</strong><br>
           Alle verplichte velden aanwezig. Scroll naar stap 3 voor de output.
           ${warn}
+          ${dimNote}
+          ${notesNote}
         </div>`;
     }
 
@@ -406,12 +499,12 @@ This is the complete equipment database for Brownys Event Productions.
           const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null, raw: true });
           if (rows.length < 2) throw new Error('Het bestand is leeg of bevat geen data rijen.');
           const indexes = findColumnIndexes(rows[0]);
-          const { markdown, count, locatieFilled } = rowsToMarkdown(rows.slice(1), indexes, formatDate(new Date()));
-          if (count === 0) throw new Error('Geen geldige rijen gevonden in het bestand.');
-          outputEl.value = markdown;
+          const result = rowsToMarkdown(rows.slice(1), indexes, formatDate(new Date()));
+          if (result.count === 0) throw new Error('Geen geldige rijen gevonden in het bestand.');
+          outputEl.value = result.markdown;
           outputSection.hidden = false;
           uploadStep.hidden = false;
-          showSuccess(count, locatieFilled);
+          showSuccess(result);
         } catch (err) {
           showError(err.message);
         }
